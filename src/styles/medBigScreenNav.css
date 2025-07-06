@@ -1,0 +1,27 @@
+#nav-container {
+  display: flex;
+  align-items: center;
+  padding: 1.2rem 3rem;
+}
+
+.nav-items {
+  font-size: 1.5rem;
+}
+
+.nav-hover:hover {
+  border-bottom: 2px solid var(--white);
+}
+
+#nav-groceries {
+  margin-right: 3rem;
+}
+
+#nav-home {
+  margin-right: auto;
+  font-weight: bold;
+}
+
+.item-icon {
+  font-size: 2rem;
+  margin-top: 0;
+}
