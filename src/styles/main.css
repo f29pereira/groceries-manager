@@ -1,6 +1,8 @@
 @import "colors.css";
 @import "smallScreenNav.css";
 @import "medBigScreenNav.css";
+@import "home.css";
+@import "pageNotFound.css";
 
 * {
   box-sizing: border-box;
@@ -10,7 +12,7 @@
 }
 
 body {
-  background-color: var(--white);
+  background-color: var(--soft-white);
 }
 
 nav {
@@ -29,4 +31,8 @@ a {
 
 a {
   text-decoration: none;
+}
+
+p {
+  font-size: 1.2rem;
 }

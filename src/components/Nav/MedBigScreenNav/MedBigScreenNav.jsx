@@ -2,27 +2,6 @@ import { NavLink } from "react-router";
 import { FaRegUserCircle } from "react-icons/fa";
 import { TbPaperBag } from "react-icons/tb";
 
-/*
-<li className="item-icon">
-          <TbPaperBag />
-        </li>
-
-
-
-<span className="item-icon">
-              <TbPaperBag />
-            </span>
-
-
-<li className="nav-items">
-          <NavLink to="profile">
-            <span className="item-icon">
-              <FaRegUserCircle />
-            </span>
-          </NavLink>
-        </li>          
-*/
-
 function MedBigScrenNav() {
   return (
     <nav>
