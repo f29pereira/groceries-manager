@@ -1,6 +1,5 @@
+import AuthNavOption from "../../Authentication/AuthNavOption";
 import { BsList } from "react-icons/bs";
-import { FaRegUserCircle } from "react-icons/fa";
-import { NavLink } from "react-router";
 
 function Hamburguer({ visible, handleClick }) {
   return (
@@ -11,11 +10,7 @@ function Hamburguer({ visible, handleClick }) {
         </li>
 
         <li className="icon-items">
-          <NavLink to="profile">
-            <span className="icon">
-              <FaRegUserCircle />
-            </span>
-          </NavLink>
+          <AuthNavOption />
         </li>
       </ul>
     </nav>
