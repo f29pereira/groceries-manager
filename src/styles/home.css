@@ -36,12 +36,6 @@
   margin-bottom: 1rem;
 }
 
-#sign-up-link a {
-  color: var(--dark-green);
-  text-decoration: underline;
-  margin-left: 0.5rem;
-}
-
 @media (min-width: 800px) {
   #home-main {
     padding: 2rem 3rem;

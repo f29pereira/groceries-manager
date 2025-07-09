@@ -1,0 +1,75 @@
+/*Authentication used in small and medium/big navbars*/
+.auth-option {
+  color: var(--dark-green);
+  background-color: var(--ligth-green);
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  display: block;
+}
+
+.auth-option:hover {
+  color: var(--white);
+  background-color: var(--dark-green);
+}
+
+/*Forms*/
+#main-form {
+  background-color: var(--soft-white);
+  padding: 2rem;
+  height: 100vh;
+}
+
+#section-form {
+  background-color: var(--ligth-green);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+#section-form h1 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-label {
+  display: block;
+  margin-top: 1rem;
+}
+
+.form-input {
+  padding: 0.5rem;
+}
+
+.submit-btn {
+  background-color: var(--darker-green);
+  color: var(--white);
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+}
+
+.submit-btn:hover {
+  background-color: var(--dark-green);
+}
+
+#create-account {
+  font-size: 1rem;
+}
+
+.sign-up-link {
+  color: var(--darker-green);
+  text-decoration: underline;
+  margin-left: 0.5rem;
+}

@@ -22,10 +22,10 @@ function Home() {
         </p>
 
         <p className="home-text">
-          Interested ? Sign up
-          <span id="sign-up-link">
-            <NavLink to="/profile">here</NavLink>
-          </span>
+          Interested ?
+          <NavLink to="/signUp" className="sign-up-link">
+            Sign up here
+          </NavLink>
         </p>
       </section>
     </main>

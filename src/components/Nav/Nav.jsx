@@ -19,12 +19,11 @@ function Nav() {
     };
   }, []);
 
-  const isMobile = windowWith <= 400;
+  const isSmallScreen = windowWith <= 400;
 
   return (
     <>
-      {isMobile && <SmallScreenNav />}
-      {!isMobile && <MedBigScreenNav />}
+      {isSmallScreen ? <SmallScreenNav /> : <MedBigScreenNav />}
 
       <Outlet />
     </>

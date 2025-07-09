@@ -1,8 +1,12 @@
 import { NavLink } from "react-router";
+import { useContext } from "react";
+import { AuthContext } from "../../../App";
 import { FaRegUserCircle } from "react-icons/fa";
 import { TbPaperBag } from "react-icons/tb";
 
 function MedBigScrenNav() {
+  const { isSignedIn } = useContext(AuthContext);
+
   return (
     <nav>
       <ul id="nav-container">
@@ -16,11 +20,17 @@ function MedBigScrenNav() {
           <NavLink to="groceries">Groceries</NavLink>
         </li>
         <li className="nav-items">
-          <NavLink to="profile">
-            <span className="item-icon">
-              <FaRegUserCircle />
-            </span>
-          </NavLink>
+          {isSignedIn ? (
+            <NavLink to="profile">
+              <span className="icon">
+                <FaRegUserCircle />
+              </span>
+            </NavLink>
+          ) : (
+            <NavLink to="signIn" className="auth-option">
+              Sign In
+            </NavLink>
+          )}
         </li>
       </ul>
     </nav>

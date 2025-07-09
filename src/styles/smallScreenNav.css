@@ -19,6 +19,10 @@
   border-bottom: 2px solid var(--white);
 }
 
+.icon-items .auth-option {
+  font-size: 1rem;
+}
+
 /*Menu*/
 #menu-container {
   display: flex;
@@ -47,10 +51,6 @@
 
 .item .description:hover {
   border-bottom: 2px solid var(--white);
-}
-
-#profile {
-  display: none;
 }
 
 #hamburguer-nav.hidden,

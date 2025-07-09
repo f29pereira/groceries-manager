@@ -29,15 +29,6 @@ function Menu({ visible, handleClick }) {
             <span className="description">Groceries</span>
           </NavLink>
         </li>
-
-        <li className="item" id="profile">
-          <NavLink to="profile" onClick={handleClick}>
-            <span className="icon">
-              <FaRegUserCircle />
-            </span>
-            <span className="description">Profile</span>
-          </NavLink>
-        </li>
       </ul>
     </nav>
   );

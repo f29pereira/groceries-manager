@@ -3,6 +3,7 @@
 @import "medBigScreenNav.css";
 @import "home.css";
 @import "pageNotFound.css";
+@import "authentication.css";
 
 * {
   box-sizing: border-box;
@@ -35,4 +36,8 @@ a {
 
 p {
   font-size: 1.2rem;
+}
+
+button {
+  border: none;
 }
