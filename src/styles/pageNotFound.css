@@ -20,7 +20,7 @@
 }
 
 #not-found-card h1 span {
-  color: var(--dark-green);
+  color: var(--nav-green);
 }
 
 #not-found-card p {
@@ -35,7 +35,7 @@
 }
 
 #return-home-container span {
-  background-color: var(--dark-green);
+  background-color: var(--nav-green);
   padding: 0.5rem 1rem;
   margin-top: 1rem;
   border-radius: 10px;

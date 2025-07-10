@@ -1,6 +1,6 @@
 /*Authentication used in small and medium/big navbars*/
 .auth-option {
-  color: var(--dark-green);
+  color: var(--nav-green);
   background-color: var(--ligth-green);
   font-weight: bold;
   border-radius: 5px;
@@ -10,25 +10,12 @@
 
 .auth-option:hover {
   color: var(--white);
-  background-color: var(--dark-green);
+  background-color: var(--nav-green);
 }
 
 /*Forms*/
 .main-form {
-  color: var(--black);
-  padding: 2rem;
-  height: 100vh;
-}
-
-.section-form {
-  background-color: var(--ligth-green);
-  border-radius: 10px;
   padding: 1rem;
-}
-
-.form-container h1 {
-  font-size: 1.5rem;
-  text-align: center;
 }
 
 .form-container {
@@ -37,43 +24,57 @@
   align-items: center;
 }
 
+.form-description {
+  text-align: center;
+  line-height: 1.5rem;
+  margin: 0.5rem 0;
+}
+
 .input-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
+  width: auto;
 }
 
 .form-label {
-  display: block;
+  font-weight: bold;
   margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .form-input {
+  border: 1px solid var(--ligth-gray);
   padding: 0.5rem;
+  margin-bottom: 1rem;
   width: 100%;
 }
 
+.form-input:focus {
+  border-color: var(--dark-green);
+  outline: none;
+}
+
 .submit-btn {
-  background-color: var(--darker-green);
+  background-color: var(--dark-green);
   color: var(--white);
+  font-size: 1.2rem;
   border-radius: 5px;
   padding: 0.5rem 1rem;
   margin: 1rem 0;
 }
 
 .submit-btn:hover {
-  background-color: var(--dark-green);
+  background-color: var(--nav-green);
 }
 
 #create-account {
   font-size: 1rem;
+  margin-bottom: 1rem;
 }
 
-.sign-up-link {
-  color: var(--darker-green);
-  text-decoration: underline;
-  margin-left: 0.5rem;
+.reset-password {
+  align-self: flex-start;
 }
 
 /*Error Messages*/
@@ -81,7 +82,6 @@
   color: var(--red);
   font-size: 1rem;
   line-height: 1.5rem;
-  margin-top: 0.5rem;
 }
 
 .generic-error-container {
@@ -106,4 +106,15 @@
   font-size: 1rem;
   line-height: 1.5rem;
   padding: 0.2rem;
+}
+
+@media (min-width: 800px) {
+  .input-container {
+    width: auto;
+  }
+
+  .form-description {
+    line-height: 1.5rem;
+    margin: 1rem 0;
+  }
 }

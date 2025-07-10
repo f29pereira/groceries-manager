@@ -1,14 +1,26 @@
+import { Link } from "react-router";
 import ErrorMessage from "../../Errors/ErrorMessage";
+import { FaQuestionCircle } from "react-icons/fa";
 
 /**
  * Component that renders user email/password authentication form
- * @param {function} handleOnSubmit - on submit function
- * @param {string} title            - form title
- * @param {string} errorMsg         - input specific/generic error message
- * @param {function} handleChange   - sets email/password state values
- * @param {string} formData         - email/password state values
+ * @param {function} handleOnSubmit     - on submit function
+ * @param {string} description          - form description
+ * @param {string} errorMsg             - input specific/generic error message
+ * @param {function} handleChange       - sets email/password state values
+ * @param {string} formData             - email/password state values
+ * @param {boolean} forgotPassword      - shows forgotPassword link
+ * @param {string} submitBtnTxt         - submit button text
  */
-function UserForm({ handleOnSubmit, title, errorMsg, handleChange, formData }) {
+function UserForm({
+  handleOnSubmit,
+  description,
+  errorMsg,
+  handleChange,
+  formData,
+  forgotPassword,
+  submitBtnTxt,
+}) {
   return (
     <main className="main-form">
       <section className="section-form">
@@ -17,13 +29,12 @@ function UserForm({ handleOnSubmit, title, errorMsg, handleChange, formData }) {
           onSubmit={handleOnSubmit}
           autoComplete="on"
         >
-          <h1>{title}</h1>
-
           {errorMsg.generic.length > 0 ? (
             <ErrorMessage type="generic">{errorMsg.generic}</ErrorMessage>
           ) : null}
 
           <div className="input-container">
+            <p className="form-description">{description}</p>
             <label htmlFor="user-email" className="form-label">
               Email
             </label>
@@ -54,13 +65,20 @@ function UserForm({ handleOnSubmit, title, errorMsg, handleChange, formData }) {
               value={formData.password}
               autoComplete="current-password"
             />
+
             {errorMsg.password.length > 0 ? (
               <ErrorMessage type="input">{errorMsg.password}</ErrorMessage>
+            ) : null}
+
+            {forgotPassword ? (
+              <Link to="/resetPassword" className="click-link reset-password">
+                Forgot Password ?
+              </Link>
             ) : null}
           </div>
 
           <button type="submit" className="submit-btn">
-            {title}
+            {submitBtnTxt}
           </button>
         </form>
       </section>

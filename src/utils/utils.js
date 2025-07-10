@@ -38,7 +38,10 @@ const getError = (errorCode) => {
     description: "",
   };
 
-  if (errorCode === "auth/password-does-not-meet-requirements") {
+  if (errorCode === "auth/invalid-email") {
+    error.inputType = "email";
+    error.description = "Invalid email";
+  } else if (errorCode === "auth/password-does-not-meet-requirements") {
     error.inputType = "password";
     error.description =
       "Password must contain: at least 8 characters, a lower case character, an upper case character and a non-alphanumeric character";

@@ -12,7 +12,7 @@
 }
 
 #green-text {
-  color: var(--dark-green);
+  color: var(--nav-green);
 }
 
 #img-container {
@@ -34,6 +34,10 @@
   text-align: center;
   line-height: 2rem;
   margin-bottom: 1rem;
+}
+
+.sign-up-home {
+  margin-left: 0.5rem;
 }
 
 @media (min-width: 800px) {

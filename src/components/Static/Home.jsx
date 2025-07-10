@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link } from "react-router";
 
 function Home() {
   return (
@@ -23,9 +23,9 @@ function Home() {
 
         <p className="home-text">
           Interested ?
-          <NavLink to="/signUp" className="sign-up-link">
+          <Link to="/signUp" className="click-link sign-up-home">
             Sign up here
-          </NavLink>
+          </Link>
         </p>
       </section>
     </main>

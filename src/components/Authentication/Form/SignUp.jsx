@@ -1,10 +1,12 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { auth } from "../../../firebase/firebase";
 import { AuthContext } from "../../../App";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { handleInputChange, setInputError } from "../../../utils/utils";
+import Card from "../../Elements/Card";
 import UserForm from "./UserForm";
+import { FaUserPlus } from "react-icons/fa";
 
 function SignUp() {
   const { setisSignedIn, setCurrentUser } = useContext(AuthContext);
@@ -39,17 +41,26 @@ function SignUp() {
         navigate("/groceries");
       })
       .catch((error) => {
+        console.log(error.code);
         setInputError(error.code, setErrorMsg);
       });
   };
 
   return (
-    <UserForm
-      handleOnSubmit={signUpUser}
-      title="Sign Up"
-      errorMsg={errorMsg}
-      handleChange={handleChange}
-      formData={signUpFormData}
+    <Card
+      titleIcon={<FaUserPlus />}
+      titleText="Sign Up"
+      body={
+        <UserForm
+          handleOnSubmit={signUpUser}
+          description="Create an account to access your groceries list"
+          errorMsg={errorMsg}
+          handleChange={handleChange}
+          formData={signUpFormData}
+          forgotPassword={true}
+          submitBtnTxt="Sign Up"
+        />
+      }
     />
   );
 }

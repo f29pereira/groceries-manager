@@ -4,7 +4,9 @@ import { useNavigate, Link } from "react-router";
 import { auth } from "../../../firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { handleInputChange, setInputError } from "../../../utils/utils";
+import Card from "../../Elements/Card";
 import UserForm from "./UserForm";
+import { FaUser } from "react-icons/fa";
 
 function SignIn() {
   const { setisSignedIn, setCurrentUser } = useContext(AuthContext);
@@ -44,19 +46,27 @@ function SignIn() {
   };
 
   return (
-    <>
-      <UserForm
-        handleOnSubmit={signInUser}
-        title="Sign In"
-        errorMsg={errorMsg}
-        handleChange={handleChange}
-        formData={signInFormData}
-      />
-      <p id="create-account">Don't have an account ?</p>
-      <Link to="/signUp" className="sign-up-link">
-        Sign up here
-      </Link>
-    </>
+    <Card
+      titleIcon={<FaUser />}
+      titleText="Sign In"
+      body={
+        <>
+          <UserForm
+            handleOnSubmit={signInUser}
+            description="Welcome back. Sign In to get acess to your custom groceries list."
+            errorMsg={errorMsg}
+            handleChange={handleChange}
+            formData={signInFormData}
+            forgotPassword={false}
+            submitBtnTxt="Sign In"
+          />
+          <p id="create-account">Don't have an account ?</p>
+          <Link to="/signUp" className="click-link">
+            Sign up here
+          </Link>
+        </>
+      }
+    />
   );
 }
 

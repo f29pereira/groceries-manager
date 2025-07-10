@@ -4,6 +4,8 @@
 @import "home.css";
 @import "pageNotFound.css";
 @import "authentication.css";
+@import "groceries.css";
+@import "elements.css";
 
 * {
   box-sizing: border-box;
@@ -17,7 +19,7 @@ body {
 }
 
 nav {
-  background-color: var(--dark-green);
+  background-color: var(--nav-green);
 }
 
 li {
@@ -40,4 +42,9 @@ p {
 
 button {
   border: none;
+}
+
+.click-link {
+  color: var(--dark-green);
+  text-decoration: underline;
 }

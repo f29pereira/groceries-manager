@@ -1,11 +1,12 @@
 /*Colors*/
 :root {
-  --dark-green: #006400;
-  --darker-green: #042e04;
+  --nav-green: #006400;
+  --dark-green: #042e04;
   --ligth-green: #ace1af;
   --white: #ffffff;
   --black: #000000;
   --soft-white: #faf9f6;
   --red: #ff0800;
   --dark-red: #710804;
+  --ligth-gray: #cac9c9;
 }
