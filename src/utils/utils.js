@@ -1,3 +1,5 @@
+import { FirebaseError } from "firebase/app";
+
 /**
  * Sets the current input value change to state
  * @param {object} event - input event
@@ -12,13 +14,35 @@ export const handleInputChange = (event, stateSetter) => {
 };
 
 /**
- * Sets new error message
+ * Handles catched errors and adds them to state
  * @param {string} errorCode - firebase error code
  * @param {function} stateSetter - error message state setter function
  */
-export const setInputError = (errorCode, stateSetter) => {
-  const error = getError(errorCode);
-  const errorType = error.inputType;
+export const showError = (errorToHandle, stateSetter) => {
+  const error = isFirebaseError(errorToHandle)
+    ? errorToHandle.code
+    : errorToHandle;
+
+  setError(error, stateSetter);
+};
+
+/**
+ * Checks if error is FirebaseError
+ * @param {*} error
+ * @returns
+ */
+const isFirebaseError = (error) => {
+  return error instanceof FirebaseError;
+};
+
+/**
+ * Sets new error message to state
+ * @param {string} errorCode - error description
+ * @param {function} stateSetter - error message state setter function
+ */
+const setError = (errorCode, stateSetter) => {
+  const error = getErrorDescription(errorCode);
+  const errorType = error.type;
   const errorDescription = error.description;
 
   stateSetter((prev) => ({
@@ -28,31 +52,34 @@ export const setInputError = (errorCode, stateSetter) => {
 };
 
 /**
- * Returns object with input and error message associated with errorCode
- * @param {string} errorCode - firebase error code
+ * Return object with error type and description
+ * @param {string} errorCode - error code
  * @returns
  */
-const getError = (errorCode) => {
+const getErrorDescription = (errorCode) => {
   const error = {
-    inputType: "",
+    type: "",
     description: "",
   };
 
   if (errorCode === "auth/invalid-email") {
-    error.inputType = "email";
+    error.type = "email";
     error.description = "Invalid email";
   } else if (errorCode === "auth/password-does-not-meet-requirements") {
-    error.inputType = "password";
+    error.type = "password";
     error.description =
       "Password must contain: at least 8 characters, a lower case character, an upper case character and a non-alphanumeric character";
   } else if (errorCode === "auth/invalid-credential") {
-    error.inputType = "generic";
+    error.type = "generic";
     error.description = "Invalid credentials";
   } else if (errorCode === "auth/email-already-in-use") {
-    error.inputType = "email";
+    error.type = "email";
     error.description = "Email already in use";
+  } else if (errorCode === "auth/reset-confirm-not-equals") {
+    error.type = "generic";
+    error.description = "Password and Confirm Password don't match";
   } else {
-    error.inputType = "generic";
+    error.type = "generic";
     error.description = "Sorry, something went wrong.";
   }
 

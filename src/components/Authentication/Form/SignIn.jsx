@@ -3,10 +3,10 @@ import { AuthContext } from "../../../App";
 import { useNavigate, Link } from "react-router";
 import { auth } from "../../../firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { handleInputChange, setInputError } from "../../../utils/utils";
+import { handleInputChange, showError } from "../../../utils/utils";
+import { FaUser } from "../../../utils/icons";
 import Card from "../../Elements/Card";
 import UserForm from "./UserForm";
-import { FaUser } from "react-icons/fa";
 
 function SignIn() {
   const { setisSignedIn, setCurrentUser } = useContext(AuthContext);
@@ -35,13 +35,12 @@ function SignIn() {
       signInFormData.password
     )
       .then((userCredential) => {
-        const user = userCredential.user;
-        setCurrentUser(user);
+        setCurrentUser(userCredential.user);
         setisSignedIn((prev) => !prev);
-        navigate("/groceries");
+        navigate("/groceriesList");
       })
       .catch((error) => {
-        setInputError(error.code, setErrorMsg);
+        showError(error, setErrorMsg);
       });
   };
 

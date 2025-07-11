@@ -1,12 +1,12 @@
 import { useState, useContext } from "react";
-import { Link, useNavigate } from "react-router";
-import { auth } from "../../../firebase/firebase";
 import { AuthContext } from "../../../App";
+import { useNavigate } from "react-router";
+import { auth } from "../../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { handleInputChange, setInputError } from "../../../utils/utils";
+import { handleInputChange, showError } from "../../../utils/utils";
+import { FaUserPlus } from "../../../utils/icons";
 import Card from "../../Elements/Card";
 import UserForm from "./UserForm";
-import { FaUserPlus } from "react-icons/fa";
 
 function SignUp() {
   const { setisSignedIn, setCurrentUser } = useContext(AuthContext);
@@ -35,14 +35,12 @@ function SignUp() {
       signUpFormData.password
     )
       .then((userCredential) => {
-        const user = userCredential.user;
-        setCurrentUser(user);
+        setCurrentUser(userCredential.user);
         setisSignedIn((prev) => !prev);
-        navigate("/groceries");
+        navigate("/groceriesList");
       })
       .catch((error) => {
-        console.log(error.code);
-        setInputError(error.code, setErrorMsg);
+        showError(error, setErrorMsg);
       });
   };
 
@@ -57,7 +55,6 @@ function SignUp() {
           errorMsg={errorMsg}
           handleChange={handleChange}
           formData={signUpFormData}
-          forgotPassword={true}
           submitBtnTxt="Sign Up"
         />
       }

@@ -2,8 +2,8 @@ import { Link } from "react-router";
 
 function Home() {
   return (
-    <main id="home-main">
-      <header id="home-header">
+    <main className="main home">
+      <header className="header home">
         <h1 id="home-title">
           Manage your <span id="green-text">Groceries</span>
         </h1>

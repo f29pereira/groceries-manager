@@ -1,5 +1,5 @@
 import AuthNavOption from "../../Authentication/AuthNavOption";
-import { BsList } from "react-icons/bs";
+import { BsList } from "../../../utils/icons";
 
 function Hamburguer({ visible, handleClick }) {
   return (

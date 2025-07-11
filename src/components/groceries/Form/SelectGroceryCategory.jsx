@@ -4,7 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import Loading from "../../Elements/Loading";
 
 /**
- * Component thar renders categories list drop down menu
+ * Component that renders categories list drop down menu
  * @param {function} handleChange   - sets category id state value
  * @param {string} selectedCategory - category id state value
  */
@@ -15,7 +15,9 @@ function SelectGroceryCategory({ handleChange, selectedCategory }) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const querySnapshot = await getDocs(collection(db, "grocery_category"));
+        const querySnapshot = await getDocs(
+          collection(db, "grocery_categories")
+        );
 
         const dataList = querySnapshot.docs.map((doc) => ({
           id: doc.id,

@@ -1,4 +1,4 @@
-import { BiError } from "react-icons/bi";
+import { BiError } from "../../utils/icons";
 
 /**
  * Component that renders a error message

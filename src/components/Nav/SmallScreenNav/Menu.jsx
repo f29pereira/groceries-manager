@@ -1,8 +1,9 @@
 import { NavLink } from "react-router";
-import { IoMdCloseCircle } from "react-icons/io";
-import { TbPaperBag } from "react-icons/tb";
-import { RiFileList2Line } from "react-icons/ri";
-import { FaRegUserCircle } from "react-icons/fa";
+import {
+  IoMdCloseCircle,
+  TbPaperBag,
+  RiFileList2Line,
+} from "../../../utils/icons";
 
 function Menu({ visible, handleClick }) {
   return (
@@ -22,7 +23,7 @@ function Menu({ visible, handleClick }) {
         </li>
 
         <li className="item">
-          <NavLink to="groceries" onClick={handleClick}>
+          <NavLink to="groceriesList" onClick={handleClick}>
             <span className="icon">
               <RiFileList2Line />
             </span>

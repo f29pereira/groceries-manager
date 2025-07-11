@@ -55,19 +55,6 @@
   outline: none;
 }
 
-.submit-btn {
-  background-color: var(--dark-green);
-  color: var(--white);
-  font-size: 1.2rem;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  margin: 1rem 0;
-}
-
-.submit-btn:hover {
-  background-color: var(--nav-green);
-}
-
 #create-account {
   font-size: 1rem;
   margin-bottom: 1rem;

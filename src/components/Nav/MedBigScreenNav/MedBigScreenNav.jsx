@@ -1,13 +1,8 @@
 import { NavLink } from "react-router";
-import { useContext } from "react";
-import { AuthContext } from "../../../App";
 import AuthNavOption from "../../Authentication/AuthNavOption";
-import { FaRegUserCircle } from "react-icons/fa";
-import { TbPaperBag } from "react-icons/tb";
+import { TbPaperBag } from "../../../utils/icons";
 
 function MedBigScrenNav() {
-  const { isSignedIn } = useContext(AuthContext);
-
   return (
     <nav>
       <ul id="nav-container">
@@ -18,7 +13,7 @@ function MedBigScrenNav() {
           <NavLink to="/">Groceries Manager</NavLink>
         </li>
         <li className="nav-items nav-hover" id="nav-groceries">
-          <NavLink to="groceries">Groceries</NavLink>
+          <NavLink to="groceriesList">Groceries</NavLink>
         </li>
         <li className="nav-items">
           <AuthNavOption />
