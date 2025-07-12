@@ -6,7 +6,7 @@ import { IoIosAddCircle } from "../../../../utils/icons";
 import SelectGroceryCategory from "../SelectGroceryCategory";
 import Card from "../../../Elements/Card";
 import ErrorMessage from "../../../Errors/ErrorMessage";
-import { addItem } from "./addItem_firebase";
+import { addItem } from "../../js/groceries_firebase";
 
 function AddItem() {
   const navigate = useNavigate();

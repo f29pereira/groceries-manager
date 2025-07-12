@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { db } from "../../../firebase/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { fetchGroceryCategories } from "../js/groceries_firebase";
 import Loading from "../../Elements/Loading";
 
 /**
@@ -13,25 +12,16 @@ function SelectGroceryCategory({ handleChange, selectedCategory }) {
   const [loadingData, setLoadingData] = useState(true);
 
   useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const querySnapshot = await getDocs(
-          collection(db, "grocery_categories")
-        );
-
-        const dataList = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-
-        setCategories(dataList);
-        setLoadingData(false);
-      } catch (error) {
-        console.log(error);
-      }
+    const getCategories = () => {
+      fetchGroceryCategories()
+        .then((data) => {
+          setCategories(data);
+          setLoadingData(false);
+        })
+        .catch((error) => console.log(error));
     };
 
-    fetchCategories();
+    getCategories();
   }, []);
 
   return (
