@@ -1,7 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../App";
 import { useNavigate, Link } from "react-router";
-import { setInputError } from "../../utils/utils";
 import { signOut } from "firebase/auth";
 
 function SignOut() {

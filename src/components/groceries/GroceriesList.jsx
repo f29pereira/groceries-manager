@@ -3,19 +3,20 @@ import { Link } from "react-router";
 import { AuthContext } from "../../App";
 import { fetchGroceryList } from "./js/groceries_firebase";
 import Loading from "../Elements/Loading";
+import { IoIosAddCircle } from "../../utils/icons";
 
 function GroceriesList() {
   const { currentUser } = useContext(AuthContext);
 
   const [itemsList, setItemsList] = useState([]);
-  const [loadingData, setLoadingData] = useState(true);
+  const [isLoadingData, setIsLoadingData] = useState(true);
   const [isGroceriesEmpty, setIsGroceriesEmpty] = useState(false);
 
   useEffect(() => {
     const getGroceryList = () => {
       fetchGroceryList(currentUser.uid)
         .then((data) => {
-          setLoadingData(false);
+          setIsLoadingData(false);
           if (data.length !== 0) {
             setItemsList(data);
           } else {
@@ -30,52 +31,77 @@ function GroceriesList() {
 
   return (
     <main className="main">
-      <header className="header">
+      <header className="header groceries">
         <h1>Groceries List</h1>
       </header>
 
       <section>
-        <Link to="/addItem" className="submit-btn">
-          Add Item
-        </Link>
+        <div className="centered-container">
+          <Link to="/addItem" className="submit-btn add-item">
+            <IoIosAddCircle className="add-item-icon" />
+            Add Item
+          </Link>
+        </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Category</th>
-              <th>Quantity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {loadingData ? (
-              <tr>
-                <td>
-                  <Loading>Loading grocery list</Loading>
-                </td>
-              </tr>
-            ) : isGroceriesEmpty ? (
-              <tr>
-                <td>No data</td>
-              </tr>
-            ) : (
-              itemsList.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.name}</td>
-                  <td>
-                    <span
-                      className="item-category"
-                      style={{ backgroundColor: item.categoryColor }}
-                    >
-                      {item.categoryName}
-                    </span>
-                  </td>
-                  <td>{item.quantity}</td>
-                </tr>
-              ))
+        {isGroceriesEmpty ? (
+          <div className="groceries-row-container centered">
+            <div className="no-list">
+              Groceries List not created yet, add a item to create it.
+            </div>
+          </div>
+        ) : (
+          <>
+            {isLoadingData ? null : (
+              <div className="item-count-container">
+                <div className="item-count">
+                  Total Count:<span>{itemsList.length}</span>
+                </div>
+              </div>
             )}
-          </tbody>
-        </table>
+
+            <div className="groceries-list">
+              <div className="groceries-row-container groceries-header">
+                <div className="groceries-column-container category">
+                  Category
+                </div>
+                <div className="groceries-column-container groceryItem">
+                  Item
+                </div>
+                <div className="groceries-column-container quantity">
+                  Quantity
+                </div>
+              </div>
+
+              {isLoadingData ? (
+                <div className="groceries-row-container centered">
+                  <Loading>Loading grocery list</Loading>
+                </div>
+              ) : (
+                itemsList.map((item, index) => (
+                  <div
+                    key={index}
+                    className="groceries-row-container item-data"
+                  >
+                    <div className="groceries-column-container category">
+                      <span
+                        className="item-category"
+                        style={{ backgroundColor: item.categoryColor }}
+                      >
+                        {item.categoryName}
+                      </span>
+                    </div>
+                    <div className="groceries-column-container groceryItem">
+                      {item.name}
+                    </div>
+                    <div className="groceries-column-container quantity">
+                      {item.quantity}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          </>
+        )}
       </section>
     </main>
   );

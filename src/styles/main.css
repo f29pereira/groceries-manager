@@ -60,6 +60,10 @@ header {
   margin-bottom: 1rem;
 }
 
+section {
+  width: 100%;
+}
+
 .submit-btn {
   background-color: var(--dark-green);
   color: var(--white);
@@ -71,6 +75,12 @@ header {
 
 .submit-btn:hover {
   background-color: var(--nav-green);
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media (min-width: 800px) {

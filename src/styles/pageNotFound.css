@@ -28,12 +28,6 @@
   line-height: 2rem;
 }
 
-#return-home-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 #return-home-container span {
   background-color: var(--nav-green);
   padding: 0.5rem 1rem;

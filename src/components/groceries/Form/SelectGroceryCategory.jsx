@@ -9,14 +9,14 @@ import Loading from "../../Elements/Loading";
  */
 function SelectGroceryCategory({ handleChange, selectedCategory }) {
   const [categories, setCategories] = useState([]);
-  const [loadingData, setLoadingData] = useState(true);
+  const [isLoadingData, setIsLoadingData] = useState(true);
 
   useEffect(() => {
     const getCategories = () => {
       fetchGroceryCategories()
         .then((data) => {
           setCategories(data);
-          setLoadingData(false);
+          setIsLoadingData(false);
         })
         .catch((error) => console.log(error));
     };
@@ -26,7 +26,7 @@ function SelectGroceryCategory({ handleChange, selectedCategory }) {
 
   return (
     <>
-      {loadingData ? (
+      {isLoadingData ? (
         <Loading>Loading grocery categories</Loading>
       ) : (
         <>

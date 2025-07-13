@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link } from "react-router";
 
 function NotFound() {
   return (
@@ -8,13 +8,13 @@ function NotFound() {
           404 - <span>Page not found</span>
         </h1>
         <p>
-          Sorry, the page you are looking for doesn't exist or it isn´t
-          available.
+          Sorry, the page you are looking for doesn't exist or it isn't
+          available at the moment.
         </p>
-        <div id="return-home-container">
-          <span>
-            <NavLink to="/">Return Home</NavLink>
-          </span>
+        <div className="centered-container">
+          <Link className="submit-btn" to="/">
+            Return Home
+          </Link>
         </div>
       </div>
     </div>
