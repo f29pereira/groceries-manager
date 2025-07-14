@@ -29,7 +29,7 @@
 .card-header {
   background: linear-gradient(
     90deg,
-    var(--dark-green) 0%,
+    var(--submit) 0%,
     var(--nav-green) 35%,
     var(--ligth-green) 100%
   );
@@ -41,24 +41,40 @@
 
 .card-header .title-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+}
+
+.go-back-btn {
+  margin-right: auto;
 }
 
 .card-header .icon {
   font-size: 2rem;
   margin-right: 1rem;
+  color: var(--white);
+}
+
+.left-element .icon:hover {
+  color: var(--ligth-green);
+}
+
+.right-element {
+  visibility: hidden;
 }
 
 .card-header .title {
   font-size: 1.5rem;
 }
 
+.go-back-btn {
+  background: none;
+}
+
 .card-body {
   background-color: var(--soft-white);
   padding: 1rem;
   border-radius: 0 0 10px 10px;
-  border: 1px solid var(--ligth-gray);
+  border: 1px solid var(--gray);
   border-top: none;
   text-align: center;
 }

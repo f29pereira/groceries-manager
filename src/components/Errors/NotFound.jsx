@@ -12,7 +12,7 @@ function NotFound() {
           available at the moment.
         </p>
         <div className="centered-container">
-          <Link className="submit-btn" to="/">
+          <Link className="btn submit" to="/">
             Return Home
           </Link>
         </div>

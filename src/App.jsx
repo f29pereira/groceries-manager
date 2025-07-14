@@ -7,6 +7,7 @@ import SignIn from "./components/Authentication/Form/SignIn";
 import AuthRequired from "./components/Authentication/AuthRequired";
 import GroceriesList from "./components/Groceries/GroceriesList";
 import AddItem from "./components/Groceries/Form/AddItem/AddItem";
+import RemoveItem from "./components/Groceries/RemoveItem";
 import Profile from "./components/Authentication/Profile";
 import NotFound from "./components/Errors/NotFound";
 
@@ -28,8 +29,11 @@ function App() {
             <Route path="signIn" element={<SignIn />} />
 
             <Route element={<AuthRequired />}>
-              <Route path="groceriesList" element={<GroceriesList />} />
-              <Route path="addItem" element={<AddItem />} />
+              <Route path="groceries">
+                <Route path="list" element={<GroceriesList />} />
+                <Route path="addItem" element={<AddItem />} />
+                <Route path="removeItem/:id" element={<RemoveItem />} />
+              </Route>
               <Route path="profile" element={<Profile />} />
             </Route>
           </Route>

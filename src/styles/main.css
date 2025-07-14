@@ -45,7 +45,7 @@ button {
 }
 
 .click-link {
-  color: var(--dark-green);
+  color: var(--submit);
   text-decoration: underline;
 }
 
@@ -64,17 +64,28 @@ section {
   width: 100%;
 }
 
-.submit-btn {
-  background-color: var(--dark-green);
-  color: var(--white);
+.btn {
   font-size: 1.2rem;
   border-radius: 5px;
   padding: 0.5rem 1rem;
   margin: 1rem 0;
+  color: var(--white);
 }
 
-.submit-btn:hover {
-  background-color: var(--nav-green);
+.btn.submit {
+  background-color: var(--submit);
+}
+
+.submit:hover {
+  background-color: var(--hover-submit);
+}
+
+.cancel {
+  background-color: var(--cancel);
+}
+
+.cancel:hover {
+  background-color: var(--hover-cancel);
 }
 
 .centered-container {

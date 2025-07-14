@@ -31,7 +31,7 @@ function AddItem() {
 
     addItem(currentUser.uid, groceryFormData)
       .then(() => {
-        navigate("/groceriesList");
+        navigate("/groceries/list");
       })
       .catch((error) => {
         showError(error, setErrorMsg);
@@ -40,6 +40,7 @@ function AddItem() {
 
   return (
     <Card
+      showGoBack={true}
       titleIcon={<IoIosAddCircle />}
       titleText="Add Item"
       body={
@@ -79,6 +80,7 @@ function AddItem() {
                   name="quantity"
                   onChange={handleChange}
                   value={groceryFormData.quantity}
+                  placeholder="e.g., 5units, 500g, 1Kg"
                 />
                 <SelectGroceryCategory
                   handleChange={handleChange}
@@ -86,7 +88,7 @@ function AddItem() {
                 />
               </div>
 
-              <button type="submit" className="submit-btn">
+              <button type="submit" className="btn submit">
                 Add
               </button>
             </form>

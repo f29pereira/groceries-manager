@@ -1,19 +1,28 @@
+import { Outlet } from "react-router";
 import AuthNavOption from "../../Authentication/AuthNavOption";
 import { BsList } from "../../../utils/icons";
 
-function Hamburguer({ visible, handleClick }) {
+function Hamburguer({ isHamburguerOpen, handleClick }) {
   return (
-    <nav id="hamburguer-nav" className={visible}>
-      <ul id="hamburguer-container">
-        <li className="icon-items" id="open" onClick={handleClick}>
-          <BsList />
-        </li>
+    <>
+      {!isHamburguerOpen ? (
+        <>
+          <nav id="hamburguer-nav">
+            <ul id="hamburguer-container">
+              <li className="icon-items" id="open" onClick={handleClick}>
+                <BsList />
+              </li>
 
-        <li className="icon-items">
-          <AuthNavOption />
-        </li>
-      </ul>
-    </nav>
+              <li className="icon-items">
+                <AuthNavOption />
+              </li>
+            </ul>
+          </nav>
+
+          <Outlet />
+        </>
+      ) : null}
+    </>
   );
 }
 

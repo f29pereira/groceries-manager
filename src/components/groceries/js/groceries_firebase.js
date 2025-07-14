@@ -9,10 +9,26 @@ import {
   getDoc,
   updateDoc,
   arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 
 /**
- * Updates or creates collection groceries_list
+ * Queries the groceries_list collection for given user id
+ * @param {userId} userId  - authenticated user id
+ * @returns {object} - result of the query
+ */
+const getUserGroceryList = async (userId) => {
+  const userQuery = query(
+    collection(db, "groceries_list"),
+    where("user_id", "==", userId)
+  );
+  const querySnapshot = await getDocs(userQuery);
+
+  return querySnapshot;
+};
+
+/**
+ * Updates or creates collection groceries_list for given user id
  * @param {string} userId - authenticated user id
  * @param {object} formData - item form data
  */
@@ -23,15 +39,11 @@ export const addItem = async (userId, formData) => {
     grocery_categories_id: formData.categoryId,
   };
 
-  const userQuery = query(
-    collection(db, "groceries_list"),
-    where("user_id", "==", userId)
-  );
-  const querySnapshot = await getDocs(userQuery);
+  const query = await getUserGroceryList(userId);
 
   //Check if user has grocery list
-  if (!querySnapshot.empty) {
-    const groceryListId = querySnapshot.docs[0].id;
+  if (!query.empty) {
+    const groceryListId = query.docs[0].id;
     const groceryListRef = doc(db, "groceries_list", groceryListId);
 
     //update grocery list with new item
@@ -45,6 +57,31 @@ export const addItem = async (userId, formData) => {
     await setDoc(doc(db, "groceries_list", groceryId), {
       user_id: userId,
       items: [itemObj],
+    });
+  }
+};
+
+/**
+ * Deletes item from groceries_list collection
+ * @param {string} userId - authenticated user id
+ * @param {object} item - item to be removed
+ */
+export const removeItem = async (userId, item) => {
+  const itemObj = {
+    name: item.name,
+    quantity: item.quantity,
+    grocery_categories_id: item.categoryId,
+  };
+
+  const query = await getUserGroceryList(userId);
+
+  if (!query.empty) {
+    const groceryListId = query.docs[0].id;
+    const groceryListRef = doc(db, "groceries_list", groceryListId);
+
+    //delete item
+    await updateDoc(groceryListRef, {
+      items: arrayRemove(itemObj),
     });
   }
 };
@@ -81,13 +118,17 @@ export const fetchGroceryList = async (userId) => {
   const querySnapshot = await getDocs(userQuery);
 
   if (!querySnapshot.empty) {
-    const items = querySnapshot.docs[0].data().items.reverse();
+    const items = querySnapshot.docs[0].data().items;
 
     for (const item of items) {
-      const categoryObj = await fetchNameColor(item.grocery_categories_id);
+      const categoryId = item.grocery_categories_id;
+      const categoryObj = await fetchNameColor(categoryId);
+      const itemId = items.indexOf(item);
 
       itemsToCopy.push({
+        id: itemId,
         name: item.name,
+        categoryId: categoryId,
         categoryName: categoryObj.name,
         categoryColor: categoryObj.color,
         quantity: item.quantity,
@@ -95,7 +136,7 @@ export const fetchGroceryList = async (userId) => {
     }
   }
 
-  return itemsToCopy;
+  return itemsToCopy.reverse();
 };
 
 /**

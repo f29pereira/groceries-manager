@@ -37,7 +37,7 @@ function SignUp() {
       .then((userCredential) => {
         setCurrentUser(userCredential.user);
         setisSignedIn((prev) => !prev);
-        navigate("/groceriesList");
+        navigate("/groceries/list");
       })
       .catch((error) => {
         showError(error, setErrorMsg);
@@ -46,6 +46,7 @@ function SignUp() {
 
   return (
     <Card
+      showGoBack={false}
       titleIcon={<FaUserPlus />}
       titleText="Sign Up"
       body={

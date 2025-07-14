@@ -60,8 +60,3 @@
 .item .description:hover {
   border-bottom: 2px solid var(--white);
 }
-
-#hamburguer-nav.hidden,
-#menu-container.hidden {
-  display: none;
-}

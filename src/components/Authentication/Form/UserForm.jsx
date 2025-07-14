@@ -77,7 +77,7 @@ function UserForm({
             ) : null}
           </div>
 
-          <button type="submit" className="submit-btn">
+          <button type="submit" className="btn submit">
             {submitBtnTxt}
           </button>
         </form>

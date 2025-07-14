@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useEffect } from "react";
-import { Outlet } from "react-router";
 import SmallScreenNav from "./SmallScreenNav/SmallScreenNav";
 import MedBigScreenNav from "./MedBigScreenNav/MedBigScreenNav";
 
@@ -21,13 +20,7 @@ function Nav() {
 
   const isSmallScreen = windowWith <= 400;
 
-  return (
-    <>
-      {isSmallScreen ? <SmallScreenNav /> : <MedBigScreenNav />}
-
-      <Outlet />
-    </>
-  );
+  return <>{isSmallScreen ? <SmallScreenNav /> : <MedBigScreenNav />}</>;
 }
 
 export default Nav;

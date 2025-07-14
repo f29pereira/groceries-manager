@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { AuthContext } from "../../App";
 import { fetchGroceryList } from "./js/groceries_firebase";
 import Loading from "../Elements/Loading";
-import { IoIosAddCircle } from "../../utils/icons";
+import { IoIosAddCircle, MdDelete } from "../../utils/icons";
 
 function GroceriesList() {
   const { currentUser } = useContext(AuthContext);
@@ -37,7 +37,7 @@ function GroceriesList() {
 
       <section>
         <div className="centered-container">
-          <Link to="/addItem" className="submit-btn add-item">
+          <Link to="/groceries/addItem" className="btn submit add-item">
             <IoIosAddCircle className="add-item-icon" />
             Add Item
           </Link>
@@ -70,6 +70,9 @@ function GroceriesList() {
                 <div className="groceries-column-container quantity">
                   Quantity
                 </div>
+                <div className="groceries-column-container actions">
+                  Actions
+                </div>
               </div>
 
               {isLoadingData ? (
@@ -95,6 +98,21 @@ function GroceriesList() {
                     </div>
                     <div className="groceries-column-container quantity">
                       {item.quantity}
+                    </div>
+                    <div className="groceries-column-container actions">
+                      <Link
+                        to={`/groceries/removeItem/${item.id}`}
+                        state={{
+                          categoryId: item.categoryId,
+                          categoryColor: item.categoryColor,
+                          categoryName: item.categoryName,
+                          name: item.name,
+                          quantity: item.quantity,
+                        }}
+                        title="Remove Item"
+                      >
+                        <MdDelete className="remove-item-icon" />
+                      </Link>
                     </div>
                   </div>
                 ))

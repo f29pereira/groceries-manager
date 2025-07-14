@@ -1,4 +1,4 @@
-.submit-btn .add-item-icon {
+.btn .add-item-icon {
   font-size: 1.2rem;
   margin-right: 0.5rem;
 }
@@ -26,6 +26,7 @@
 .groceries-row-container {
   display: flex;
   align-items: center;
+  gap: 5px;
 }
 
 .groceries-column-container {
@@ -34,16 +35,21 @@
   align-items: center;
 }
 
+/*Groceries List - columns*/
 .groceries-column-container.category {
-  flex: 2;
+  flex: 1;
 }
 
 .groceries-column-container.groceryItem {
-  flex: 1;
+  flex: 0.5;
 }
 
 .groceries-column-container.quantity {
-  flex: 1;
+  flex: 0.5;
+}
+
+.groceries-column-container.actions {
+  flex: 0.5;
 }
 
 .groceries-row-container.centered {
@@ -51,16 +57,12 @@
 }
 
 .groceries-row-container.groceries-header {
-  background: linear-gradient(
-    90deg,
-    var(--dark-green) 0%,
-    var(--nav-green) 50%
-  );
+  background: linear-gradient(90deg, var(--submit) 0%, var(--nav-green) 50%);
   color: var(--white);
   font-size: 1.2rem;
   font-weight: bold;
   border-radius: 5px 5px 0 0;
-  padding: 1rem;
+  padding: 1rem 0.5rem;
 }
 
 .no-list {
@@ -73,9 +75,9 @@
 .groceries-row-container.item-data,
 .groceries-row-container.centered {
   padding: 1rem;
-  border-left: 1px solid var(--dark-green);
-  border-right: 1px solid var(--dark-green);
-  border-bottom: 1px solid var(--dark-green);
+  border-left: 1px solid var(--submit);
+  border-right: 1px solid var(--submit);
+  border-bottom: 1px solid var(--submit);
 }
 
 .groceries-row-container.item-data:hover {
@@ -84,10 +86,38 @@
 
 .item-category {
   text-align: center;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   font-weight: 500;
   border-radius: 5px;
   padding: 0.2rem 0.5rem;
+}
+
+.remove-item-icon {
+  color: var(--cancel);
+  font-size: 1.5rem;
+}
+
+/*Remove Item*/
+.remove-item-container {
+  border: 1px solid var(--submit);
+  background-color: var(--ligth-gray);
+}
+
+.remove-item {
+  padding: 1rem;
+}
+
+ul .remove-item-info {
+  color: var(--black);
+  margin-bottom: 0.5rem;
+}
+
+.remove-item-btns {
+  gap: 2rem;
+}
+
+.remove-item-question {
+  margin-top: 1rem;
 }
 
 @media (min-width: 800px) {
@@ -96,11 +126,11 @@
     margin-bottom: 1rem;
   }
 
-  .submit-btn .add-item-icon {
+  .btn .add-item-icon {
     font-size: 2.2rem;
   }
 
-  .submit-btn.add-item {
+  .btn.add-item {
     font-size: 1.5rem;
   }
 
@@ -119,6 +149,22 @@
 
   .item-category {
     font-size: 1.2rem;
+  }
+
+  .groceries-column-container.category {
+    flex: 2;
+  }
+
+  .groceries-column-container.groceryItem {
+    flex: 1;
+  }
+
+  .groceries-column-container.quantity {
+    flex: 1;
+  }
+
+  .groceries-column-container.actions {
+    flex: 1;
   }
 }
 

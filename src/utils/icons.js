@@ -5,6 +5,8 @@ import { RiFileList2Line } from "react-icons/ri";
 import { BiError } from "react-icons/bi";
 import { FaUser, FaUserPlus } from "react-icons/fa";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { MdDelete } from "react-icons/md";
+import { IoArrowBackCircle } from "react-icons/io5";
 
 export {
   BsList,
@@ -17,4 +19,6 @@ export {
   FaUserPlus,
   AiOutlineLoading3Quarters,
   TbLockPassword,
+  MdDelete,
+  IoArrowBackCircle,
 };

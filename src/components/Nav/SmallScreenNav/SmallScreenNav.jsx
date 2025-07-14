@@ -2,11 +2,8 @@ import { useState } from "react";
 import Hamburguer from "./Hamburguer";
 import Menu from "./Menu";
 
-function MobileNav() {
+function SmallScreenNav() {
   const [isHamburguerOpen, setIsHamburguerOpen] = useState(false);
-
-  const hamburguerHidden = isHamburguerOpen ? "hidden" : "";
-  const menuHidden = !isHamburguerOpen ? "hidden" : "";
 
   function toggle() {
     setIsHamburguerOpen((prevState) => !prevState);
@@ -14,10 +11,10 @@ function MobileNav() {
 
   return (
     <>
-      <Hamburguer visible={hamburguerHidden} handleClick={toggle} />
-      <Menu visible={menuHidden} handleClick={toggle} />
+      <Hamburguer isHamburguerOpen={isHamburguerOpen} handleClick={toggle} />
+      <Menu isHamburguerOpen={isHamburguerOpen} handleClick={toggle} />
     </>
   );
 }
 
-export default MobileNav;
+export default SmallScreenNav;
