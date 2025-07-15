@@ -1,0 +1,112 @@
+/*Authentication used in small and medium/big navbars*/
+.auth-option {
+  color: var(--nav-green);
+  background-color: var(--ligth-green);
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  display: block;
+}
+
+.auth-option:hover {
+  color: var(--white);
+  background-color: var(--nav-green);
+}
+
+/*Forms*/
+.main-form {
+  padding: 1rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-description {
+  text-align: center;
+  line-height: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: auto;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.form-input {
+  border: 1px solid var(--gray);
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.form-input:focus {
+  border-color: var(--submit);
+  outline: none;
+}
+
+.select-input {
+  border: 1px solid var(--gray);
+  padding: 0.5rem 1rem;
+}
+
+#create-account {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.reset-password {
+  align-self: flex-start;
+}
+
+/*Error Messages*/
+.input-error-msg {
+  color: var(--red);
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.generic-error-container {
+  background-color: var(--cancel);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  margin: 1rem 0;
+}
+
+.error-icon {
+  border-right: 1px solid var(--white);
+}
+
+.error-icon .icon {
+  font-size: 2.5rem;
+  padding: 0.2rem;
+}
+
+.error-msg {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  padding: 0.2rem;
+}
+
+@media (min-width: 800px) {
+  .input-container {
+    width: auto;
+  }
+
+  .form-description {
+    line-height: 1.5rem;
+    margin: 1rem 0;
+  }
+}

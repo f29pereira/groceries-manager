@@ -1,0 +1,14 @@
+/*Colors*/
+:root {
+  --nav-green: #006400;
+  --submit: #042e04;
+  --hover-submit: #064506;
+  --ligth-green: #b5ebc7;
+  --cancel: #640000;
+  --hover-cancel: #880000;
+  --white: #ffffff;
+  --soft-white: #faf9f6;
+  --black: #000000;
+  --gray: #cac9c9;
+  --ligth-gray: #eeecec;
+}

@@ -1,0 +1,188 @@
+.header.groceries {
+  text-align: center;
+}
+
+.btn .add-item-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.item-count-container {
+  display: flex;
+  margin: 1rem 0 0.5rem 0;
+}
+
+.item-count {
+  font-weight: bold;
+}
+
+.item-count span {
+  font-weight: normal;
+  margin-left: 0.5rem;
+}
+
+/*Groceries List*/
+.groceries-list {
+  background-color: #faf9f6;
+  border-bottom: none;
+}
+
+.groceries-row-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.groceries-column-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*Groceries List - columns*/
+.groceries-column-container.category {
+  flex: 1;
+}
+
+.groceries-column-container.groceryItem {
+  flex: 0.5;
+}
+
+.groceries-column-container.quantity {
+  flex: 0.5;
+}
+
+.groceries-column-container.actions {
+  flex: 0.5;
+}
+
+.groceries-row-container.centered {
+  justify-content: center;
+}
+
+.groceries-row-container.groceries-header {
+  background: linear-gradient(90deg, var(--submit) 0%, var(--nav-green) 50%);
+  color: var(--white);
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px 5px 0 0;
+  padding: 1rem 0.5rem;
+}
+
+.no-list {
+  background-color: var(--ligth-green);
+  font-size: 1.2rem;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.groceries-row-container.item-data,
+.groceries-row-container.centered {
+  padding: 1rem;
+  border-left: 1px solid var(--submit);
+  border-right: 1px solid var(--submit);
+  border-bottom: 1px solid var(--submit);
+}
+
+.groceries-row-container.item-data:hover {
+  background-color: var(--ligth-green);
+}
+
+.item-category {
+  text-align: center;
+  font-size: 0.7rem;
+  font-weight: 500;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+}
+
+.remove-item-icon {
+  color: var(--cancel);
+  font-size: 1.5rem;
+}
+
+/*Remove Item*/
+.remove-item-container {
+  border: 1px solid var(--submit);
+  background-color: var(--ligth-gray);
+}
+
+.remove-item {
+  padding: 1rem;
+}
+
+ul .remove-item-info {
+  color: var(--black);
+  margin-bottom: 0.5rem;
+}
+
+.remove-item-btns {
+  gap: 2rem;
+}
+
+.remove-item-question {
+  margin-top: 1rem;
+}
+
+@media (min-width: 800px) {
+  .header.groceries {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .btn .add-item-icon {
+    font-size: 2.2rem;
+  }
+
+  .btn.add-item {
+    font-size: 1.5rem;
+  }
+
+  .item-count {
+    font-size: 1.5rem;
+  }
+
+  .groceries-row-container.groceries-header {
+    font-size: 1.5rem;
+  }
+
+  .groceries-row-container.item-data,
+  .groceries-row-container.centered {
+    font-size: 1.3rem;
+  }
+
+  .item-category {
+    font-size: 1.2rem;
+  }
+
+  .groceries-column-container.category {
+    flex: 2;
+  }
+
+  .groceries-column-container.groceryItem {
+    flex: 1;
+  }
+
+  .groceries-column-container.quantity {
+    flex: 1;
+  }
+
+  .groceries-column-container.actions {
+    flex: 1;
+  }
+}
+
+@media (min-width: 1200px) {
+  .groceries-row-container.groceries-header {
+    font-size: 1.7rem;
+  }
+
+  .groceries-row-container.item-data,
+  .groceries-row-container.centered {
+    font-size: 1.5rem;
+  }
+
+  .item-category {
+    font-size: 1.4rem;
+  }
+}

@@ -1,0 +1,126 @@
+@import "colors.css";
+@import "smallScreenNav.css";
+@import "medBigScreenNav.css";
+@import "home.css";
+@import "pageNotFound.css";
+@import "forms.css";
+@import "groceries.css";
+@import "elements.css";
+
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--soft-white);
+}
+
+nav {
+  background-color: var(--nav-green);
+}
+
+li {
+  list-style: none;
+  color: var(--white);
+}
+
+li,
+a {
+  color: var(--white);
+}
+
+a {
+  text-decoration: none;
+}
+
+p {
+  font-size: 1.2rem;
+}
+
+button {
+  border: none;
+}
+
+.click-link {
+  color: var(--submit);
+  text-decoration: underline;
+}
+
+.content {
+  padding: 1rem 2rem;
+  min-height: 37rem;
+}
+
+header {
+  margin-bottom: 1rem;
+}
+
+section {
+  width: 100%;
+}
+
+.btn {
+  font-size: 1.2rem;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  color: var(--white);
+}
+
+.btn.submit {
+  background-color: var(--submit);
+}
+
+.submit:hover {
+  background-color: var(--hover-submit);
+}
+
+.cancel {
+  background-color: var(--cancel);
+}
+
+.cancel:hover {
+  background-color: var(--hover-cancel);
+}
+
+.centered-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*Footer*/
+footer {
+  background-color: var(--nav-green);
+  padding: 2rem;
+  color: var(--white);
+  margin-top: 4rem;
+}
+
+.footer-icon {
+  font-size: 2rem;
+}
+
+.footer-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.centered-column-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.green-text {
+  color: var(--nav-green);
+}
+
+@media (min-width: 800px) {
+  .main {
+    padding: 2rem 3rem;
+  }
+}
