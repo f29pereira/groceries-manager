@@ -7,6 +7,7 @@ import SelectGroceryCategory from "../SelectGroceryCategory";
 import Card from "../../../Elements/Card";
 import ErrorMessage from "../../../Errors/ErrorMessage";
 import { addItem } from "../../js/groceries_firebase";
+import Footer from "../../../Static/Footer";
 
 function AddItem() {
   const navigate = useNavigate();
@@ -39,63 +40,66 @@ function AddItem() {
   };
 
   return (
-    <Card
-      showGoBack={true}
-      titleIcon={<IoIosAddCircle />}
-      titleText="Add Item"
-      body={
-        <main className="main-form">
-          <section className="section-form">
-            <form
-              className="form-container"
-              onSubmit={addItemToGroceryList}
-              autoComplete="on"
-            >
-              {errorMsg.generic.length > 0 ? (
-                <ErrorMessage type="generic">{errorMsg.generic}</ErrorMessage>
-              ) : null}
+    <>
+      <Card
+        showGoBack={true}
+        titleIcon={<IoIosAddCircle />}
+        titleText="Add Item"
+        body={
+          <main className="main-form">
+            <section className="section-form">
+              <form
+                className="form-container"
+                onSubmit={addItemToGroceryList}
+                autoComplete="on"
+              >
+                {errorMsg.generic.length > 0 ? (
+                  <ErrorMessage type="generic">{errorMsg.generic}</ErrorMessage>
+                ) : null}
 
-              <div className="input-container">
-                <label htmlFor="grocery-name" className="form-label">
-                  Name
-                </label>
-                <input
-                  id="grocery-name"
-                  type="text"
-                  className="form-input"
-                  required
-                  name="name"
-                  onChange={handleChange}
-                  value={groceryFormData.name}
-                />
+                <div className="input-container">
+                  <label htmlFor="grocery-name" className="form-label">
+                    Name
+                  </label>
+                  <input
+                    id="grocery-name"
+                    type="text"
+                    className="form-input"
+                    required
+                    name="name"
+                    onChange={handleChange}
+                    value={groceryFormData.name}
+                  />
 
-                <label htmlFor="grocery-quantity" className="form-label">
-                  Quantity
-                </label>
-                <input
-                  id="grocery-quantity"
-                  type="text"
-                  className="form-input"
-                  required
-                  name="quantity"
-                  onChange={handleChange}
-                  value={groceryFormData.quantity}
-                  placeholder="e.g., 5units, 500g, 1Kg"
-                />
-                <SelectGroceryCategory
-                  handleChange={handleChange}
-                  selectedCategory={groceryFormData.categoryId}
-                />
-              </div>
+                  <label htmlFor="grocery-quantity" className="form-label">
+                    Quantity
+                  </label>
+                  <input
+                    id="grocery-quantity"
+                    type="text"
+                    className="form-input"
+                    required
+                    name="quantity"
+                    onChange={handleChange}
+                    value={groceryFormData.quantity}
+                    placeholder="e.g., 5units, 500g, 1Kg"
+                  />
+                  <SelectGroceryCategory
+                    handleChange={handleChange}
+                    selectedCategory={groceryFormData.categoryId}
+                  />
+                </div>
 
-              <button type="submit" className="btn submit">
-                Add
-              </button>
-            </form>
-          </section>
-        </main>
-      }
-    />
+                <button type="submit" className="btn submit">
+                  Add
+                </button>
+              </form>
+            </section>
+          </main>
+        }
+      />
+      <Footer />
+    </>
   );
 }
 

@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { AuthContext } from "../../App";
 import { fetchGroceryList } from "./js/groceries_firebase";
 import Loading from "../Elements/Loading";
+import Footer from "../Static/Footer";
 import { IoIosAddCircle, MdDelete } from "../../utils/icons";
 
 function GroceriesList() {
@@ -30,98 +31,104 @@ function GroceriesList() {
   }, []);
 
   return (
-    <main className="main">
-      <header className="header groceries">
-        <h1>Groceries List</h1>
-      </header>
+    <>
+      <main>
+        <div className="content">
+          <header className="header groceries">
+            <h1>Groceries List</h1>
+          </header>
 
-      <section>
-        <div className="centered-container">
-          <Link to="/groceries/addItem" className="btn submit add-item">
-            <IoIosAddCircle className="add-item-icon" />
-            Add Item
-          </Link>
-        </div>
-
-        {isGroceriesEmpty ? (
-          <div className="groceries-row-container centered">
-            <div className="no-list">
-              Groceries List not created yet, add a item to create it.
+          <section>
+            <div className="centered-container">
+              <Link to="/groceries/addItem" className="btn submit add-item">
+                <IoIosAddCircle className="add-item-icon" />
+                Add Item
+              </Link>
             </div>
-          </div>
-        ) : (
-          <>
-            {isLoadingData ? null : (
-              <div className="item-count-container">
-                <div className="item-count">
-                  Total Count:<span>{itemsList.length}</span>
+
+            {isGroceriesEmpty ? (
+              <div className="groceries-row-container centered">
+                <div className="no-list">
+                  Groceries List not created yet, add a item to create it.
                 </div>
               </div>
-            )}
-
-            <div className="groceries-list">
-              <div className="groceries-row-container groceries-header">
-                <div className="groceries-column-container category">
-                  Category
-                </div>
-                <div className="groceries-column-container groceryItem">
-                  Item
-                </div>
-                <div className="groceries-column-container quantity">
-                  Quantity
-                </div>
-                <div className="groceries-column-container actions">
-                  Actions
-                </div>
-              </div>
-
-              {isLoadingData ? (
-                <div className="groceries-row-container centered">
-                  <Loading>Loading grocery list</Loading>
-                </div>
-              ) : (
-                itemsList.map((item, index) => (
-                  <div
-                    key={index}
-                    className="groceries-row-container item-data"
-                  >
-                    <div className="groceries-column-container category">
-                      <span
-                        className="item-category"
-                        style={{ backgroundColor: item.categoryColor }}
-                      >
-                        {item.categoryName}
-                      </span>
-                    </div>
-                    <div className="groceries-column-container groceryItem">
-                      {item.name}
-                    </div>
-                    <div className="groceries-column-container quantity">
-                      {item.quantity}
-                    </div>
-                    <div className="groceries-column-container actions">
-                      <Link
-                        to={`/groceries/removeItem/${item.id}`}
-                        state={{
-                          categoryId: item.categoryId,
-                          categoryColor: item.categoryColor,
-                          categoryName: item.categoryName,
-                          name: item.name,
-                          quantity: item.quantity,
-                        }}
-                        title="Remove Item"
-                      >
-                        <MdDelete className="remove-item-icon" />
-                      </Link>
+            ) : (
+              <>
+                {isLoadingData ? null : (
+                  <div className="item-count-container">
+                    <div className="item-count">
+                      Total Count:<span>{itemsList.length}</span>
                     </div>
                   </div>
-                ))
-              )}
-            </div>
-          </>
-        )}
-      </section>
-    </main>
+                )}
+
+                <div className="groceries-list">
+                  <div className="groceries-row-container groceries-header">
+                    <div className="groceries-column-container category">
+                      Category
+                    </div>
+                    <div className="groceries-column-container groceryItem">
+                      Item
+                    </div>
+                    <div className="groceries-column-container quantity">
+                      Quantity
+                    </div>
+                    <div className="groceries-column-container actions">
+                      Actions
+                    </div>
+                  </div>
+
+                  {isLoadingData ? (
+                    <div className="groceries-row-container centered loading-items">
+                      <Loading>Loading grocery list</Loading>
+                    </div>
+                  ) : (
+                    itemsList.map((item, index) => (
+                      <div
+                        key={index}
+                        className="groceries-row-container item-data"
+                      >
+                        <div className="groceries-column-container category">
+                          <span
+                            className="item-category"
+                            style={{ backgroundColor: item.categoryColor }}
+                          >
+                            {item.categoryName}
+                          </span>
+                        </div>
+                        <div className="groceries-column-container groceryItem">
+                          {item.name}
+                        </div>
+                        <div className="groceries-column-container quantity">
+                          {item.quantity}
+                        </div>
+                        <div className="groceries-column-container actions">
+                          <Link
+                            to={`/groceries/removeItem/${item.id}`}
+                            state={{
+                              categoryId: item.categoryId,
+                              categoryColor: item.categoryColor,
+                              categoryName: item.categoryName,
+                              name: item.name,
+                              quantity: item.quantity,
+                            }}
+                            title="Remove Item"
+                          >
+                            <MdDelete className="remove-item-icon" />
+                          </Link>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </>
+            )}
+          </section>
+        </div>
+      </main>
+
+      <Footer />
+    </>
   );
 }
 

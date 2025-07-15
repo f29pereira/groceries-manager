@@ -5,7 +5,7 @@ function NotFound() {
     <div id="not-found-container">
       <div id="not-found-card">
         <h1>
-          404 - <span>Page not found</span>
+          404 - <span className="green-text">Page not found</span>
         </h1>
         <p>
           Sorry, the page you are looking for doesn't exist or it isn't

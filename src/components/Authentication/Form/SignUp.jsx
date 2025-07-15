@@ -7,6 +7,7 @@ import { handleInputChange, showError } from "../../../utils/utils";
 import { FaUserPlus } from "../../../utils/icons";
 import Card from "../../Elements/Card";
 import UserForm from "./UserForm";
+import Footer from "../../Static/Footer";
 
 function SignUp() {
   const { setisSignedIn, setCurrentUser } = useContext(AuthContext);
@@ -45,21 +46,24 @@ function SignUp() {
   };
 
   return (
-    <Card
-      showGoBack={false}
-      titleIcon={<FaUserPlus />}
-      titleText="Sign Up"
-      body={
-        <UserForm
-          handleOnSubmit={signUpUser}
-          description="Create an account to access your groceries list"
-          errorMsg={errorMsg}
-          handleChange={handleChange}
-          formData={signUpFormData}
-          submitBtnTxt="Sign Up"
-        />
-      }
-    />
+    <>
+      <Card
+        showGoBack={false}
+        titleIcon={<FaUserPlus />}
+        titleText="Sign Up"
+        body={
+          <UserForm
+            handleOnSubmit={signUpUser}
+            description="Create an account to access your groceries list"
+            errorMsg={errorMsg}
+            handleChange={handleChange}
+            formData={signUpFormData}
+            submitBtnTxt="Sign Up"
+          />
+        }
+      />
+      <Footer />
+    </>
   );
 }
 

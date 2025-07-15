@@ -55,6 +55,11 @@
   outline: none;
 }
 
+.select-input {
+  border: 1px solid var(--gray);
+  padding: 0.5rem 1rem;
+}
+
 #create-account {
   font-size: 1rem;
   margin-bottom: 1rem;

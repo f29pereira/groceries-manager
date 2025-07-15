@@ -19,10 +19,6 @@
   margin-bottom: 1rem;
 }
 
-#not-found-card h1 span {
-  color: var(--nav-green);
-}
-
 #not-found-card p {
   font-size: 1rem;
   line-height: 2rem;

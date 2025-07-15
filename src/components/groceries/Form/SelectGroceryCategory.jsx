@@ -35,6 +35,7 @@ function SelectGroceryCategory({ handleChange, selectedCategory }) {
           </label>
           <select
             id="grocery-category"
+            className="select-input"
             required
             name="categoryId"
             onChange={handleChange}

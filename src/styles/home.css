@@ -1,10 +1,11 @@
-#home-title {
+.home-title {
   font-size: 2.2rem;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
-#green-text {
-  color: var(--nav-green);
+.home-title .green-text {
+  display: block;
 }
 
 #img-container {
@@ -15,8 +16,8 @@
 }
 
 #groceries-bag {
-  width: 9rem;
-  height: 9rem;
+  width: 12rem;
+  height: 12rem;
   border-radius: 50%;
   object-fit: cover;
   text-align: center;
@@ -32,6 +33,56 @@
   margin-left: 0.5rem;
 }
 
+/*Features Section*/
+.features-section {
+  background-color: var(--submit);
+  padding: 1rem;
+}
+
+.features-title {
+  color: var(--white);
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.features-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.features-card {
+  background-color: var(--soft-white);
+  text-align: center;
+  border-radius: 5px;
+  padding: 1rem;
+  width: 15rem;
+  height: 15rem;
+}
+
+.features-icon {
+  color: var(--submit);
+  font-size: 2.5rem;
+}
+
+.info-title {
+  color: var(--submit);
+  font-size: 1.4rem;
+  margin-top: 0.5rem;
+}
+
+.info-text {
+  color: var(--black);
+  line-height: 2rem;
+  margin-top: 1rem;
+}
+
+.centered-column-container.info {
+  margin-bottom: 2rem;
+}
+
 @media (min-width: 800px) {
   .home {
     align-items: flex-start;
@@ -43,18 +94,47 @@
     margin-bottom: 3rem;
   }
 
-  #home-title {
+  .home-title {
     font-size: 4rem;
     text-align: left;
   }
 
-  #green-text {
+  .green-text {
     display: block;
   }
 
   .home-text {
     text-align: left;
     font-size: 1.4rem;
+  }
+
+  #groceries-bag {
+    width: 60%;
+    height: 60%;
+  }
+
+  .groceries-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /*Features Section*/
+  .features-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 7rem;
+  }
+
+  .features-card {
+    width: 15rem;
+    height: 15rem;
+  }
+
+  .info-text {
+    line-height: unset;
   }
 }
 
@@ -63,14 +143,7 @@
     width: 100%;
   }
 
-  #home-title {
+  .home-title {
     font-size: 6rem;
-  }
-
-  #groceries-bag {
-    width: 90%;
-    height: 90%;
-    max-width: 20rem;
-    max-height: 20rem;
   }
 }

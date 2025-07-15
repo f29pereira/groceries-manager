@@ -1,12 +1,31 @@
-# React + Vite
+# Groceries Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to groceries manager project. This project was built using **Vite** and **React 19**.
 
-Currently, two official plugins are available:
+![Home Page Screenshot](src/assets/images/home.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**User Sign Up** - before acessing the groceries manager features, users need to sign up first
 
-## Expanding the ESLint configuration
+![User Sign Up Screenshot](src/assets/images/sign_up.png)
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Features
+
+**Add items** - where users can add items to their grocery list
+
+![Add item to grocery list Screenshot](src/assets/images/add_item.png)
+
+**Grocery List** - where users can consult their grocery list
+
+![Grocery list Screenshot](src/assets/images/groceries_list.png)
+
+**Delete items** - where users can delete a specific grocery list item
+
+![Delete item Screenshot](src/assets/images/remove_item.png)
+
+# Depedencies
+
+- **vite**: build tool and development server.
+- **react 19**: used for building User Interfaces without refreshing the page.
+- **react-router-dom**: used for routing.
+- **firebase**: used for user authetication and real-time database.
+- **react-icons**: used for the different icons from popular icon libraries (e.g. Font Awesome).

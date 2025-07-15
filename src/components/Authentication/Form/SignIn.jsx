@@ -7,6 +7,7 @@ import { handleInputChange, showError } from "../../../utils/utils";
 import { FaUser } from "../../../utils/icons";
 import Card from "../../Elements/Card";
 import UserForm from "./UserForm";
+import Footer from "../../Static/Footer";
 
 function SignIn() {
   const { setisSignedIn, setCurrentUser } = useContext(AuthContext);
@@ -45,28 +46,32 @@ function SignIn() {
   };
 
   return (
-    <Card
-      showGoBack={false}
-      titleIcon={<FaUser />}
-      titleText="Sign In"
-      body={
-        <>
-          <UserForm
-            handleOnSubmit={signInUser}
-            description="Welcome back. Sign In to get acess to your custom groceries list."
-            errorMsg={errorMsg}
-            handleChange={handleChange}
-            formData={signInFormData}
-            forgotPassword={false}
-            submitBtnTxt="Sign In"
-          />
-          <p id="create-account">Don't have an account ?</p>
-          <Link to="/signUp" className="click-link">
-            Sign up here
-          </Link>
-        </>
-      }
-    />
+    <>
+      <Card
+        showGoBack={false}
+        titleIcon={<FaUser />}
+        titleText="Sign In"
+        body={
+          <>
+            <UserForm
+              handleOnSubmit={signInUser}
+              description="Welcome back. Sign In to get acess to your custom groceries list."
+              errorMsg={errorMsg}
+              handleChange={handleChange}
+              formData={signInFormData}
+              forgotPassword={false}
+              submitBtnTxt="Sign In"
+            />
+            <p id="create-account">Don't have an account ?</p>
+            <Link to="/signUp" className="click-link">
+              Sign up here
+            </Link>
+          </>
+        }
+      />
+
+      <Footer />
+    </>
   );
 }
 
