@@ -22,7 +22,7 @@ Welcome to groceries manager project. This project was built using **Vite** and 
 
 ![Delete item Screenshot](src/assets/images/remove_item.png)
 
-# Depedencies
+# Dependencies
 
 - **vite**: build tool and development server.
 - **react 19**: used for building User Interfaces without refreshing the page.

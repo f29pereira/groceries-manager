@@ -1,25 +1,30 @@
 import { BsList } from "react-icons/bs";
 import { IoMdCloseCircle, IoIosAddCircle } from "react-icons/io";
 import { TbPaperBag, TbLockPassword } from "react-icons/tb";
-import { RiFileList2Line } from "react-icons/ri";
-import { BiError } from "react-icons/bi";
-import { FaUser, FaUserPlus, FaRegListAlt } from "react-icons/fa";
+import { BiError, BiTag } from "react-icons/bi";
+import { FaUser, FaUserPlus, FaRegListAlt, FaAsterisk } from "react-icons/fa";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-import { MdDelete } from "react-icons/md";
-import { IoArrowBackCircle } from "react-icons/io5";
+import { MdDelete, MdAlternateEmail } from "react-icons/md";
+import { IoAdd, IoArrowBackCircle, IoText } from "react-icons/io5";
+import { RiWeightLine } from "react-icons/ri";
 
 export {
-  BsList,
+  FaUserPlus, //add user
+  FaUser, //user
+  TbLockPassword, //user password
+  MdAlternateEmail, //user e-mail
+  IoIosAddCircle, //add circle
+  IoAdd, //add
+  BsList, //hamburguer
   IoMdCloseCircle,
-  IoIosAddCircle,
-  TbPaperBag,
-  RiFileList2Line,
-  BiError,
-  FaUser,
-  FaUserPlus,
-  AiOutlineLoading3Quarters,
-  TbLockPassword,
-  MdDelete,
-  IoArrowBackCircle,
-  FaRegListAlt,
+  TbPaperBag, //close
+  BiError, //warning
+  AiOutlineLoading3Quarters, //loading
+  MdDelete, //trash
+  IoArrowBackCircle, //go back
+  FaRegListAlt, //list
+  FaAsterisk, //asterisk
+  IoText, //text
+  RiWeightLine, //weight
+  BiTag, //tag
 };

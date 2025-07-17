@@ -47,21 +47,27 @@ function SignUp() {
 
   return (
     <>
-      <Card
-        showGoBack={false}
-        titleIcon={<FaUserPlus />}
-        titleText="Sign Up"
-        body={
-          <UserForm
-            handleOnSubmit={signUpUser}
-            description="Create an account to access your groceries list"
-            errorMsg={errorMsg}
-            handleChange={handleChange}
-            formData={signUpFormData}
-            submitBtnTxt="Sign Up"
+      <main>
+        <div className="content card">
+          <Card
+            showGoBack={true}
+            titleIcon={<FaUserPlus />}
+            titleText="Sign Up"
+            body={
+              <UserForm
+                handleOnSubmit={signUpUser}
+                description="Create an account with email/password"
+                errorMsg={errorMsg}
+                handleChange={handleChange}
+                formData={signUpFormData}
+                showPasswordRules={true}
+                submitBtnTxt="Sign Up"
+              />
+            }
           />
-        }
-      />
+        </div>
+      </main>
+
       <Footer />
     </>
   );

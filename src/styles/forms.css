@@ -34,13 +34,31 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: auto;
+  width: 100%;
 }
 
 .form-label {
   font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.left-container.label-required {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
+}
+
+.input-icon-container {
+  display: flex;
+  height: 2.125rem;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.input-icon {
+  background-color: var(--submit);
+  color: var(--white);
+  font-size: 1.4rem;
+  padding: 1rem;
 }
 
 .form-input {
@@ -48,6 +66,7 @@
   padding: 0.5rem;
   margin-bottom: 1rem;
   width: 100%;
+  height: 100%;
 }
 
 .form-input:focus {
@@ -57,16 +76,44 @@
 
 .select-input {
   border: 1px solid var(--gray);
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 1rem;
 }
 
 #create-account {
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
-.reset-password {
-  align-self: flex-start;
+/*Password rules*/
+.password-rules {
+  opacity: 0;
+  visibility: hidden;
+  background-color: var(--password-rules);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid var(--submit);
+  padding: 0.5rem 1rem;
+  margin-top: -1rem;
+  width: 100%;
+  transition: opacity 0.5s, visibility 0s 0.5s;
+}
+
+.password-rules-pop-up:focus-within .password-rules {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s, visibility 0s 0s;
+}
+
+.rules-list {
+  text-align: left;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.rules-item {
+  color: var(--black);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
 }
 
 /*Error Messages*/
@@ -102,11 +149,16 @@
 
 @media (min-width: 800px) {
   .input-container {
-    width: auto;
+    width: 60%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .input-container {
+    width: 30%;
   }
 
-  .form-description {
-    line-height: 1.5rem;
-    margin: 1rem 0;
+  .form-input {
+    font-size: 1rem;
   }
 }

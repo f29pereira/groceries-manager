@@ -1,3 +1,9 @@
+/*Add item component*/
+.add-item-btns {
+  gap: 2rem;
+}
+
+/*GroceriesList component*/
 .header.groceries {
   text-align: center;
 }
@@ -12,6 +18,7 @@
   margin: 1rem 0 0.5rem 0;
 }
 
+/*Grocery List item count*/
 .item-count {
   font-weight: bold;
 }
@@ -21,7 +28,7 @@
   margin-left: 0.5rem;
 }
 
-/*Groceries List*/
+/*Groceries List Table*/
 .groceries-list {
   background-color: #faf9f6;
   border-bottom: none;
@@ -39,7 +46,7 @@
   align-items: center;
 }
 
-/*Groceries List - columns*/
+/*Table - columns*/
 .groceries-column-container.category {
   flex: 1;
 }
@@ -101,7 +108,7 @@
   font-size: 1.5rem;
 }
 
-/*Remove Item*/
+/*Remove Item Component*/
 .remove-item-container {
   border: 1px solid var(--submit);
   background-color: var(--ligth-gray);

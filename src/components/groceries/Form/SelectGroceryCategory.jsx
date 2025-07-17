@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { fetchGroceryCategories } from "../js/groceries_firebase";
 import Loading from "../../Elements/Loading";
+import RequiredField from "../../Elements/RequiredField";
+import { BiTag } from "../../../utils/icons";
 
 /**
  * Component that renders categories list drop down menu
@@ -30,24 +32,32 @@ function SelectGroceryCategory({ handleChange, selectedCategory }) {
         <Loading>Loading grocery categories</Loading>
       ) : (
         <>
-          <label htmlFor="grocery-category" className="form-label">
-            Category
-          </label>
-          <select
-            id="grocery-category"
-            className="select-input"
-            required
-            name="categoryId"
-            onChange={handleChange}
-            value={selectedCategory}
-          >
-            <option value="">Select a category</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+          <div className="left-container label-required">
+            <label htmlFor="grocery-category" className="form-label">
+              Category
+            </label>
+            <RequiredField />
+          </div>
+          <div className="input-icon-container">
+            <div className="centered-container input-icon">
+              <BiTag />
+            </div>
+            <select
+              id="grocery-category"
+              className="select-input form-input"
+              required
+              name="categoryId"
+              onChange={handleChange}
+              value={selectedCategory}
+            >
+              <option value="">Select a category</option>
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </>
       )}
     </>

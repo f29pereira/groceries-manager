@@ -2,7 +2,7 @@ import { NavLink } from "react-router";
 import {
   IoMdCloseCircle,
   TbPaperBag,
-  RiFileList2Line,
+  FaRegListAlt,
 } from "../../../utils/icons";
 
 function Menu({ isHamburguerOpen, handleClick }) {
@@ -27,7 +27,7 @@ function Menu({ isHamburguerOpen, handleClick }) {
             <li className="item">
               <NavLink to="groceries/list" onClick={handleClick}>
                 <span className="icon">
-                  <RiFileList2Line />
+                  <FaRegListAlt />
                 </span>
                 <span className="description">Groceries</span>
               </NavLink>

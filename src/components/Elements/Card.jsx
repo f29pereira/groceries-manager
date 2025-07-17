@@ -11,9 +11,9 @@ function Card({ showGoBack, titleIcon, titleText, body }) {
   return (
     <div className="card-container">
       <div className="card-header">
-        <div className="title-container">
-          <div className="left-element">
-            {showGoBack ? (
+        {showGoBack ? (
+          <div className="space-between-container">
+            <div className="left-element">
               <button
                 className="go-back-btn"
                 onClick={handleGoBack}
@@ -21,20 +21,25 @@ function Card({ showGoBack, titleIcon, titleText, body }) {
               >
                 <IoArrowBackCircle className="icon" />
               </button>
-            ) : null}
-          </div>
-          <div className="center-element">
-            <div className="centered-container">
-              <span className="icon">{titleIcon}</span>
-              <h1 className="title">{titleText}</h1>
+            </div>
+            <div className="center-element">
+              <div className="centered-container">
+                <span className="icon">{titleIcon}</span>
+                <h1 className="title">{titleText}</h1>
+              </div>
+            </div>
+            <div className="right-element">
+              <div className="go-back-btn">
+                <IoArrowBackCircle className="icon" />
+              </div>
             </div>
           </div>
-          <div className="right-element">
-            <div className="go-back-btn">
-              <IoArrowBackCircle className="icon" />
-            </div>
+        ) : (
+          <div className="centered-container">
+            <span className="icon">{titleIcon}</span>
+            <h1 className="title">{titleText}</h1>
           </div>
-        </div>
+        )}
       </div>
       <div className="card-body">{body}</div>
     </div>
