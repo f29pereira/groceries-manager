@@ -8,11 +8,6 @@
   text-align: center;
 }
 
-.btn .add-item-icon {
-  font-size: 1.2rem;
-  margin-right: 0.5rem;
-}
-
 .item-count-container {
   display: flex;
   margin: 1rem 0 0.5rem 0;
@@ -135,14 +130,6 @@ ul .remove-item-info {
   .header.groceries {
     font-size: 2rem;
     margin-bottom: 1rem;
-  }
-
-  .btn .add-item-icon {
-    font-size: 2.2rem;
-  }
-
-  .btn.add-item {
-    font-size: 1.5rem;
   }
 
   .item-count {

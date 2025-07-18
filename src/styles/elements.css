@@ -70,6 +70,35 @@
   text-align: center;
 }
 
+/*LinkButton Component*/
+.btn {
+  font-size: 1.2rem;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  color: var(--white);
+}
+
+.btn-icon-gap {
+  gap: 10px;
+}
+
+.btn.green {
+  background-color: var(--submit);
+}
+
+.btn.green:hover {
+  background-color: var(--hover-submit);
+}
+
+.btn.red {
+  background-color: var(--cancel);
+}
+
+.btn.red:hover {
+  background-color: var(--hover-cancel);
+}
+
 /*Footer Component*/
 footer {
   background-color: var(--nav-green);
@@ -142,6 +171,15 @@ footer {
 
   .card-header .title {
     font-size: 2rem;
+  }
+
+  /*LinkButton Component*/
+  .btn .add-item-icon {
+    font-size: 2.2rem;
+  }
+
+  .btn.add-item {
+    font-size: 1.5rem;
   }
 
   /*Footer Component*/
