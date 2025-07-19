@@ -87,6 +87,10 @@ button {
   padding: 1rem 0.5rem;
 }
 
+.row-container.no-data {
+  justify-content: center;
+}
+
 .row-container:hover {
   background-color: var(--ligth-green);
 }
@@ -159,10 +163,6 @@ button {
 }
 
 @media (min-width: 800px) {
-  .btn {
-    font-size: 1.5rem;
-  }
-
   p {
     font-size: 1.4rem;
   }

@@ -58,22 +58,20 @@ function MyLists() {
               </div>
 
               {isLoadingData ? (
-                <div className="row-container">
-                  <div className="column-container">
-                    <Loading>Loading your lists</Loading>
-                  </div>
+                <div className="row-container no-data">
+                  <Loading>Loading your lists</Loading>
                 </div>
               ) : isListEmpty ? (
-                <div className="row-container">
-                  <div className="column-container table-no-data">
-                    No groceries list created yet. Click the "Add List" button.
-                  </div>
+                <div className="row-container no-data">
+                  No groceries list created yet. Click the "Add List" button.
                 </div>
               ) : (
                 userLists.map((list, index) => (
                   <div key={index} className="row-container">
                     <div className="column-container name">{list.name}</div>
-                    <div className="column-container description">Teste</div>
+                    <div className="column-container description">
+                      {list.description}
+                    </div>
                     <div className="column-container itemCount">
                       {list.itemCount}
                     </div>

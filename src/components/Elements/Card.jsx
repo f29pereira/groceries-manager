@@ -25,7 +25,7 @@ function Card({ showGoBack, titleIcon, titleText, body }) {
             <div className="center-element">
               <div className="centered-container">
                 <span className="icon">{titleIcon}</span>
-                <h1 className="title">{titleText}</h1>
+                <h1 className="card-header-title">{titleText}</h1>
               </div>
             </div>
             <div className="right-element">
@@ -37,7 +37,7 @@ function Card({ showGoBack, titleIcon, titleText, body }) {
         ) : (
           <div className="centered-container">
             <span className="icon">{titleIcon}</span>
-            <h1 className="title">{titleText}</h1>
+            <h1 className="card-header-title">{titleText}</h1>
           </div>
         )}
       </div>

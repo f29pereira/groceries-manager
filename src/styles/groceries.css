@@ -9,11 +9,6 @@
   margin: 0;
 }
 
-/*Add item component*/
-.add-item-btns {
-  gap: 2rem;
-}
-
 /*MyLists component table rows*/
 .column-container.name {
   font-weight: bold;

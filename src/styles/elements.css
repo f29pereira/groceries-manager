@@ -34,7 +34,7 @@
   );
   color: var(--white);
   border-radius: 10px 10px 0 0;
-  padding: 1rem;
+  padding: 0.5rem;
   border-bottom: none;
 }
 
@@ -56,8 +56,8 @@
   visibility: hidden;
 }
 
-.card-header .title {
-  font-size: 1.5rem;
+.card-header-title {
+  font-size: 1.2rem;
 }
 
 .go-back-btn {
@@ -167,29 +167,30 @@ footer {
 }
 
 @media (min-width: 800px) {
+  /*Card component*/
   .card-container {
     width: 80%;
     margin: auto;
+  }
+
+  .card-header {
+    padding: 1rem;
   }
 
   .card-header .icon {
     font-size: 2.5rem;
   }
 
-  .card-header .title {
-    font-size: 2rem;
+  .card-header-title {
+    font-size: 1.8rem;
   }
 
-  /*LinkButton Component*/
-  .btn .add-item-icon {
-    font-size: 2.2rem;
-  }
-
+  /*LinkButton component*/
   .btn.add-item {
     font-size: 1.5rem;
   }
 
-  /*Footer Component*/
+  /*Footer component*/
   .footer-text {
     font-size: 1.2rem;
     font-weight: bold;
@@ -197,6 +198,7 @@ footer {
 }
 
 @media (min-width: 1200px) {
+  /*Card component*/
   .card-container {
     width: 60%;
     margin: auto;
