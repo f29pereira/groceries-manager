@@ -13,4 +13,8 @@
   --black: #000000;
   --gray: #cac9c9;
   --ligth-gray: #eeecec;
+
+  --info: #0a068a;
+  --edit: #ffde59;
+  --delete: #e4080a;
 }

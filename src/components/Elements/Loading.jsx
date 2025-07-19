@@ -2,9 +2,9 @@ import { AiOutlineLoading3Quarters } from "../../utils/icons";
 
 function Loading({ children }) {
   return (
-    <div className="loading-container">
+    <div className="centered-container loading">
       <AiOutlineLoading3Quarters className="loading-icon" />
-      <span>{children}</span>
+      <span className="loading-text">{children}</span>
     </div>
   );
 }

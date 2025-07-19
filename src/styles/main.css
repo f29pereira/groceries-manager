@@ -56,42 +56,9 @@ button {
   padding: 3rem;
 }
 
-header {
-  margin-bottom: 1rem;
-}
-
-section {
-  width: 100%;
-}
-
 a,
 button {
   cursor: pointer;
-}
-
-/*Buttons*/
-.btn {
-  font-size: 1.2rem;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  margin: 1rem 0;
-  color: var(--white);
-}
-
-.btn.submit {
-  background-color: var(--submit);
-}
-
-.submit:hover {
-  background-color: var(--hover-submit);
-}
-
-.cancel {
-  background-color: var(--cancel);
-}
-
-.cancel:hover {
-  background-color: var(--hover-cancel);
 }
 
 .green-text {
@@ -100,6 +67,54 @@ button {
 
 .full-width {
   width: 100%;
+}
+
+/*Table*/
+.table {
+  background-color: var(--soft-white);
+  border-bottom: none;
+  text-align: center;
+}
+
+.row-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1.2rem;
+  border-left: 1px solid var(--submit);
+  border-right: 1px solid var(--submit);
+  border-bottom: 1px solid var(--submit);
+  padding: 1rem 0.5rem;
+}
+
+.row-container:hover {
+  background-color: var(--ligth-green);
+}
+
+.data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table-header {
+  background: linear-gradient(90deg, var(--submit) 0%, var(--nav-green) 50%);
+  color: var(--white);
+  font-weight: bold;
+  border-radius: 5px 5px 0 0;
+  padding: 1rem 0.5rem;
+}
+
+.info-icon {
+  color: var(--info);
+}
+
+.edit-icon {
+  color: var(--edit);
+}
+
+.delete-icon {
+  color: var(--delete);
 }
 
 /*Centered Row flex container*/
@@ -150,5 +165,31 @@ button {
 
   p {
     font-size: 1.4rem;
+  }
+
+  .row-container {
+    padding: 1.2rem;
+  }
+
+  /*User Action Icons*/
+  .user-actions-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 800px) {
+  /*Table*/
+  .row-container {
+    padding: 1.7rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  h1 {
+    font-size: 3rem;
   }
 }

@@ -1,67 +1,35 @@
+.content.list {
+  padding: 1rem;
+}
+
+/*MyLists component*/
+.btn.info-list-btn {
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin: 0;
+}
+
 /*Add item component*/
 .add-item-btns {
   gap: 2rem;
 }
 
-/*GroceriesList component*/
-.header.groceries {
-  text-align: center;
-}
-
-.item-count-container {
-  display: flex;
-  margin: 1rem 0 0.5rem 0;
-}
-
-/*Grocery List item count*/
-.item-count {
+/*MyLists component table rows*/
+.column-container.name {
   font-weight: bold;
 }
 
-.item-count span {
-  font-weight: normal;
-  margin-left: 0.5rem;
-}
-
-/*Groceries List Table*/
-.groceries-list {
-  background-color: #faf9f6;
-  border-bottom: none;
-}
-
-.groceries-row-container {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.groceries-column-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/*Table - columns*/
-.groceries-column-container.category {
+.column-container.name,
+.column-container.itemCount,
+.column-container.listInfo {
   flex: 1;
 }
 
-.groceries-column-container.groceryItem {
-  flex: 0.5;
+.column-container.description {
+  flex: 2;
 }
 
-.groceries-column-container.quantity {
-  flex: 0.5;
-}
-
-.groceries-column-container.actions {
-  flex: 0.5;
-}
-
-.groceries-row-container.centered {
-  justify-content: center;
-}
-
+/*delete*/
 .groceries-row-container.groceries-header {
   background: linear-gradient(90deg, var(--submit) 0%, var(--nav-green) 50%);
   color: var(--white);
@@ -88,14 +56,6 @@
 
 .groceries-row-container.item-data:hover {
   background-color: var(--ligth-green);
-}
-
-.item-category {
-  text-align: center;
-  font-size: 0.7rem;
-  font-weight: 500;
-  border-radius: 5px;
-  padding: 0.2rem 0.5rem;
 }
 
 .remove-item-icon {
@@ -127,56 +87,41 @@ ul .remove-item-info {
 }
 
 @media (min-width: 800px) {
-  .header.groceries {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+  .content.list {
+    padding: 2rem;
   }
 
-  .item-count {
-    font-size: 1.5rem;
-  }
-
-  .groceries-row-container.groceries-header {
-    font-size: 1.5rem;
-  }
-
-  .groceries-row-container.item-data,
-  .groceries-row-container.centered {
-    font-size: 1.3rem;
-  }
-
-  .item-category {
-    font-size: 1.2rem;
-  }
-
-  .groceries-column-container.category {
-    flex: 2;
-  }
-
-  .groceries-column-container.groceryItem {
-    flex: 1;
-  }
-
-  .groceries-column-container.quantity {
-    flex: 1;
-  }
-
-  .groceries-column-container.actions {
-    flex: 1;
+  /*MyLists component*/
+  .column-container.itemCount {
+    text-align: center;
   }
 }
 
 @media (min-width: 1200px) {
-  .groceries-row-container.groceries-header {
-    font-size: 1.7rem;
+  .content.list {
+    padding: 3rem;
   }
 
-  .groceries-row-container.item-data,
-  .groceries-row-container.centered {
-    font-size: 1.5rem;
+  /*MyLists component table rows*/
+  .column-container.name,
+  .column-container.itemCount,
+  .column-container.listInfo {
+    flex: 1;
   }
 
-  .item-category {
+  .column-container.description {
+    flex: 1.5;
+  }
+
+  .column-container.name,
+  .column-container.itemCount,
+  .column-container.listInfo,
+  .column-container.description {
     font-size: 1.4rem;
+  }
+
+  .btn.info-list-btn {
+    font-size: 1.2rem;
+    width: 7.5rem;
   }
 }

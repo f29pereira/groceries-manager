@@ -7,6 +7,7 @@ import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { MdDelete, MdAlternateEmail } from "react-icons/md";
 import { IoAdd, IoArrowBackCircle, IoText } from "react-icons/io5";
 import { RiWeightLine } from "react-icons/ri";
+import { FaEdit, FaInfoCircle } from "react-icons/fa";
 
 export {
   FaUserPlus, //add user
@@ -14,17 +15,19 @@ export {
   TbLockPassword, //user password
   MdAlternateEmail, //user e-mail
   IoIosAddCircle, //add circle
-  IoAdd, //add
   BsList, //hamburguer
   IoMdCloseCircle,
   TbPaperBag, //close
   BiError, //warning
   AiOutlineLoading3Quarters, //loading
-  MdDelete, //trash
   IoArrowBackCircle, //go back
   FaRegListAlt, //list
   FaAsterisk, //asterisk
   IoText, //text
   RiWeightLine, //weight
   BiTag, //tag
+  IoAdd, //add
+  MdDelete, //delete
+  FaEdit, //edit
+  FaInfoCircle, //info
 };

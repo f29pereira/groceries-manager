@@ -8,9 +8,7 @@
   }
 }
 
-.loading-container {
-  display: flex;
-  align-items: center;
+.loading {
   padding: 1rem;
   margin: 1rem 0;
 }
@@ -18,7 +16,12 @@
 .loading-icon {
   animation: rotate 3s linear infinite;
   font-size: 1.5rem;
+  color: var(--submit);
   margin-right: 1rem;
+}
+
+.loading-text {
+  font-size: 1.2rem;
 }
 
 /*Card Component*/
@@ -97,6 +100,10 @@
 
 .btn.red:hover {
   background-color: var(--hover-cancel);
+}
+
+.btn.blue {
+  background-color: var(--info);
 }
 
 /*Footer Component*/
