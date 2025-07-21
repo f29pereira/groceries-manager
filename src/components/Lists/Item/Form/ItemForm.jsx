@@ -1,16 +1,17 @@
-import { IoText } from "../../../../utils/icons";
 import ErrorMessage from "../../../Errors/ErrorMessage";
 import RequiredField from "../../../Elements/RequiredField";
+import SelectGroceryCategory from "./SelectGroceryCategory";
+import { IoAdd, RiWeightLine, IoText } from "../../../../utils/icons";
 
 /**
- * Renders the Grocery List form with name/description fields
+ * Renders item from the grocery list form
  * @param {function} handleOnSubmit     - on submit function
  * @param {string} errorMsg             - input specific/generic error message
- * @param {function} handleChange       - sets name/description state values
- * @param {string} formData             - name/description state values
- * @param {funcion} handleCancel        - cancel button onClick function
+ * @param {function} handleChange       - sets name/quantity/category state values
+ * @param {string} formData             - name/quantity/category state values
+ * @param {function} handleCancel       - cancel btn function
  */
-function GroceriesListForm({
+function ItemForm({
   handleOnSubmit,
   errorMsg,
   handleChange,
@@ -51,22 +52,33 @@ function GroceriesListForm({
 
         <div className="left-container label-required">
           <label htmlFor="grocery-quantity" className="form-label">
-            Description
+            Quantity
           </label>
+          <RequiredField />
         </div>
         <div className="input-icon-container">
-          <textarea
+          <div className="centered-container input-icon">
+            <RiWeightLine />
+          </div>
+          <input
             id="grocery-quantity"
-            className="form-input text-description"
-            name="description"
+            type="text"
+            className="form-input"
+            required
+            name="quantity"
             onChange={handleChange}
-            value={formData.description}
-            placeholder="e.g., Buy on the supermarket..."
-          ></textarea>
+            value={formData.quantity}
+            placeholder="e.g., 5units, 500g, 1Kg"
+          />
         </div>
+
+        <SelectGroceryCategory
+          handleChange={handleChange}
+          selectedCategory={formData.categoryId}
+        />
       </div>
 
-      <div className="centered-container buttons add-grocery-list">
+      <div className="centered-container buttons">
         <button type="submit" className="btn green">
           Submit
         </button>
@@ -78,4 +90,4 @@ function GroceriesListForm({
   );
 }
 
-export default GroceriesListForm;
+export default ItemForm;

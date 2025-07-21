@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import LinkButton from "../Elements/LinkButton";
 
 function NotFound() {
   return (
@@ -12,9 +12,7 @@ function NotFound() {
           available at the moment.
         </p>
         <div className="centered-container">
-          <Link className="btn submit" to="/">
-            Return Home
-          </Link>
+          <LinkButton path="/" classNames="green" name="Return Home" />
         </div>
       </div>
     </div>

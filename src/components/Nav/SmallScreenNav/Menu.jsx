@@ -25,11 +25,11 @@ function Menu({ isHamburguerOpen, handleClick }) {
             </li>
 
             <li className="item">
-              <NavLink to="groceries/list" onClick={handleClick}>
+              <NavLink to="myLists" onClick={handleClick}>
                 <span className="icon">
                   <FaRegListAlt />
                 </span>
-                <span className="description">Groceries</span>
+                <span className="description">My Lists</span>
               </NavLink>
             </li>
           </ul>

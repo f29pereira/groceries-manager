@@ -14,7 +14,7 @@
 }
 
 /*Forms*/
-.main-form {
+.form-wrapper {
   padding: 1rem;
 }
 
@@ -114,6 +114,17 @@
   color: var(--black);
   font-size: 0.9rem;
   margin-bottom: 0.5rem;
+}
+
+/*Form Buttons*/
+.buttons {
+  gap: 2rem;
+}
+
+/*Textarea*/
+.form-input.text-description {
+  height: 5rem;
+  margin-bottom: 2rem;
 }
 
 /*Error Messages*/

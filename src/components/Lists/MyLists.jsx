@@ -52,7 +52,9 @@ function MyLists() {
             <div className="table">
               <div className="row-container table-header">
                 <div className="column-container name">Name</div>
-                <div className="column-container description">Description</div>
+                <div className="column-container creationDate">
+                  Creation Date
+                </div>
                 <div className="column-container itemCount">Items</div>
                 <div className="column-container listInfo">List Info</div>
               </div>
@@ -69,8 +71,8 @@ function MyLists() {
                 userLists.map((list, index) => (
                   <div key={index} className="row-container">
                     <div className="column-container name">{list.name}</div>
-                    <div className="column-container description">
-                      {list.description}
+                    <div className="column-container creationDate">
+                      {list.created_at}
                     </div>
                     <div className="column-container itemCount">
                       {list.itemCount}
@@ -82,6 +84,7 @@ function MyLists() {
                           classNames="blue info-list-btn"
                           icon={<FaInfoCircle />}
                           name="Info"
+                          state={{ index: index, id: list.id }}
                         />
                       </div>
                     </div>

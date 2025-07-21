@@ -38,7 +38,7 @@ function SignIn() {
       .then((userCredential) => {
         setCurrentUser(userCredential.user);
         setisSignedIn((prev) => !prev);
-        navigate("/groceries/list");
+        navigate("/myLists");
       })
       .catch((error) => {
         showError(error, setErrorMsg);

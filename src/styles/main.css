@@ -109,6 +109,7 @@ button {
   padding: 1rem 0.5rem;
 }
 
+/*Icon colors*/
 .info-icon {
   color: var(--info);
 }

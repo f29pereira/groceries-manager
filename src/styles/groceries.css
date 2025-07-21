@@ -2,7 +2,7 @@
   padding: 1rem;
 }
 
-/*MyLists component*/
+/*MyLists component info button*/
 .btn.info-list-btn {
   font-size: 1rem;
   padding: 0.5rem;
@@ -14,51 +14,45 @@
   font-weight: bold;
 }
 
-.column-container.name,
+.column-container.name {
+  flex: 2;
+}
+
+.column-container.creationDate,
 .column-container.itemCount,
 .column-container.listInfo {
   flex: 1;
 }
 
-.column-container.description {
+.column-container.creationDate,
+.column-container.itemCount {
+  font-size: 1rem;
+}
+
+/*AddGroceryList component*/
+.add-grocery-list {
+  margin-top: 3rem;
+}
+
+/*GroceriesList component*/
+.column-container.category,
+.column-container.itemName {
   flex: 2;
 }
 
-/*delete*/
-.groceries-row-container.groceries-header {
-  background: linear-gradient(90deg, var(--submit) 0%, var(--nav-green) 50%);
-  color: var(--white);
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-radius: 5px 5px 0 0;
-  padding: 1rem 0.5rem;
+.column-container.itemQuantity,
+.column-container.itemActions {
+  flex: 1;
 }
 
-.no-list {
-  background-color: var(--ligth-green);
-  font-size: 1.2rem;
-  padding: 1rem;
-  border-radius: 10px;
+/*Item Category*/
+.item-category {
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 0.2rem 0.4rem;
 }
 
-.groceries-row-container.item-data,
-.groceries-row-container.centered {
-  padding: 1rem;
-  border-left: 1px solid var(--submit);
-  border-right: 1px solid var(--submit);
-  border-bottom: 1px solid var(--submit);
-}
-
-.groceries-row-container.item-data:hover {
-  background-color: var(--ligth-green);
-}
-
-.remove-item-icon {
-  color: var(--cancel);
-  font-size: 1.5rem;
-}
-
-/*Remove Item Component*/
+/*RemoveItem component*/
 .remove-item-container {
   border: 1px solid var(--submit);
   background-color: var(--ligth-gray);
@@ -90,6 +84,23 @@ ul .remove-item-info {
   .column-container.itemCount {
     text-align: center;
   }
+
+  /*GroceriesList component*/
+  .column-container.category,
+  .column-container.itemName,
+  .column-container.itemQuantity,
+  .column-container.itemActions {
+    flex: 1;
+  }
+
+  .column-container.category {
+    align-items: center;
+  }
+
+  /*MyLists component Item Category*/
+  .item-category {
+    width: 60%;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -97,26 +108,34 @@ ul .remove-item-info {
     padding: 3rem;
   }
 
+  /*MyLists component info button*/
+  .btn.info-list-btn {
+    font-size: 1.2rem;
+    width: 7.5rem;
+  }
+
   /*MyLists component table rows*/
-  .column-container.name,
+  .column-container.category,
+  .column-container.name {
+    flex: 1.5;
+  }
+
+  .column-container.creationDate,
   .column-container.itemCount,
   .column-container.listInfo {
     flex: 1;
   }
 
-  .column-container.description {
-    flex: 1.5;
-  }
-
   .column-container.name,
   .column-container.itemCount,
   .column-container.listInfo,
-  .column-container.description {
+  .column-container.creationDate {
     font-size: 1.4rem;
   }
 
-  .btn.info-list-btn {
-    font-size: 1.2rem;
-    width: 7.5rem;
+  /*MyLists component Item Category*/
+  .item-category {
+    padding: 0.5rem;
+    width: 40%;
   }
 }

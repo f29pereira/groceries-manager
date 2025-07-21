@@ -1,6 +1,23 @@
 import { FirebaseError } from "firebase/app";
 
 /**
+ * Formats date YYY/MM/DD
+ * @param {string} date - date timestamp
+ */
+export const formatDate = (date) => {
+  let newDate = "";
+
+  if (date !== null && typeof date === "string") {
+    const year = date.slice(0, 4);
+    const month = date.slice(5, 7);
+    const day = date.slice(8, 10);
+    newDate = `${year}/${month}/${day}`;
+  }
+
+  return newDate;
+};
+
+/**
  * Sets the current input value change to state
  * @param {object} event - input event
  * @param {function} stateSetter - state setter function

@@ -14,7 +14,7 @@ function MedBigScrenNav() {
             <NavLink to="/">Groceries Manager</NavLink>
           </li>
           <li className="nav-items nav-hover" id="nav-groceries">
-            <NavLink to="groceries/list">Groceries</NavLink>
+            <NavLink to="myLists">My Lists</NavLink>
           </li>
           <li className="nav-items">
             <AuthNavOption />
