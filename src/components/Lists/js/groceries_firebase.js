@@ -7,9 +7,10 @@ import {
   where,
   getDocs,
   getDoc,
+  updateDoc,
 } from "firebase/firestore";
 
-import { formatDate } from "../../../utils/utils";
+import { formatDate, getDocumentRefSnapShot } from "../../../utils/utils";
 
 /**
  * Creates a new document on the groceries_list collection
@@ -91,19 +92,22 @@ export const fetchGroceryListById = async (listId) => {
     name: "",
     description: "",
     items: [],
+    itemsCount: "",
     created_at: "",
   };
 
-  const docRef = doc(db, "groceries_list", listId);
-  const docSnapshot = await getDoc(docRef);
+  const document = await getDocumentRefSnapShot("groceries_list", listId);
+  const snapShot = document.snapShot;
 
-  if (docSnapshot.exists()) {
-    groceryListToCopy.name = docSnapshot.data().name;
-    groceryListToCopy.description = docSnapshot.data().description;
-    groceryListToCopy.created_at = formatDate(docSnapshot.data().created_at);
+  if (snapShot.exists()) {
+    groceryListToCopy.name = snapShot.data().name;
+    groceryListToCopy.description = snapShot.data().description;
+    groceryListToCopy.created_at = formatDate(snapShot.data().created_at);
 
     //items document references
-    const itemsList = docSnapshot.data().items_list;
+    const itemsList = snapShot.data().items_list;
+
+    groceryListToCopy.itemsCount = itemsList.length;
 
     if (itemsList.length > 0) {
       for (const item of itemsList) {
@@ -142,4 +146,44 @@ export const fetchGroceryListById = async (listId) => {
   }
 
   return groceryListToCopy;
+};
+
+/**
+ * Fetches groceries_list document name/description fields by given id
+ * @param {string} listId - groceries_list document id
+ * @returns {object} - object with name/description fields
+ */
+export const fetchGroceryListNameDescById = async (listId) => {
+  const groceryListToCopy = {
+    name: "",
+    description: "",
+  };
+
+  const document = await getDocumentRefSnapShot("groceries_list", listId);
+  const snapShot = document.snapShot;
+
+  if (snapShot.exists()) {
+    groceryListToCopy.name = snapShot.data().name;
+    groceryListToCopy.description = snapShot.data().description;
+  }
+
+  return groceryListToCopy;
+};
+
+/**
+ * Updates groceries_list document name/description fields by given id
+ * @param {string} listId - groceries_list document id
+ * @param {object} formData - grocery list form data
+ */
+export const updateGroceryListById = async (listId, formData) => {
+  const document = await getDocumentRefSnapShot("groceries_list", listId);
+  const reference = document.reference;
+  const snapShot = document.snapShot;
+
+  if (snapShot.exists()) {
+    await updateDoc(reference, {
+      name: formData.name,
+      description: formData.description,
+    });
+  }
 };

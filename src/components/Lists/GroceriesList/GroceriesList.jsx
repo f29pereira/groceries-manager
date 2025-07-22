@@ -41,8 +41,22 @@ function GroceriesList() {
             <h1>{groceriesList.name}</h1>
           </header>
 
+          <p>{groceriesList.description}</p>
+
           <section>
             <div className="centered-container">
+              <h2>
+                Items Count: <span>{groceriesList.itemsCount}</span>
+              </h2>
+
+              <LinkButton
+                path={`/myLists/groceryList/${location.state?.index}/edit`}
+                classNames="yellow"
+                icon={<FaEdit />}
+                name="Edit"
+                state={{ id: location.state?.id }}
+              />
+
               <LinkButton
                 path={`/myLists/groceryList/${location.state?.index}/addItem`}
                 classNames="green"

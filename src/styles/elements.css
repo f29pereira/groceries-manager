@@ -106,6 +106,10 @@
   background-color: var(--info);
 }
 
+.btn.yellow {
+  background-color: var(--edit);
+}
+
 /*Footer Component*/
 footer {
   background-color: var(--nav-green);
