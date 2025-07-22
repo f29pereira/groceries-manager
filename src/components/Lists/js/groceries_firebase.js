@@ -8,6 +8,7 @@ import {
   getDocs,
   getDoc,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 import { formatDate, getDocumentRefSnapShot } from "../../../utils/utils";
@@ -89,9 +90,10 @@ export const fetchAllUserLists = async (userId) => {
  */
 export const fetchGroceryListById = async (listId) => {
   const groceryListToCopy = {
+    id: "",
     name: "",
     description: "",
-    items: [],
+    items_list: [],
     itemsCount: "",
     created_at: "",
   };
@@ -100,6 +102,7 @@ export const fetchGroceryListById = async (listId) => {
   const snapShot = document.snapShot;
 
   if (snapShot.exists()) {
+    groceryListToCopy.id = listId;
     groceryListToCopy.name = snapShot.data().name;
     groceryListToCopy.description = snapShot.data().description;
     groceryListToCopy.created_at = formatDate(snapShot.data().created_at);
@@ -134,7 +137,7 @@ export const fetchGroceryListById = async (listId) => {
           }
         }
 
-        groceryListToCopy.items.push({
+        groceryListToCopy.items_list.push({
           id: itemId,
           name: itemName,
           quantity: itemQuantity,
@@ -185,5 +188,27 @@ export const updateGroceryListById = async (listId, formData) => {
       name: formData.name,
       description: formData.description,
     });
+  }
+};
+
+/**
+ * Deletes groceries_list document and associated item documents by given id
+ * @param {string} listId - groceries_list document id
+ */
+export const deleteGroceryListById = async (listId) => {
+  const document = await getDocumentRefSnapShot("groceries_list", listId);
+  const reference = document.reference;
+  const snapShot = document.snapShot;
+
+  if (snapShot.exists()) {
+    const itemsRefs = snapShot.data().items_list;
+
+    //delete associated item documents
+    for (const item of itemsRefs) {
+      await deleteDoc(item);
+    }
+
+    //delete groceries_list document
+    await deleteDoc(reference);
   }
 };

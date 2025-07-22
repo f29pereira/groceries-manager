@@ -7,31 +7,59 @@ import {
   updateDoc,
   arrayUnion,
 } from "firebase/firestore";
+import { getDocumentRefSnapShot } from "../../../utils/utils";
 
 /**
  * Creates a new document on the items collection
  * @param {string} groceryListId - grocery_list document id
  * @param {object} formData - item form data
+ * @returns {object} - object with new document data
  */
 export const addItem = async (groceryListId, formData) => {
-  const groceryCategoryRef = doc(db, "grocery_categories", formData.categoryId);
+  const categoryDoc = await getDocumentRefSnapShot(
+    "grocery_categories",
+    formData.categoryId
+  );
+  const categoryRef = categoryDoc.reference;
+  const categorySnapshot = categoryDoc.snapShot;
 
-  const itemObj = {
+  //new item document
+  const firebaseItemObj = {
     name: formData.name,
     quantity: formData.quantity,
-    grocery_categories_id: groceryCategoryRef,
+    grocery_categories_id: categoryRef,
   };
 
   const id = `item_${new Date().toISOString()}`;
 
   const itemRef = doc(db, "items", id);
-  await setDoc(itemRef, itemObj);
+  await setDoc(itemRef, firebaseItemObj);
 
-  const groceryListRef = doc(db, "groceries_list", groceryListId);
+  const groceryListDoc = await getDocumentRefSnapShot(
+    "groceries_list",
+    groceryListId
+  );
+  const groceryListRef = groceryListDoc.reference;
 
   await updateDoc(groceryListRef, {
     items_list: arrayUnion(itemRef),
   });
+
+  //item to be added in state
+  const itemObj = {
+    id: id,
+    name: formData.name,
+    quantity: formData.quantity,
+    category_name: "",
+    category_color: "",
+  };
+
+  if (categorySnapshot.exists()) {
+    itemObj.category_name = categorySnapshot.data().name;
+    itemObj.category_color = categorySnapshot.data().color;
+  }
+
+  return itemObj;
 };
 
 /**

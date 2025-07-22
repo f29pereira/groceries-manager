@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link } from "react-router";
 import { AuthContext } from "../../../App";
 import { fetchGroceryListById } from "../js/groceries_firebase";
 import { IoIosAddCircle, MdDelete, FaEdit } from "../../../utils/icons";
@@ -7,31 +7,11 @@ import Loading from "../../Elements/Loading";
 import Footer from "../../Static/Footer";
 import LinkButton from "../../Elements/LinkButton";
 
+import { GroceriesContext } from "./Groceries";
+
 function GroceriesList() {
-  const location = useLocation();
-
-  const [groceriesList, setGroceriesList] = useState({});
-  const [isLoadingData, setIsLoadingData] = useState(true);
-  const [isGroceriesListEmpty, setIsGroceryListEmpty] = useState(false);
-
-  useEffect(() => {
-    const getGroceryList = () => {
-      fetchGroceryListById(location.state?.id)
-        .then((data) => {
-          setIsLoadingData(false);
-          if (data.length !== 0) {
-            setGroceriesList(data);
-          }
-
-          if (data.items.length === 0) {
-            setIsGroceryListEmpty(true);
-          }
-        })
-        .catch((error) => console.log(error));
-    };
-
-    getGroceryList();
-  }, []);
+  const { groceriesList, isLoadingData, isGroceriesListEmpty } =
+    useContext(GroceriesContext);
 
   return (
     <>
@@ -50,19 +30,24 @@ function GroceriesList() {
               </h2>
 
               <LinkButton
-                path={`/myLists/groceryList/${location.state?.index}/edit`}
+                path={`/myLists/groceryList/${groceriesList.index}/edit`}
                 classNames="yellow"
                 icon={<FaEdit />}
                 name="Edit"
-                state={{ id: location.state?.id }}
               />
 
               <LinkButton
-                path={`/myLists/groceryList/${location.state?.index}/addItem`}
+                path={`/myLists/groceryList/${groceriesList.index}/remove`}
+                classNames="red"
+                icon={<MdDelete />}
+                name="Remove"
+              />
+
+              <LinkButton
+                path={`/myLists/groceryList/${groceriesList.index}/addItem`}
                 classNames="green"
                 icon={<IoIosAddCircle />}
                 name="Add Item"
-                state={{ id: location.state?.id }}
               />
             </div>
 
@@ -83,7 +68,7 @@ function GroceriesList() {
                   This list has no items.
                 </div>
               ) : (
-                groceriesList.items.map((item, index) => (
+                groceriesList.items_list.map((item, index) => (
                   <div key={index} className="row-container">
                     <div className="column-container category">
                       <span

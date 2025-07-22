@@ -7,6 +7,7 @@ import SignIn from "./components/Authentication/Form/SignIn";
 import AuthRequired from "./components/Authentication/AuthRequired";
 import MyLists from "./components/Lists/MyLists";
 import AddGroceriesList from "./components/Lists/GroceriesList/Form/AddGroceriesList";
+import Groceries from "./components/Lists/GroceriesList/Groceries";
 import GroceriesList from "./components/Lists/GroceriesList/GroceriesList";
 import EditGroceriesList from "./components/Lists/GroceriesList/Form/EditGroceriesList";
 import RemoveList from "./components/Lists/GroceriesList/RemoveList";
@@ -38,7 +39,7 @@ function App() {
                 <Route index element={<MyLists />} />
                 <Route path="addList" element={<AddGroceriesList />} />
 
-                <Route path="groceryList/:id">
+                <Route path="groceryList/:id" element={<Groceries />}>
                   <Route index element={<GroceriesList />} />
                   <Route path="edit" element={<EditGroceriesList />} />
                   <Route path="remove" element={<RemoveList />} />
