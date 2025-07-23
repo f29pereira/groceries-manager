@@ -1,10 +1,13 @@
+import { useEffect, useState } from "react";
 import ErrorMessage from "../../../Errors/ErrorMessage";
 import RequiredField from "../../../Elements/RequiredField";
 import SelectGroceryCategory from "./SelectGroceryCategory";
-import { IoAdd, RiWeightLine, IoText } from "../../../../utils/icons";
+import { IoAdd, RiWeightLine, IoText, BiTag } from "../../../../utils/icons";
+import Loading from "../../../Elements/Loading";
+import { fetchGroceryCategories } from "../../js/items_firebase";
 
 /**
- * Renders item from the grocery list form
+ * Renders Item name/quantity/category from
  * @param {function} handleOnSubmit     - on submit function
  * @param {string} errorMsg             - input specific/generic error message
  * @param {function} handleChange       - sets name/quantity/category state values
@@ -18,6 +21,22 @@ function ItemForm({
   formData,
   handleCancel,
 }) {
+  const [categories, setCategories] = useState([]);
+  const [isLoadingCategories, setIsLoadingCategories] = useState(true);
+
+  useEffect(() => {
+    const getCategories = () => {
+      fetchGroceryCategories()
+        .then((categories) => {
+          setCategories(categories);
+          setIsLoadingCategories(false);
+        })
+        .catch((error) => console.log(error));
+    };
+
+    getCategories();
+  }, []);
+
   return (
     <form
       className="form-container"
@@ -72,10 +91,44 @@ function ItemForm({
           />
         </div>
 
-        <SelectGroceryCategory
-          handleChange={handleChange}
-          selectedCategory={formData.categoryId}
-        />
+        {isLoadingCategories ? (
+          <Loading>Loading grocery categories</Loading>
+        ) : (
+          <>
+            <div className="left-container label-required">
+              <label htmlFor="grocery-category" className="form-label">
+                Category
+              </label>
+              <RequiredField />
+            </div>
+            <div className="input-icon-container">
+              <div className="centered-container input-icon">
+                <BiTag />
+              </div>
+
+              <select
+                id="grocery-category"
+                className="select-input form-input"
+                required
+                name="category_id"
+                onChange={handleChange}
+                value={formData.category_id}
+              >
+                {formData.category_id === "" && (
+                  <option value="" disabled>
+                    Select a category
+                  </option>
+                )}
+
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="centered-container buttons">

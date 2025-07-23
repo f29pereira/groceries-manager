@@ -117,6 +117,7 @@ export const fetchGroceryListById = async (listId) => {
         let itemId = "";
         let itemName = "";
         let itemQuantity = "";
+        let categoryId = "";
         let categoryName = "";
         let categoryColor = "";
 
@@ -132,6 +133,7 @@ export const fetchGroceryListById = async (listId) => {
           const categorySnapshot = await getDoc(categoryRef);
 
           if (categorySnapshot.exists()) {
+            categoryId = categorySnapshot.id;
             categoryName = categorySnapshot.data().name;
             categoryColor = categorySnapshot.data().color;
           }
@@ -141,6 +143,7 @@ export const fetchGroceryListById = async (listId) => {
           id: itemId,
           name: itemName,
           quantity: itemQuantity,
+          category_id: categoryId,
           category_name: categoryName,
           category_color: categoryColor,
         });

@@ -6,7 +6,7 @@ import { doc, getDoc } from "firebase/firestore";
  * Returns the document reference and snapshot for a given collection/document id
  * @param {string} collectionName - collection name
  * @param {string} documentId     - document id
- * @returns {object}              - reference/snapShot attributes
+ * @returns {object}              - object with reference/snapShot attributes
  */
 export const getDocumentRefSnapShot = async (collectionName, documentId) => {
   const docRef = doc(db, collectionName, documentId);

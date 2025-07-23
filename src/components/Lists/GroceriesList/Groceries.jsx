@@ -44,6 +44,7 @@ function Groceries() {
         setGroceriesList,
         isLoadingData,
         isGroceriesListEmpty,
+        setIsGroceryListEmpty,
       }}
     >
       <Outlet />

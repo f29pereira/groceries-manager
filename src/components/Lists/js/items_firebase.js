@@ -4,8 +4,10 @@ import {
   doc,
   setDoc,
   getDocs,
-  updateDoc,
   arrayUnion,
+  arrayRemove,
+  updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { getDocumentRefSnapShot } from "../../../utils/utils";
 
@@ -18,7 +20,7 @@ import { getDocumentRefSnapShot } from "../../../utils/utils";
 export const addItem = async (groceryListId, formData) => {
   const categoryDoc = await getDocumentRefSnapShot(
     "grocery_categories",
-    formData.categoryId
+    formData.category_id
   );
   const categoryRef = categoryDoc.reference;
   const categorySnapshot = categoryDoc.snapShot;
@@ -50,11 +52,13 @@ export const addItem = async (groceryListId, formData) => {
     id: id,
     name: formData.name,
     quantity: formData.quantity,
+    category_id: "",
     category_name: "",
     category_color: "",
   };
 
   if (categorySnapshot.exists()) {
+    itemObj.category_id = categorySnapshot.id;
     itemObj.category_name = categorySnapshot.data().name;
     itemObj.category_color = categorySnapshot.data().color;
   }
@@ -66,19 +70,89 @@ export const addItem = async (groceryListId, formData) => {
  * Removes document from items collection
  * @param {string} itemId - item to be removed
  */
-export const removeItemById = async (itemId) => {
-  //TO DO:
-  //delete document reference from groceries_list "items_list" field
-  //delete document from items collection
+export const removeItemById = async (itemId, listId, itemsList) => {
+  const itemDoc = await getDocumentRefSnapShot("items", itemId);
+  const itemReference = itemDoc.reference;
+
+  const groceriesListDoc = await getDocumentRefSnapShot(
+    "groceries_list",
+    listId
+  );
+  const groceryListReference = groceriesListDoc.reference;
+  const groceryListSnapShot = groceriesListDoc.snapShot;
+
+  let updatedItemsList = [];
+
+  if (groceryListSnapShot.exists()) {
+    //remove document reference from groceries_list
+    await updateDoc(groceryListReference, {
+      items_list: arrayRemove(itemReference),
+    });
+
+    //update list of items
+    updatedItemsList = itemsList.filter((item) => item.id != itemId);
+
+    //delete document from items collection
+    await deleteDoc(itemReference);
+  }
+
+  return updatedItemsList;
 };
 
 /**
- * Updates document from items collection
- * @param {string} itemId - item to be updated
+ * Returns item if exists on itemsList
+ * @param {string} itemId - item id
+ * @param {array} itemsList - list of items
+ * @returns {object} item
  */
-export const updateItemById = async (itemId) => {
-  //TO DO:
-  //fetch document and update data
+export const getItemById = (itemId, itemsList) => {
+  for (const item of itemsList) {
+    if (item.id === itemId) {
+      return item;
+    }
+  }
+};
+
+/**
+ * Updates item document by given id
+ * @param {string} itemId   - item to be updated
+ * @param {object} formData - item form data
+ * @param {array} itemsList - list of items
+ * @returns {object}        - list of items to update state
+ */
+export const updateItemById = async (itemId, formData, itemsList) => {
+  const itemDoc = await getDocumentRefSnapShot("items", itemId);
+  const itemReference = itemDoc.reference;
+  const itemSnapShot = itemDoc.snapShot;
+
+  const categoryDoc = await getDocumentRefSnapShot(
+    "grocery_categories",
+    formData.category_id
+  );
+  const categoryRef = categoryDoc.reference;
+  const categorySnapshot = categoryDoc.snapShot;
+
+  if (itemSnapShot.exists() && categorySnapshot.exists()) {
+    //update document item data in firebase
+    await updateDoc(itemReference, {
+      name: formData.name,
+      quantity: formData.quantity,
+      grocery_categories_id: categoryRef,
+    });
+
+    //list of items to update state
+    for (const item of itemsList) {
+      if (item.id === itemId) {
+        item.name = formData.name;
+        item.quantity = formData.quantity;
+        item.category_id = formData.category_id;
+        item.category_name = categorySnapshot.data().name;
+        item.category_color = categorySnapshot.data().color;
+      }
+    }
+  }
+
+  return itemsList;
 };
 
 /**

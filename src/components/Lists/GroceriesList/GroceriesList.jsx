@@ -87,7 +87,7 @@ function GroceriesList() {
                         to={`removeItem/${index}`}
                         title="Remove Item"
                         state={{
-                          id: item.id,
+                          itemId: item.id,
                         }}
                       >
                         <MdDelete className="delete-icon" />
@@ -97,7 +97,7 @@ function GroceriesList() {
                         to={`editItem/${index}`}
                         title="Edit Item"
                         state={{
-                          id: item.id,
+                          itemId: item.id,
                         }}
                       >
                         <FaEdit className="edit-icon" />
