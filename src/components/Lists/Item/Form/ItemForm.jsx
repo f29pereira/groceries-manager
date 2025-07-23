@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import ErrorMessage from "../../../Errors/ErrorMessage";
 import RequiredField from "../../../Elements/RequiredField";
-import SelectGroceryCategory from "./SelectGroceryCategory";
 import { IoAdd, RiWeightLine, IoText, BiTag } from "../../../../utils/icons";
 import Loading from "../../../Elements/Loading";
 import { fetchGroceryCategories } from "../../js/items_firebase";
