@@ -1,35 +1,15 @@
-import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router";
-import { fetchAllUserLists } from "./js/groceries_firebase";
-import { AuthContext } from "../../App";
+import { useContext } from "react";
 import { IoIosAddCircle, FaInfoCircle } from "../../utils/icons";
+import { ListContext } from "./List";
 import Footer from "../Static/Footer";
 import LinkButton from "../Elements/LinkButton";
 import Loading from "../Elements/Loading";
 
-function MyLists() {
-  const { currentUser } = useContext(AuthContext);
-
-  const [userLists, setUserLists] = useState([]);
-  const [isLoadingData, setIsLoadingData] = useState(true);
-  const [isListEmpty, setIsListEmpty] = useState(false);
-
-  useEffect(() => {
-    const getAllUserLists = () => {
-      fetchAllUserLists(currentUser.uid)
-        .then((data) => {
-          setIsLoadingData(false);
-          if (data.length !== 0) {
-            setUserLists(data);
-          } else {
-            setIsListEmpty(true);
-          }
-        })
-        .catch((error) => console.log(error));
-    };
-
-    getAllUserLists();
-  }, []);
+/**
+ * Renders all groceries lists created by the user
+ */
+function UserLists() {
+  const { userLists, isLoadingData, isListEmpty } = useContext(ListContext);
 
   return (
     <>
@@ -101,4 +81,4 @@ function MyLists() {
   );
 }
 
-export default MyLists;
+export default UserLists;

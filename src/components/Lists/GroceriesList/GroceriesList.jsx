@@ -1,13 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router";
-import { AuthContext } from "../../../App";
-import { fetchGroceryListById } from "../js/groceries_firebase";
 import { IoIosAddCircle, MdDelete, FaEdit } from "../../../utils/icons";
+import { GroceriesContext } from "./Groceries";
 import Loading from "../../Elements/Loading";
 import Footer from "../../Static/Footer";
 import LinkButton from "../../Elements/LinkButton";
-
-import { GroceriesContext } from "./Groceries";
 
 function GroceriesList() {
   const { groceriesList, isLoadingData, isGroceriesListEmpty } =

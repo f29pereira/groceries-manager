@@ -16,12 +16,14 @@ import { formatDate, getDocumentRefSnapShot } from "../../../utils/utils";
 /**
  * Creates a new document on the groceries_list collection
  * @param {string} userId - authenticated user id
- * @param {object} formData - grocery list form data
+ * @param {array} userLists - array of groceries list
+ * @returns {array} - array of groceries list to update state
  */
-export const addEmptyGroceryList = async (userId, formData) => {
+export const addEmptyGroceryList = async (userId, formData, userLists) => {
   const date = new Date().toISOString();
 
-  const groceryListObj = {
+  //new grocery_list document
+  const firebaseGroceryListObj = {
     name: formData.name,
     description: formData.description,
     items_list: [],
@@ -31,7 +33,22 @@ export const addEmptyGroceryList = async (userId, formData) => {
 
   const groceryId = `${userId}_${date}`;
 
-  await setDoc(doc(db, "groceries_list", groceryId), groceryListObj);
+  await setDoc(doc(db, "groceries_list", groceryId), firebaseGroceryListObj);
+
+  //new element to be added to state
+  const groceryListObj = {
+    id: groceryId,
+    name: formData.name,
+    description: formData.description,
+    items_list: [],
+    itemCount: 0,
+    created_at: formatDate(date),
+  };
+
+  let updatedUserLists = userLists;
+  updatedUserLists.push(groceryListObj);
+
+  return updatedUserLists;
 };
 
 /**
@@ -178,27 +195,46 @@ export const fetchGroceryListNameDescById = async (listId) => {
 
 /**
  * Updates groceries_list document name/description fields by given id
- * @param {string} listId - groceries_list document id
- * @param {object} formData - grocery list form data
+ * @param {object} groceriesList  - groceries list to be updated
+ * @param {object} formData  - grocery list form data
+ * @returns {object} - groceries list object to update state
  */
-export const updateGroceryListById = async (listId, formData) => {
-  const document = await getDocumentRefSnapShot("groceries_list", listId);
+export const updateGroceryList = async (groceriesList, formData) => {
+  const groceriesListObj = {
+    ...groceriesList,
+  };
+
+  const document = await getDocumentRefSnapShot(
+    "groceries_list",
+    groceriesList.id
+  );
   const reference = document.reference;
   const snapShot = document.snapShot;
 
   if (snapShot.exists()) {
+    //update groceries_list document
     await updateDoc(reference, {
       name: formData.name,
       description: formData.description,
     });
+
+    //groceriesList to update state
+    groceriesListObj.name = formData.name;
+    groceriesListObj.description = formData.description;
   }
+
+  return groceriesListObj;
 };
 
 /**
  * Deletes groceries_list document and associated item documents by given id
  * @param {string} listId - groceries_list document id
+ * @param {array} userLists - array of groceries list
+ * @returns {array} - array of groceries list to update state
  */
-export const deleteGroceryListById = async (listId) => {
+export const deleteGroceryListById = async (listId, userLists) => {
+  const userListsObj = [];
+
   const document = await getDocumentRefSnapShot("groceries_list", listId);
   const reference = document.reference;
   const snapShot = document.snapShot;
@@ -213,5 +249,10 @@ export const deleteGroceryListById = async (listId) => {
 
     //delete groceries_list document
     await deleteDoc(reference);
+
+    //userList to update state
+    const userListsObj = userLists.filter((list) => list.id !== listId);
   }
+
+  return userListsObj;
 };

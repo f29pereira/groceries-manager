@@ -1,19 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router";
 import { handleInputChange } from "../../../../utils/utils";
 import {
   fetchGroceryListNameDescById,
-  updateGroceryListById,
+  updateGroceryList,
 } from "../../js/groceries_firebase";
 import { FaEdit } from "../../../../utils/icons";
 import Card from "../../../Elements/Card";
 import GroceriesListForm from "./GroceriesListForm";
+import Footer from "../../../Static/Footer";
+import { GroceriesContext } from "../Groceries";
 
 /**
- * Renders the form to update the Grocery List name/description fields
+ * Renders the form to update the grocery list name/description fields
  */
 function EditGroceriesList() {
-  const location = useLocation();
+  const { groceriesList, isLoadingData, setIsLoadingData, setGroceriesList } =
+    useContext(GroceriesContext);
+
   const navigate = useNavigate();
 
   const [listFormData, setListFormData] = useState({
@@ -21,15 +25,13 @@ function EditGroceriesList() {
     description: "",
   });
 
-  const [isLoadingData, setIsLoadingData] = useState(true);
-
   const [errorMsg, setErrorMsg] = useState({
     generic: "",
   });
 
   useEffect(() => {
     const getGroceryListData = () => {
-      fetchGroceryListNameDescById(location.state?.id)
+      fetchGroceryListNameDescById(groceriesList.id)
         .then((data) => {
           setIsLoadingData(false);
           setListFormData(data);
@@ -44,11 +46,12 @@ function EditGroceriesList() {
     handleInputChange(event, setListFormData);
   };
 
-  const updateGroceryList = (event) => {
+  const editGroceryList = (event) => {
     event.preventDefault();
 
-    updateGroceryListById(location.state?.id, listFormData)
-      .then(() => {
+    updateGroceryList(groceriesList, listFormData)
+      .then((updatedGroceriesList) => {
+        setGroceriesList(updatedGroceriesList);
         navigate(-1);
       })
       .catch((error) => console.log(error));
@@ -69,7 +72,7 @@ function EditGroceriesList() {
             isLoading={isLoadingData}
             body={
               <GroceriesListForm
-                handleOnSubmit={updateGroceryList}
+                handleOnSubmit={editGroceryList}
                 errorMsg={errorMsg}
                 handleChange={handleChange}
                 formData={listFormData}
@@ -79,6 +82,8 @@ function EditGroceriesList() {
           ></Card>
         </div>
       </main>
+
+      <Footer />
     </>
   );
 }

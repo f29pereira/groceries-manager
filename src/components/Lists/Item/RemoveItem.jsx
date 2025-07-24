@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { GroceriesContext } from "../GroceriesList/Groceries";
+import { ListContext } from "../List";
 import { useLocation, useNavigate } from "react-router";
 import { getItemById, removeItemById } from "../js/items_firebase";
 import { MdDelete } from "../../../utils/icons";
@@ -9,6 +10,9 @@ import Footer from "../../Static/Footer";
 function RemoveItem() {
   const { groceriesList, setGroceriesList, setIsGroceryListEmpty } =
     useContext(GroceriesContext);
+
+  const { setUserLists } = useContext(ListContext);
+
   const [itemToRemove, setItemToRemove] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
@@ -37,9 +41,19 @@ function RemoveItem() {
       groceriesList.items_list
     )
       .then((updatedItemsList) => {
+        //decrement itemCount in userLists List state
+        setUserLists((prevUserList) =>
+          prevUserList.map((list) =>
+            list.id === groceriesList.id
+              ? { ...list, itemCount: list.itemCount - 1 }
+              : list
+          )
+        );
+
         setGroceriesList((prevList) => ({
           ...prevList,
           items_list: updatedItemsList,
+          itemsCount: prevList.itemsCount - 1,
         }));
 
         if (updatedItemsList.length === 0) {

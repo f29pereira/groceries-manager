@@ -7,6 +7,7 @@ import { GroceriesContext } from "../../GroceriesList/Groceries";
 import Card from "../../../Elements/Card";
 import ItemForm from "./ItemForm";
 import Footer from "../../../Static/Footer";
+import { ListContext } from "../../List";
 
 function AddItem() {
   const {
@@ -15,6 +16,8 @@ function AddItem() {
     isGroceriesListEmpty,
     setIsGroceryListEmpty,
   } = useContext(GroceriesContext);
+
+  const { setUserLists } = useContext(ListContext);
 
   const navigate = useNavigate();
 
@@ -37,10 +40,19 @@ function AddItem() {
 
     addItem(groceriesList.id, itemFormData)
       .then((newItem) => {
+        //increment itemCount in userLists List state
+        setUserLists((prevUserList) =>
+          prevUserList.map((list) =>
+            list.id === groceriesList.id
+              ? { ...list, itemCount: list.itemCount + 1 }
+              : list
+          )
+        );
+
         setGroceriesList((prevList) => ({
           ...prevList,
-          itemsCount: prevList.itemsCount + 1,
           items_list: [...prevList.items_list, newItem],
+          itemsCount: prevList.itemsCount + 1,
         }));
 
         if (isGroceriesListEmpty) {

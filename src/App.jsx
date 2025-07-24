@@ -5,12 +5,13 @@ import Home from "./components/Static/Home";
 import SignUp from "./components/Authentication/Form/SignUp";
 import SignIn from "./components/Authentication/Form/SignIn";
 import AuthRequired from "./components/Authentication/AuthRequired";
-import MyLists from "./components/Lists/MyLists";
+import List from "./components/Lists/List";
+import UserLists from "./components/Lists/UserLists";
 import AddGroceriesList from "./components/Lists/GroceriesList/Form/AddGroceriesList";
 import Groceries from "./components/Lists/GroceriesList/Groceries";
 import GroceriesList from "./components/Lists/GroceriesList/GroceriesList";
 import EditGroceriesList from "./components/Lists/GroceriesList/Form/EditGroceriesList";
-import RemoveList from "./components/Lists/GroceriesList/RemoveList";
+import RemoveGroceriesList from "./components/Lists/GroceriesList/RemoveGroceriesList";
 import AddItem from "./components/Lists/Item/Form/AddItem";
 import EditItem from "./components/Lists/Item/Form/EditItem";
 import RemoveItem from "./components/Lists/Item/RemoveItem";
@@ -35,14 +36,14 @@ function App() {
             <Route path="signIn" element={<SignIn />} />
 
             <Route element={<AuthRequired />}>
-              <Route path="myLists">
-                <Route index element={<MyLists />} />
+              <Route path="myLists" element={<List />}>
+                <Route index element={<UserLists />} />
                 <Route path="addList" element={<AddGroceriesList />} />
 
                 <Route path="groceryList/:id" element={<Groceries />}>
                   <Route index element={<GroceriesList />} />
                   <Route path="edit" element={<EditGroceriesList />} />
-                  <Route path="remove" element={<RemoveList />} />
+                  <Route path="remove" element={<RemoveGroceriesList />} />
                   <Route path="addItem" element={<AddItem />} />
                   <Route path="editItem/:id" element={<EditItem />} />
                   <Route path="removeItem/:id" element={<RemoveItem />} />
