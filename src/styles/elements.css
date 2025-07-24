@@ -110,23 +110,7 @@
   background-color: var(--edit);
 }
 
-/*Footer Component*/
-footer {
-  background-color: var(--nav-green);
-  padding: 1rem;
-  color: var(--white);
-}
-
-.footer-icon {
-  font-size: 2rem;
-}
-
-.footer-text {
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-/*Required field Component*/
+/*Required field component*/
 .centered-container.required-wrapper {
   margin-left: 1rem;
 }
@@ -170,6 +154,35 @@ footer {
   transition: opacity 0.5s;
 }
 
+/*FallBack component*/
+.fallback {
+  border-radius: 5px;
+  border: 1px solid var(--cancel);
+  padding: 1rem;
+}
+
+.fallback-msg {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/*Footer Component*/
+footer {
+  background-color: var(--nav-green);
+  padding: 1rem;
+  color: var(--white);
+}
+
+.footer-icon {
+  font-size: 2rem;
+}
+
+.footer-text {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 @media (min-width: 800px) {
   /*Card component*/
   .card-container {
@@ -194,6 +207,11 @@ footer {
     font-size: 1.5rem;
   }
 
+  /*FallBack component*/
+  .fallback-msg {
+    font-size: 1.6rem;
+  }
+
   /*Footer component*/
   .footer-text {
     font-size: 1.2rem;
@@ -206,5 +224,15 @@ footer {
   .card-container {
     width: 60%;
     margin: auto;
+  }
+
+  /*FallBack component*/
+  .fallback {
+    width: 40%;
+    margin: auto;
+  }
+
+  .fallback-msg {
+    font-size: 1.8rem;
   }
 }

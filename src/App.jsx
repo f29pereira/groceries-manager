@@ -5,6 +5,7 @@ import Home from "./components/Static/Home";
 import SignUp from "./components/Authentication/Form/SignUp";
 import SignIn from "./components/Authentication/Form/SignIn";
 import AuthRequired from "./components/Authentication/AuthRequired";
+import ErrorBoundary from "./components/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import List from "./components/Lists/List";
 import UserLists from "./components/Lists/UserLists";
 import AddGroceriesList from "./components/Lists/GroceriesList/Form/AddGroceriesList";
@@ -16,7 +17,7 @@ import AddItem from "./components/Lists/Item/Form/AddItem";
 import EditItem from "./components/Lists/Item/Form/EditItem";
 import RemoveItem from "./components/Lists/Item/RemoveItem";
 import Profile from "./components/Authentication/Profile";
-import NotFound from "./components/Errors/NotFound";
+import NotFound from "./components/ErrorHandling/Errors/NotFound";
 
 export const AuthContext = createContext();
 
@@ -36,7 +37,14 @@ function App() {
             <Route path="signIn" element={<SignIn />} />
 
             <Route element={<AuthRequired />}>
-              <Route path="myLists" element={<List />}>
+              <Route
+                path="myLists"
+                element={
+                  <ErrorBoundary>
+                    <List />
+                  </ErrorBoundary>
+                }
+              >
                 <Route index element={<UserLists />} />
                 <Route path="addList" element={<AddGroceriesList />} />
 

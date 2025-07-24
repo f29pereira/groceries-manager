@@ -1,4 +1,4 @@
-import LinkButton from "../Elements/LinkButton";
+import LinkButton from "../../Elements/LinkButton";
 
 function NotFound() {
   return (
