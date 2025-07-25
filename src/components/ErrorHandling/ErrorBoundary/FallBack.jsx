@@ -1,22 +1,31 @@
-import LinkButton from "../../Elements/LinkButton";
-import Footer from "../../Static/Footer";
+import { AuthContext } from "../../../App";
+import { useContext } from "react";
+import { useNavigate } from "react-router";
 
 /**
  * Renders fallback UI used by ErrorBoundary
  */
-function FallBack(/*{ errorMessage }*/) {
+function FallBack() {
+  const { setIsError } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const returnHome = () => {
+    setIsError(false);
+    navigate("/");
+  };
+
   return (
     <>
       <main>
         <div className="content">
           <div className="centered-column-container fallback">
             <h1 className="fallback-msg">Sorry, something went wrong.</h1>
-            <LinkButton path="/" classNames="green" name="Return Home" />
+            <button className="btn green" onClick={returnHome}>
+              Return Home
+            </button>
           </div>
         </div>
       </main>
-
-      <Footer />
     </>
   );
 }

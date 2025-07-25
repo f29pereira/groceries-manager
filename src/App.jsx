@@ -24,11 +24,19 @@ export const AuthContext = createContext();
 function App() {
   const [isSignedIn, setisSignedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
+  const [isError, setIsError] = useState(false);
 
   return (
     <BrowserRouter>
       <AuthContext
-        value={{ isSignedIn, setisSignedIn, currentUser, setCurrentUser }}
+        value={{
+          isSignedIn,
+          setisSignedIn,
+          currentUser,
+          setCurrentUser,
+          isError,
+          setIsError,
+        }}
       >
         <Routes>
           <Route path="/" element={<Nav />}>
