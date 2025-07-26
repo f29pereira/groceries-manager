@@ -120,3 +120,33 @@ const getErrorDescription = (errorCode) => {
 
   return error;
 };
+
+/**
+ * Checks if value is a string
+ * @param {string} value - value to validate
+ * @param {string} valueName - value description name to appear on exception message
+ * @throws {Error} - if value isn't string
+ */
+export const validateString = (value, valueName) => {
+  if (typeof value !== "string") {
+    throw new Error(
+      `Invalid data type: ${valueName} must be string. Current value: ${value}`
+    );
+  }
+
+  return;
+};
+
+/**
+ * Checks if value is an array
+ * @param {string} array - value to validate
+ * @param {string} arrayName - value description name to appear on exception message
+ * @throws {Error} - if value isn't array
+ */
+export const validateArray = (array, arrayName) => {
+  if (!Array.isArray(array)) {
+    throw new Error(
+      `Invalid data type: ${arrayName} must be an array. Current value: ${array}`
+    );
+  }
+};
