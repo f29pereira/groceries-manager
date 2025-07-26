@@ -1,5 +1,7 @@
 import { useState, useEffect, useContext } from "react";
-import { useLocation, useNavigate } from "react-router";
+import { GroceriesContext } from "../Groceries";
+import { AuthContext } from "../../../../App";
+import { useNavigate } from "react-router";
 import { handleInputChange } from "../../../../utils/utils";
 import {
   fetchGroceryListNameDescById,
@@ -9,7 +11,6 @@ import { FaEdit } from "../../../../utils/icons";
 import Card from "../../../Elements/Card";
 import GroceriesListForm from "./GroceriesListForm";
 import Footer from "../../../Static/Footer";
-import { GroceriesContext } from "../Groceries";
 
 /**
  * Renders the form to update the grocery list name/description fields
@@ -17,6 +18,7 @@ import { GroceriesContext } from "../Groceries";
 function EditGroceriesList() {
   const { groceriesList, isLoadingData, setIsLoadingData, setGroceriesList } =
     useContext(GroceriesContext);
+  const { setIsNavHidden } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -25,18 +27,19 @@ function EditGroceriesList() {
     description: "",
   });
 
-  const [errorMsg, setErrorMsg] = useState({
-    generic: "",
-  });
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getGroceryListData = () => {
       fetchGroceryListNameDescById(groceriesList.id)
         .then((data) => {
-          setIsLoadingData(false);
           setListFormData(data);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          setIsNavHidden(true);
+          setError(error);
+        })
+        .finally(setIsLoadingData(false));
     };
 
     getGroceryListData();
@@ -54,12 +57,20 @@ function EditGroceriesList() {
         setGroceriesList(updatedGroceriesList);
         navigate(-1);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setIsNavHidden(true);
+        setError(error);
+      });
   };
 
   const goBack = () => {
     navigate(-1);
   };
+
+  if (error) {
+    console.log(error);
+    throw error; //error to be caught by ErrorBoundary
+  }
 
   return (
     <>

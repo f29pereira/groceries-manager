@@ -4,12 +4,14 @@ import { handleInputChange, showError } from "../../../../utils/utils";
 import { getItemById, updateItemById } from "../../js/items_firebase";
 import { FaEdit } from "../../../../utils/icons";
 import { GroceriesContext } from "../../GroceriesList/Groceries";
+import { AuthContext } from "../../../../App";
 import Card from "../../../Elements/Card";
 import ItemForm from "./ItemForm";
 import Footer from "../../../Static/Footer";
 
 function EditItem() {
   const { groceriesList, setGroceriesList } = useContext(GroceriesContext);
+  const { setIsNavHidden } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -19,9 +21,7 @@ function EditItem() {
     category_id: "",
   });
 
-  const [errorMsg, setErrorMsg] = useState({
-    generic: "",
-  });
+  const [error, setError] = useState(null);
 
   const handleChange = (event) => {
     handleInputChange(event, setEditItemFormData);
@@ -29,12 +29,17 @@ function EditItem() {
 
   useEffect(() => {
     const setItemData = () => {
-      const itemData = getItemById(
-        location.state?.itemId,
-        groceriesList.items_list
-      );
+      try {
+        const itemData = getItemById(
+          location.state?.itemId,
+          groceriesList.items_list
+        );
 
-      setEditItemFormData(itemData);
+        setEditItemFormData(itemData);
+      } catch (error) {
+        setIsNavHidden(true);
+        setError(error);
+      }
     };
 
     setItemData();
@@ -56,12 +61,20 @@ function EditItem() {
 
         navigate(-1);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setIsNavHidden(true);
+        setError(error);
+      });
   };
 
   const goBack = () => {
     navigate(-1);
   };
+
+  if (error) {
+    console.log(error);
+    throw error; //error to be caught by ErrorBoundary
+  }
 
   return (
     <>
@@ -74,7 +87,6 @@ function EditItem() {
             body={
               <ItemForm
                 handleOnSubmit={editItem}
-                errorMsg={errorMsg}
                 handleChange={handleChange}
                 formData={editItemFormData}
                 handleCancel={goBack}

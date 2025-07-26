@@ -12,7 +12,7 @@ import GroceriesListForm from "./GroceriesListForm";
  * Renders the form to create a new Grocery List
  */
 function AddGroceriesList() {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, setIsNavHidden } = useContext(AuthContext);
   const { userLists, setUserLists, isListEmpty, setIsListEmpty } =
     useContext(ListContext);
   const navigate = useNavigate();
@@ -22,9 +22,7 @@ function AddGroceriesList() {
     description: "",
   });
 
-  const [errorMsg, setErrorMsg] = useState({
-    generic: "",
-  });
+  const [error, setError] = useState(null);
 
   const handleChange = (event) => {
     handleInputChange(event, setListFormData);
@@ -42,13 +40,19 @@ function AddGroceriesList() {
         navigate(-1);
       })
       .catch((error) => {
-        console.log(error);
+        setIsNavHidden(true);
+        setError(error);
       });
   };
 
   const clearData = () => {
     setListFormData({ name: "", description: "" });
   };
+
+  if (error) {
+    console.log(error);
+    throw error; //error to be caught by ErrorBoundary
+  }
 
   return (
     <>
@@ -61,7 +65,6 @@ function AddGroceriesList() {
             body={
               <GroceriesListForm
                 handleOnSubmit={addList}
-                errorMsg={errorMsg}
                 handleChange={handleChange}
                 formData={listFormData}
                 handleCancel={clearData}

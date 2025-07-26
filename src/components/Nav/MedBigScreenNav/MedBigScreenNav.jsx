@@ -5,11 +5,11 @@ import AuthNavOption from "../../Authentication/AuthNavOption";
 import { TbPaperBag } from "../../../utils/icons";
 
 function MedBigScrenNav() {
-  const { isError } = useContext(AuthContext);
+  const { isNavHidden } = useContext(AuthContext);
 
   return (
     <>
-      {isError ? null : (
+      {isNavHidden ? null : (
         <nav>
           <ul id="nav-container">
             <li className="item-icon">

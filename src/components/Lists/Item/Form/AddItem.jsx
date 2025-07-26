@@ -1,4 +1,6 @@
 import { useState, useContext } from "react";
+import { ListContext } from "../../List";
+import { AuthContext } from "../../../../App";
 import { useNavigate } from "react-router";
 import { addItem } from "../../js/items_firebase";
 import { handleInputChange, showError } from "../../../../utils/utils";
@@ -7,7 +9,6 @@ import { GroceriesContext } from "../../GroceriesList/Groceries";
 import Card from "../../../Elements/Card";
 import ItemForm from "./ItemForm";
 import Footer from "../../../Static/Footer";
-import { ListContext } from "../../List";
 
 function AddItem() {
   const {
@@ -19,6 +20,8 @@ function AddItem() {
 
   const { setUserLists } = useContext(ListContext);
 
+  const { setIsNavHidden } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const [itemFormData, setItemFormData] = useState({
@@ -27,9 +30,7 @@ function AddItem() {
     category_id: "",
   });
 
-  const [errorMsg, setErrorMsg] = useState({
-    generic: "",
-  });
+  const [error, setError] = useState(null);
 
   const handleChange = (event) => {
     handleInputChange(event, setItemFormData);
@@ -62,14 +63,19 @@ function AddItem() {
         navigate(-1);
       })
       .catch((error) => {
-        console.log(error);
-        showError(error, setErrorMsg);
+        setIsNavHidden(true);
+        setError(error);
       });
   };
 
   const clearData = () => {
     setItemFormData({ name: "", quantity: "", categoryId: "" });
   };
+
+  if (error) {
+    console.log(error);
+    throw error; //error to be caught by ErrorBoundary
+  }
 
   return (
     <>
@@ -82,7 +88,6 @@ function AddItem() {
             body={
               <ItemForm
                 handleOnSubmit={addItemToGroceryList}
-                errorMsg={errorMsg}
                 handleChange={handleChange}
                 formData={itemFormData}
                 handleCancel={clearData}

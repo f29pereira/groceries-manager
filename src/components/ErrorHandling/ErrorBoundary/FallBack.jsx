@@ -6,11 +6,11 @@ import { useNavigate } from "react-router";
  * Renders fallback UI used by ErrorBoundary
  */
 function FallBack() {
-  const { setIsError } = useContext(AuthContext);
+  const { setIsNavHidden } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const returnHome = () => {
-    setIsError(false);
+    setIsNavHidden(false);
     navigate("/");
   };
 

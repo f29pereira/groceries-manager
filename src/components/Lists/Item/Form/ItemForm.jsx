@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ErrorMessage from "../../../Errors/ErrorMessage";
+import ErrorMessage from "../../../ErrorHandling/Errors/ErrorMessage";
 import RequiredField from "../../../Elements/RequiredField";
 import { IoAdd, RiWeightLine, IoText, BiTag } from "../../../../utils/icons";
 import Loading from "../../../Elements/Loading";
@@ -8,33 +8,34 @@ import { fetchGroceryCategories } from "../../js/items_firebase";
 /**
  * Renders Item name/quantity/category from
  * @param {function} handleOnSubmit     - on submit function
- * @param {string} errorMsg             - input specific/generic error message
  * @param {function} handleChange       - sets name/quantity/category state values
  * @param {string} formData             - name/quantity/category state values
  * @param {function} handleCancel       - cancel btn function
  */
-function ItemForm({
-  handleOnSubmit,
-  errorMsg,
-  handleChange,
-  formData,
-  handleCancel,
-}) {
+function ItemForm({ handleOnSubmit, handleChange, formData, handleCancel }) {
   const [categories, setCategories] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getCategories = () => {
       fetchGroceryCategories()
         .then((categories) => {
           setCategories(categories);
-          setIsLoadingCategories(false);
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          setError(error);
+        })
+        .finally(setIsLoadingCategories(false));
     };
 
     getCategories();
   }, []);
+
+  if (error) {
+    console.log(error);
+    throw error; //error to be caught by ErrorBoundary
+  }
 
   return (
     <form
@@ -42,10 +43,6 @@ function ItemForm({
       onSubmit={handleOnSubmit}
       autoComplete="on"
     >
-      {errorMsg.generic.length > 0 ? (
-        <ErrorMessage type="generic">{errorMsg.generic}</ErrorMessage>
-      ) : null}
-
       <div className="input-container">
         <div className="left-container label-required">
           <label htmlFor="grocery-name" className="form-label">

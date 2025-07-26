@@ -1,18 +1,16 @@
 import { IoText } from "../../../../utils/icons";
-import ErrorMessage from "../../../Errors/ErrorMessage";
+import ErrorMessage from "../../../ErrorHandling/Errors/ErrorMessage";
 import RequiredField from "../../../Elements/RequiredField";
 
 /**
  * Renders the Grocery List form with name/description fields
  * @param {function} handleOnSubmit     - on submit function
- * @param {string} errorMsg             - input specific/generic error message
  * @param {function} handleChange       - sets name/description state values
  * @param {string} formData             - name/description state values
  * @param {funcion} handleCancel        - cancel button onClick function
  */
 function GroceriesListForm({
   handleOnSubmit,
-  errorMsg,
   handleChange,
   formData,
   handleCancel,
@@ -23,10 +21,6 @@ function GroceriesListForm({
       onSubmit={handleOnSubmit}
       autoComplete="on"
     >
-      {errorMsg.generic.length > 0 ? (
-        <ErrorMessage type="generic">{errorMsg.generic}</ErrorMessage>
-      ) : null}
-
       <div className="input-container">
         <div className="left-container label-required">
           <label htmlFor="grocery-name" className="form-label">

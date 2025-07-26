@@ -24,7 +24,7 @@ export const AuthContext = createContext();
 function App() {
   const [isSignedIn, setisSignedIn] = useState(false);
   const [currentUser, setCurrentUser] = useState(null);
-  const [isError, setIsError] = useState(false);
+  const [isNavHidden, setIsNavHidden] = useState(false);
 
   return (
     <BrowserRouter>
@@ -34,8 +34,8 @@ function App() {
           setisSignedIn,
           currentUser,
           setCurrentUser,
-          isError,
-          setIsError,
+          isNavHidden,
+          setIsNavHidden,
         }}
       >
         <Routes>

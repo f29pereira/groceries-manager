@@ -5,13 +5,13 @@ import AuthNavOption from "../../Authentication/AuthNavOption";
 import { BsList } from "../../../utils/icons";
 
 function Hamburguer({ isHamburguerOpen, handleClick }) {
-  const { isError } = useContext(AuthContext);
+  const { isNavHidden } = useContext(AuthContext);
 
   return (
     <>
       {!isHamburguerOpen ? (
         <>
-          {isError ? null : (
+          {isNavHidden ? null : (
             <nav id="hamburguer-nav">
               <ul id="hamburguer-container">
                 <li className="icon-items" id="open" onClick={handleClick}>

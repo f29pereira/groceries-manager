@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { GroceriesContext } from "./Groceries";
 import { ListContext } from "../List";
+import { AuthContext } from "../../../App";
 import { deleteGroceryListById } from "../js/groceries_firebase";
 import { MdDelete } from "../../../utils/icons";
 import Card from "../../Elements/Card";
@@ -9,8 +10,8 @@ import Footer from "../../Static/Footer";
 
 function RemoveGroceriesList() {
   const { groceriesList, setIsListEmpty } = useContext(GroceriesContext);
-
   const { userLists, setUserLists } = useContext(ListContext);
+  const { setIsNavHidden } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -25,12 +26,20 @@ function RemoveGroceriesList() {
 
         navigate("/myLists");
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setIsNavHidden(true);
+        setError(error);
+      });
   };
 
   const handleGoBack = () => {
     navigate(-1);
   };
+
+  if (error) {
+    console.log(error);
+    throw error; //error to be caught by ErrorBoundary
+  }
 
   return (
     <>

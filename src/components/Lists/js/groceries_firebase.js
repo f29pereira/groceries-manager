@@ -11,15 +11,24 @@ import {
   deleteDoc,
 } from "firebase/firestore";
 
-import { formatDate, getDocumentRefSnapShot } from "../../../utils/utils";
+import {
+  formatDate,
+  getDocumentRefSnapShot,
+  validateString,
+  validateArray,
+} from "../../../utils/utils";
 
 /**
  * Creates a new document on the groceries_list collection
  * @param {string} userId - authenticated user id
  * @param {array} userLists - array of groceries list
- * @returns {array} - array of groceries list to update state
+ * @returns {array} array of groceries list to update state
  */
 export const addEmptyGroceryList = async (userId, formData, userLists) => {
+  validateString(userId, "userId");
+  validateGroceriesLisFormData(formData);
+  validateArray(userLists, "userLists");
+
   const date = new Date().toISOString();
 
   //new grocery_list document
@@ -52,26 +61,13 @@ export const addEmptyGroceryList = async (userId, formData, userLists) => {
 };
 
 /**
- * Queries all the groceries_list documents for given user id
- * @param {userId} userId  - authenticated user id
- * @returns {object} - result of the query
- */
-const userListsQuery = async (userId) => {
-  const userQuery = query(
-    collection(db, "groceries_list"),
-    where("user_id", "==", userId)
-  );
-  const querySnapshot = await getDocs(userQuery);
-
-  return querySnapshot;
-};
-
-/**
  * Fetches all groceries_list documents of the autenticated user
  * @param {string} userId - authenticated user id
- * @returns {object} - user lists
+ * @returns {array} user lists
  */
 export const fetchAllUserLists = async (userId) => {
+  validateString(userId, "userId");
+
   const userListsCopy = [];
 
   const query = await userListsQuery(userId);
@@ -101,11 +97,28 @@ export const fetchAllUserLists = async (userId) => {
 };
 
 /**
+ * Queries all the groceries_list documents for given user id
+ * @param {userId} userId  - authenticated user id
+ * @returns {object} result of the query
+ */
+const userListsQuery = async (userId) => {
+  const userQuery = query(
+    collection(db, "groceries_list"),
+    where("user_id", "==", userId)
+  );
+  const querySnapshot = await getDocs(userQuery);
+
+  return querySnapshot;
+};
+
+/**
  * Fetches groceries_list document by given id
  * @param {string} listId - groceries_list document id
- * @returns {object} - object with grocery list data
+ * @returns {object} object with grocery list data
  */
 export const fetchGroceryListById = async (listId) => {
+  validateString(listId, "list ID");
+
   const groceryListToCopy = {
     id: "",
     name: "",
@@ -115,56 +128,65 @@ export const fetchGroceryListById = async (listId) => {
     created_at: "",
   };
 
-  const document = await getDocumentRefSnapShot("groceries_list", listId);
-  const snapShot = document.snapShot;
+  //groceries_list document
+  const groceriesListDocument = await getDocumentRefSnapShot(
+    "groceries_list",
+    listId
+  );
+  const groceriesListSnapShot = groceriesListDocument.snapShot;
+  validateGroceriesListSnapShot(groceriesListSnapShot, listId);
 
-  if (snapShot.exists()) {
-    groceryListToCopy.id = listId;
-    groceryListToCopy.name = snapShot.data().name;
-    groceryListToCopy.description = snapShot.data().description;
-    groceryListToCopy.created_at = formatDate(snapShot.data().created_at);
+  const groceriesData = groceriesListSnapShot.data();
 
-    //items document references
-    const itemsList = snapShot.data().items_list;
+  groceryListToCopy.id = listId;
+  groceryListToCopy.name = groceriesData.name;
+  groceryListToCopy.description = groceriesData.description;
+  groceryListToCopy.created_at = formatDate(groceriesData.created_at);
 
-    groceryListToCopy.itemsCount = itemsList.length;
+  //items document references
+  const itemsList = groceriesData.items_list;
 
-    if (itemsList.length > 0) {
-      for (const item of itemsList) {
-        let itemId = "";
-        let itemName = "";
-        let itemQuantity = "";
-        let categoryId = "";
-        let categoryName = "";
-        let categoryColor = "";
+  groceryListToCopy.itemsCount = itemsList.length;
 
-        const itemSnapShot = await getDoc(item);
+  if (itemsList.length > 0) {
+    for (const item of itemsList) {
+      let itemId = "";
+      let itemName = "";
+      let itemQuantity = "";
+      let categoryId = "";
+      let categoryName = "";
+      let categoryColor = "";
 
-        if (itemSnapShot.exists()) {
-          itemId = itemSnapShot.id;
-          itemName = itemSnapShot.data().name;
-          itemQuantity = itemSnapShot.data().quantity;
+      //items document
+      const itemDocument = await getDocumentRefSnapShot("items", item.id);
+      const itemSnapShot = itemDocument.snapShot;
+      validateItemSnapShot(itemSnapShot, item.id);
 
-          //grocery_categories document references
-          const categoryRef = itemSnapShot.data().grocery_categories_id;
-          const categorySnapshot = await getDoc(categoryRef);
+      const itemSnapShotData = itemSnapShot.data();
 
-          if (categorySnapshot.exists()) {
-            categoryId = categorySnapshot.id;
-            categoryName = categorySnapshot.data().name;
-            categoryColor = categorySnapshot.data().color;
-          }
-        }
+      itemId = itemSnapShot.id;
+      itemName = itemSnapShotData.name;
+      itemQuantity = itemSnapShotData.quantity;
 
-        groceryListToCopy.items_list.push({
-          id: itemId,
-          name: itemName,
-          quantity: itemQuantity,
-          category_id: categoryId,
-          category_name: categoryName,
-          category_color: categoryColor,
-        });
-      }
+      //item_categories document
+      const categoryRef = itemSnapShotData.grocery_categories_id;
+      const categorySnapshot = await getDoc(categoryRef);
+      validateCategoriesSnapShot(categorySnapshot, categorySnapshot.id);
+
+      const categorySnapshotData = categorySnapshot.data();
+
+      categoryId = categorySnapshot.id;
+      categoryName = categorySnapshotData.name;
+      categoryColor = categorySnapshotData.color;
+
+      groceryListToCopy.items_list.push({
+        id: itemId,
+        name: itemName,
+        quantity: itemQuantity,
+        category_id: categoryId,
+        category_name: categoryName,
+        category_color: categoryColor,
+      });
     }
   }
 
@@ -177,18 +199,19 @@ export const fetchGroceryListById = async (listId) => {
  * @returns {object} - object with name/description fields
  */
 export const fetchGroceryListNameDescById = async (listId) => {
+  validateString(listId, "listId");
+
+  const document = await getDocumentRefSnapShot("groceries_list", listId);
+  const snapShot = document.snapShot;
+  validateGroceriesListSnapShot(snapShot, listId);
+
   const groceryListToCopy = {
     name: "",
     description: "",
   };
 
-  const document = await getDocumentRefSnapShot("groceries_list", listId);
-  const snapShot = document.snapShot;
-
-  if (snapShot.exists()) {
-    groceryListToCopy.name = snapShot.data().name;
-    groceryListToCopy.description = snapShot.data().description;
-  }
+  groceryListToCopy.name = snapShot.data().name;
+  groceryListToCopy.description = snapShot.data().description;
 
   return groceryListToCopy;
 };
@@ -200,9 +223,8 @@ export const fetchGroceryListNameDescById = async (listId) => {
  * @returns {object} - groceries list object to update state
  */
 export const updateGroceryList = async (groceriesList, formData) => {
-  const groceriesListObj = {
-    ...groceriesList,
-  };
+  validateString(groceriesList.id, "groceriesList id");
+  validateGroceriesLisFormData(formData);
 
   const document = await getDocumentRefSnapShot(
     "groceries_list",
@@ -210,18 +232,21 @@ export const updateGroceryList = async (groceriesList, formData) => {
   );
   const reference = document.reference;
   const snapShot = document.snapShot;
+  validateGroceriesListSnapShot(snapShot, groceriesList.id);
 
-  if (snapShot.exists()) {
-    //update groceries_list document
-    await updateDoc(reference, {
-      name: formData.name,
-      description: formData.description,
-    });
+  const groceriesListObj = {
+    ...groceriesList,
+  };
 
-    //groceriesList to update state
-    groceriesListObj.name = formData.name;
-    groceriesListObj.description = formData.description;
-  }
+  //update groceries_list document
+  await updateDoc(reference, {
+    name: formData.name,
+    description: formData.description,
+  });
+
+  //groceriesList to update state
+  groceriesListObj.name = formData.name;
+  groceriesListObj.description = formData.description;
 
   return groceriesListObj;
 };
@@ -233,26 +258,83 @@ export const updateGroceryList = async (groceriesList, formData) => {
  * @returns {array} - array of groceries list to update state
  */
 export const deleteGroceryListById = async (listId, userLists) => {
-  const userListsObj = [];
+  validateString(listId, "listId");
+  validateArray(userLists, "userLists");
 
   const document = await getDocumentRefSnapShot("groceries_list", listId);
   const reference = document.reference;
   const snapShot = document.snapShot;
+  validateGroceriesListSnapShot(snapShot, listId);
 
-  if (snapShot.exists()) {
-    const itemsRefs = snapShot.data().items_list;
+  const itemsRefs = snapShot.data().items_list;
 
-    //delete associated item documents
-    for (const item of itemsRefs) {
-      await deleteDoc(item);
-    }
-
-    //delete groceries_list document
-    await deleteDoc(reference);
-
-    //userList to update state
-    const userListsObj = userLists.filter((list) => list.id !== listId);
+  //delete all associated item documents
+  for (const item of itemsRefs) {
+    await deleteDoc(item);
   }
 
+  //delete groceries_list document
+  await deleteDoc(reference);
+
+  //userList to update state
+  const userListsObj = userLists.filter((list) => list.id !== listId);
+
   return userListsObj;
+};
+
+/**
+ * Validates if groceries list form data is valid
+ * @param {object} formData - groceries list form data
+ */
+const validateGroceriesLisFormData = (formData) => {
+  if (!formData) {
+    throw new Error("Invalid groceries list form data object");
+  }
+
+  validateString(formData.name, "groceries list name");
+  validateString(formData.description, "groceries list description");
+
+  return;
+};
+
+/**
+ * Validates if groceries_list document exists
+ * @param {object} snapShot - groceries_list snapshot
+ * @param {string} listId - id of the groceries list document
+ * @throws {Error} if groceries_list snapshot doesn't exist
+ */
+export const validateGroceriesListSnapShot = (snapShot, listId) => {
+  if (!snapShot.exists()) {
+    throw new Error(`Groceries List with id: ${listId} not found`);
+  }
+
+  return;
+};
+
+/**
+ * Validates if items document exists
+ * @param {object} snapShot - items snapshot
+ * @param {string} itemId - id of the item document
+ * @throws {Error} if items snapshot doesn't exist
+ */
+export const validateItemSnapShot = (snapShot, itemId) => {
+  if (!snapShot.exists()) {
+    throw new Error(`Item with id: ${itemId} not found`);
+  }
+
+  return;
+};
+
+/**
+ * Validates if categories document exists
+ * @param {object} snapShot - categories snapshot
+ * @param {string} listId - id of the categories document
+ * @throws {Error} if categories snapshot doesn't exist
+ */
+export const validateCategoriesSnapShot = (snapShot, categoryId) => {
+  if (!snapShot.exists()) {
+    throw new Error(`Item category with id: ${categoryId} not found`);
+  }
+
+  return;
 };

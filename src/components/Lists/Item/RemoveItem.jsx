@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { GroceriesContext } from "../GroceriesList/Groceries";
 import { ListContext } from "../List";
+import { AuthContext } from "../../../App";
 import { useLocation, useNavigate } from "react-router";
 import { getItemById, removeItemById } from "../js/items_firebase";
 import { MdDelete } from "../../../utils/icons";
@@ -10,10 +11,12 @@ import Footer from "../../Static/Footer";
 function RemoveItem() {
   const { groceriesList, setGroceriesList, setIsGroceryListEmpty } =
     useContext(GroceriesContext);
-
   const { setUserLists } = useContext(ListContext);
+  const { setIsNavHidden } = useContext(AuthContext);
 
   const [itemToRemove, setItemToRemove] = useState({});
+  const [error, setError] = useState(null);
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -23,12 +26,17 @@ function RemoveItem() {
 
   useEffect(() => {
     const setItemData = () => {
-      const itemData = getItemById(
-        location.state?.itemId,
-        groceriesList.items_list
-      );
+      try {
+        const itemData = getItemById(
+          location.state?.itemId,
+          groceriesList.items_list
+        );
 
-      setItemToRemove(itemData);
+        setItemToRemove(itemData);
+      } catch (error) {
+        setIsNavHidden(true);
+        setError(error);
+      }
     };
 
     setItemData();
@@ -62,8 +70,16 @@ function RemoveItem() {
 
         navigate(-1);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        setIsNavHidden(true);
+        setError(error);
+      });
   };
+
+  if (error) {
+    console.log(error);
+    throw error; //error to be caught by ErrorBoundary
+  }
 
   return (
     <>
