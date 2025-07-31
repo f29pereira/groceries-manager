@@ -8,11 +8,12 @@ export const ListContext = createContext();
  * Fetches all groceries lists and provides context with ListContext
  */
 function List() {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, setIsNavHidden } = useContext(AuthContext);
 
   const [userLists, setUserLists] = useState([]);
   const [isLoadingData, setIsLoadingData] = useState(true);
   const [isListEmpty, setIsListEmpty] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const getAllUserLists = () => {
@@ -25,11 +26,19 @@ function List() {
             setIsListEmpty(true);
           }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          setIsNavHidden(true);
+          setError(error);
+        });
     };
 
     getAllUserLists();
   }, []);
+
+  if (error) {
+    console.log(error);
+    throw error; //error to be caught by ErrorBoundary
+  }
 
   return (
     <ListContext
