@@ -1,10 +1,16 @@
-import { AiOutlineLoading3Quarters } from "../../utils/icons";
+import LoadingIcon from "./LoadingIcon";
 
-function Loading({ children }) {
+/**
+ * Renders loading page
+ * @param {string} message - loading text before the icon
+ */
+function Loading({ message = "" }) {
   return (
-    <div className="centered-container loading">
-      <AiOutlineLoading3Quarters className="loading-icon" />
-      <span className="loading-text">{children}</span>
+    <div className="content">
+      <div className="centered-column-container loading-container">
+        <h1 className="loading-title">{message}</h1>
+        <LoadingIcon></LoadingIcon>
+      </div>
     </div>
   );
 }

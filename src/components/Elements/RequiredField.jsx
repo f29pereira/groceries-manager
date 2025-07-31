@@ -1,5 +1,8 @@
 import { FaAsterisk } from "../../utils/icons";
 
+/**
+ * Renders required field icon with on hover text
+ */
 function RequiredField() {
   return (
     <>

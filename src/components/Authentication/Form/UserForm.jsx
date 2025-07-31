@@ -57,10 +57,11 @@ function UserForm({
             value={formData.email}
             autoComplete="email"
           />
-          {errorMsg.email.length > 0 ? (
-            <ErrorMessage type="input">{errorMsg.email}</ErrorMessage>
-          ) : null}
         </div>
+
+        {errorMsg.email.length > 0 ? (
+          <ErrorMessage type="input">{errorMsg.email}</ErrorMessage>
+        ) : null}
 
         <div className="left-container label-required">
           <label htmlFor="user-password" className="form-label">
