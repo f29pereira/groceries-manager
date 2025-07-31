@@ -111,7 +111,7 @@ button {
 
 /*Icon colors*/
 .info-icon {
-  color: var(--info);
+  color: var(--btn-info);
 }
 
 .edit-icon {

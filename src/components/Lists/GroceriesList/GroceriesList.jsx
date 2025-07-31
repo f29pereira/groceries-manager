@@ -29,7 +29,7 @@ function GroceriesList() {
                 {groceriesList.description}
               </p>
 
-              <div className="centered-container add-item-container">
+              <div className="centered-container add-container">
                 <LinkButton
                   path={`/myLists/groceryList/${groceriesList.index}/addItem`}
                   classNames="green"

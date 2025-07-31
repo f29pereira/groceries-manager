@@ -84,7 +84,6 @@ function EditGroceriesList() {
             body={
               <GroceriesListForm
                 handleOnSubmit={editGroceryList}
-                errorMsg={errorMsg}
                 handleChange={handleChange}
                 formData={listFormData}
                 handleCancel={goBack}

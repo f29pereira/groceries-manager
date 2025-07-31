@@ -91,45 +91,30 @@ function RemoveItem() {
             titleText="Item"
             body={
               <>
-                <p className="remove-item-question">
-                  Do you wish to remove this item from your groceries list ?
-                </p>
+                <h2 className="remove-question">
+                  Do you wish to remove this item from
+                  <span> {groceriesList.name}</span> ?
+                </h2>
 
-                <div className="centered-container">
-                  <div className="remove-item-container">
-                    <div className="centered-container">
-                      <div className="groceries-column-container remove-item">
-                        <ul>
-                          <li className="remove-item-info">Category:</li>
-                          <li className="remove-item-info">Item:</li>
-                          <li className="remove-item-info">Quantity:</li>
-                        </ul>
-                      </div>
-                      <div className="groceries-column-container remove-item">
-                        <ul>
-                          <li className="remove-item-info">
-                            <span
-                              className="item-category"
-                              style={{
-                                backgroundColor: itemToRemove.category_color,
-                              }}
-                            >
-                              {itemToRemove.category_name}
-                            </span>
-                          </li>
-                          <li className="remove-item-info">
-                            {itemToRemove.name}
-                          </li>
-                          <li className="remove-item-info">
-                            {itemToRemove.quantity}
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+                <div className="centered-container remove-container">
+                  <div className="remove-grid remove-item-col-rows">
+                    <h3>Category:</h3>
+                    <span
+                      className="item-category remove-item"
+                      style={{
+                        backgroundColor: itemToRemove.category_color,
+                      }}
+                    >
+                      {itemToRemove.category_name}
+                    </span>
+                    <h3>Item:</h3>
+                    {itemToRemove.name}
+                    <h3>Quantity:</h3>
+                    {itemToRemove.quantity}
                   </div>
                 </div>
 
-                <div className="centered-container remove-item-btns">
+                <div className="centered-container submit-cancel-btns">
                   <button
                     className="btn green"
                     onClick={removeItemFromGroceryList}

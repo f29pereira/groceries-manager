@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router";
 import { GroceriesContext } from "./Groceries";
@@ -14,6 +15,8 @@ function RemoveGroceriesList() {
   const { setIsNavHidden } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  const [error, setError] = useState(null);
 
   const removeGroceryList = () => {
     deleteGroceryListById(groceriesList.id, userLists)
@@ -48,35 +51,24 @@ function RemoveGroceriesList() {
           <Card
             showGoBack={true}
             titleIcon={<MdDelete />}
-            titleText="Grocery List"
+            titleText="Groceries List"
             body={
               <>
-                <div className="centered-container">
-                  <div className="remove-item-container">
-                    <div className="centered-container">
-                      <div className="groceries-column-container remove-item">
-                        <ul>
-                          <li className="remove-item-info">
-                            Name: {groceriesList.name}
-                          </li>
-                          <li className="remove-item-info">
-                            Description: {groceriesList.description}
-                          </li>
-                          <li className="remove-item-info">
-                            Items: {groceriesList.itemCount}
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
+                <h2 className="remove-question">
+                  Do you wish to delete this
+                  <span> {groceriesList?.name}</span> ?
+                </h2>
+
+                <div className="centered-container remove-container">
+                  <div className="remove-grid remove-list-col-rows">
+                    <h3>Description:</h3>
+                    {groceriesList.description}
+                    <h3>Items Count:</h3>
+                    {groceriesList.itemsCount}
                   </div>
                 </div>
 
-                <p className="remove-item-question">
-                  Do you wish to delete this groceries list and associated items
-                  ?
-                </p>
-
-                <div className="centered-container remove-item-btns">
+                <div className="centered-container submit-cancel-btns">
                   <button className="btn green" onClick={removeGroceryList}>
                     Confirm
                   </button>

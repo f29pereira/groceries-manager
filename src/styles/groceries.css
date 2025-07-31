@@ -2,9 +2,14 @@
   padding: 1rem;
 }
 
+/*MyLists component*/
+.add-container {
+  margin: 2rem 0;
+}
+
 /*MyLists component info button*/
 .btn.info-list-btn {
-  font-size: 1rem;
+  font-size: 1.5rem;
   padding: 0.5rem;
   margin: 0;
 }
@@ -29,11 +34,6 @@
   font-size: 1rem;
 }
 
-/*AddGroceryList component*/
-.add-grocery-list {
-  margin-top: 3rem;
-}
-
 /*GroceriesList component*/
 .column-container.category,
 .column-container.itemName {
@@ -45,17 +45,94 @@
   flex: 1;
 }
 
-/*Item Category*/
+/*GroceriesList component - Item Category*/
 .item-category {
-  font-size: 1rem;
+  font-size: 0.8rem;
+  font-weight: bold;
   border-radius: 5px;
-  padding: 0.2rem 0.4rem;
+  padding: 0.2rem 0.3rem;
+}
+
+.header.groceries {
+  margin-top: 2rem;
+}
+
+.header.groceries,
+.groceries-description {
+  text-align: center;
+}
+
+.groceries-description {
+  margin: 1rem 0;
+}
+
+.groceries-list-btns-container {
+  margin: 0.5rem 0;
+}
+
+.item-count {
+  font-size: 1rem;
+}
+
+.item-count span {
+  font-weight: normal;
+}
+
+.edit-delete-container {
+  gap: 1rem;
+}
+
+.btn.edit-delete-btn {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+.item-actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+}
+
+/*GroceriesListForm component*/
+.input-container.add-list {
+  margin-bottom: 4rem;
+}
+
+/*Remove grid Info*/
+.remove-grid {
+  display: grid;
+  align-items: center;
+  gap: 1rem 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--btn-danger-hover);
+  background-color: var(--remove-item);
+  padding: 1rem;
+}
+
+.remove-question {
+  font-weight: normal;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.remove-question span {
+  font-weight: bold;
 }
 
 /*RemoveItem component*/
-.remove-item-container {
-  border: 1px solid var(--submit);
-  background-color: var(--ligth-gray);
+.remove-item-col-rows {
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.remove-item-question span {
+  margin-left: 0.5rem;
+  font-weight: bold;
+}
+
+.item-category.remove-item {
+  width: 100%;
 }
 
 .remove-item {
@@ -64,15 +141,18 @@
 
 ul .remove-item-info {
   color: var(--black);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .remove-item-btns {
   gap: 2rem;
+  margin-top: 1rem;
 }
 
-.remove-item-question {
-  margin-top: 1rem;
+/*RemoveGroceriesList component*/
+.remove-list-col-rows {
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
 }
 
 @media (min-width: 800px) {
@@ -85,21 +165,66 @@ ul .remove-item-info {
     text-align: center;
   }
 
+  /*MyLists component Item Category*/
+  .item-category {
+    width: 60%;
+  }
+
+  /*MyLists component info button*/
+  .btn.info-list-btn {
+    font-size: 2rem;
+  }
+
   /*GroceriesList component*/
   .column-container.category,
-  .column-container.itemName,
+  .column-container.itemName {
+    flex: 1;
+  }
+
   .column-container.itemQuantity,
   .column-container.itemActions {
-    flex: 1;
+    flex: 0.5;
   }
 
   .column-container.category {
     align-items: center;
   }
 
-  /*MyLists component Item Category*/
+  .header.groceries {
+    display: block;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  .item-count {
+    font-size: 1.2rem;
+  }
+
   .item-category {
-    width: 60%;
+    font-size: 0.9rem;
+  }
+
+  .item-actions-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 2rem;
+  }
+
+  .btn.edit-delete-btn {
+    font-size: 1.4rem;
+  }
+
+  /*RemoveItem and RemoveGroceriesList component*/
+  .remove-container {
+    width: 70%;
+    margin: auto;
+  }
+
+  /*GroceriesListForm component*/
+  .input-container.add-list {
+    margin-bottom: 6rem;
   }
 }
 
@@ -108,24 +233,7 @@ ul .remove-item-info {
     padding: 3rem;
   }
 
-  /*MyLists component info button*/
-  .btn.info-list-btn {
-    font-size: 1.2rem;
-    width: 7.5rem;
-  }
-
   /*MyLists component table rows*/
-  .column-container.category,
-  .column-container.name {
-    flex: 1.5;
-  }
-
-  .column-container.creationDate,
-  .column-container.itemCount,
-  .column-container.listInfo {
-    flex: 1;
-  }
-
   .column-container.name,
   .column-container.itemCount,
   .column-container.listInfo,
@@ -137,5 +245,15 @@ ul .remove-item-info {
   .item-category {
     padding: 0.5rem;
     width: 40%;
+  }
+
+  .btn.edit-delete-btn {
+    font-size: 1.8rem;
+  }
+
+  /*RemoveItem and RemoveGroceriesList component*/
+  .remove-container {
+    width: 60%;
+    margin: auto;
   }
 }

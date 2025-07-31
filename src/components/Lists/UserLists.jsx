@@ -14,66 +14,68 @@ function UserLists() {
   return (
     <>
       <main>
-        <div className="content list">
-          <header className="header groceries">
-            <h1>My Lists</h1>
-          </header>
-
-          <section>
+        {isLoadingData ? (
+          <Loading message="Loading your lists" />
+        ) : (
+          <div className="content list">
             <div className="centered-container">
-              <LinkButton
-                path="/myLists/addList/"
-                classNames="green"
-                icon={<IoIosAddCircle />}
-                name="Add List"
-              />
+              <header className="header groceries">
+                <h1>My Lists</h1>
+              </header>
             </div>
 
-            <div className="table">
-              <div className="row-container table-header">
-                <div className="column-container name">Name</div>
-                <div className="column-container creationDate">
-                  Creation Date
-                </div>
-                <div className="column-container itemCount">Items</div>
-                <div className="column-container listInfo">List Info</div>
+            <section>
+              <div className="centered-container add-container">
+                <LinkButton
+                  path="/myLists/addList/"
+                  classNames="green"
+                  icon={<IoIosAddCircle />}
+                  name="Add List"
+                />
               </div>
 
-              {isLoadingData ? (
-                <div className="row-container no-data">
-                  <Loading>Loading your lists</Loading>
+              <div className="table">
+                <div className="row-container table-header">
+                  <div className="column-container name">Name</div>
+                  <div className="column-container creationDate">
+                    Creation Date
+                  </div>
+                  <div className="column-container itemCount">Items</div>
+                  <div className="column-container listInfo">List Info</div>
                 </div>
-              ) : isListEmpty ? (
-                <div className="row-container no-data">
-                  No groceries list created yet. Click the "Add List" button.
-                </div>
-              ) : (
-                userLists.map((list, index) => (
-                  <div key={index} className="row-container">
-                    <div className="column-container name">{list.name}</div>
-                    <div className="column-container creationDate">
-                      {list.created_at}
-                    </div>
-                    <div className="column-container itemCount">
-                      {list.itemCount}
-                    </div>
-                    <div className="column-container listInfo">
-                      <div className="centered-container">
-                        <LinkButton
-                          path={`/myLists/groceryList/${index}`}
-                          classNames="blue info-list-btn"
-                          icon={<FaInfoCircle />}
-                          name="Info"
-                          state={{ index: index, id: list.id }}
-                        />
+
+                {isListEmpty ? (
+                  <div className="row-container no-data">
+                    No groceries list created yet. Click the "Add List" button.
+                  </div>
+                ) : (
+                  userLists.map((list, index) => (
+                    <div key={index} className="row-container data">
+                      <div className="column-container name">{list.name}</div>
+                      <div className="column-container creationDate">
+                        {list.created_at}
+                      </div>
+                      <div className="column-container itemCount">
+                        {list.itemCount}
+                      </div>
+                      <div className="column-container listInfo">
+                        <div className="centered-container">
+                          <LinkButton
+                            path={`/myLists/groceryList/${index}`}
+                            classNames="info-list-btn"
+                            icon={<FaInfoCircle className="info-icon" />}
+                            state={{ index: index, id: list.id }}
+                            title="Groceries List Info"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ))
-              )}
-            </div>
-          </section>
-        </div>
+                  ))
+                )}
+              </div>
+            </section>
+          </div>
+        )}
       </main>
 
       <Footer />

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import ErrorMessage from "../../../ErrorHandling/Errors/ErrorMessage";
 import RequiredField from "../../../Elements/RequiredField";
 import { IoAdd, RiWeightLine, IoText, BiTag } from "../../../../utils/icons";
-import Loading from "../../../Elements/Loading";
+import LoadingIcon from "../../../Elements/LoadingIcon";
 import { fetchGroceryCategories } from "../../js/items_firebase";
 
 /**
@@ -88,7 +87,7 @@ function ItemForm({ handleOnSubmit, handleChange, formData, handleCancel }) {
         </div>
 
         {isLoadingCategories ? (
-          <Loading>Loading grocery categories</Loading>
+          <LoadingIcon>Loading grocery categories</LoadingIcon>
         ) : (
           <>
             <div className="left-container label-required">
@@ -127,7 +126,7 @@ function ItemForm({ handleOnSubmit, handleChange, formData, handleCancel }) {
         )}
       </div>
 
-      <div className="centered-container buttons">
+      <div className="centered-container submit-cancel-btns">
         <button type="submit" className="btn green">
           Submit
         </button>

@@ -7,10 +7,18 @@ import { Link } from "react-router";
  * @param {function} icon     - button icon
  * @param {string} name       - button name
  * @param {object} state      - state data object
+ * @param {string} title      - link title
  */
-function LinkButton({ path, classNames, icon, name, state = null }) {
+function LinkButton({
+  path,
+  classNames,
+  icon,
+  name = "",
+  state = null,
+  title = null,
+}) {
   return (
-    <Link to={path} className={`btn ${classNames}`} state={state}>
+    <Link to={path} className={`btn ${classNames}`} state={state} title={title}>
       <div className="centered-container btn-icon-gap">
         {icon}
         {name}

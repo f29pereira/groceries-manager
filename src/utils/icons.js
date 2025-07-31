@@ -8,6 +8,7 @@ import { MdDelete, MdAlternateEmail } from "react-icons/md";
 import { IoAdd, IoArrowBackCircle, IoText } from "react-icons/io5";
 import { RiWeightLine } from "react-icons/ri";
 import { FaEdit, FaInfoCircle } from "react-icons/fa";
+import { PiChatText } from "react-icons/pi";
 
 export {
   FaUserPlus, //add user
@@ -30,4 +31,5 @@ export {
   MdDelete, //delete
   FaEdit, //edit
   FaInfoCircle, //info
+  PiChatText, //text bubble
 };

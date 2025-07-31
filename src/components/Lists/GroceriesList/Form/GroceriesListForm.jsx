@@ -1,5 +1,4 @@
-import { IoText } from "../../../../utils/icons";
-import ErrorMessage from "../../../ErrorHandling/Errors/ErrorMessage";
+import { IoText, PiChatText } from "../../../../utils/icons";
 import RequiredField from "../../../Elements/RequiredField";
 
 /**
@@ -21,9 +20,9 @@ function GroceriesListForm({
       onSubmit={handleOnSubmit}
       autoComplete="on"
     >
-      <div className="input-container">
+      <div className="input-container add-list">
         <div className="left-container label-required">
-          <label htmlFor="grocery-name" className="form-label">
+          <label htmlFor="groceriesList-name" className="form-label">
             Name
           </label>
           <RequiredField />
@@ -33,7 +32,7 @@ function GroceriesListForm({
             <IoText />
           </div>
           <input
-            id="grocery-name"
+            id="groceriesList-name"
             type="text"
             className="form-input"
             required
@@ -44,23 +43,29 @@ function GroceriesListForm({
         </div>
 
         <div className="left-container label-required">
-          <label htmlFor="grocery-quantity" className="form-label">
+          <label htmlFor="groceriesList-description" className="form-label">
             Description
           </label>
         </div>
+
         <div className="input-icon-container">
-          <textarea
-            id="grocery-quantity"
-            className="form-input text-description"
-            name="description"
-            onChange={handleChange}
-            value={formData.description}
-            placeholder="e.g., Buy on the supermarket..."
-          ></textarea>
+          <div className="centered-column-container full-width">
+            <div className="centered-container input-icon textarea-icon full-width">
+              <PiChatText />
+            </div>
+
+            <textarea
+              id="groceriesList-description"
+              className="form-input text-description"
+              name="description"
+              onChange={handleChange}
+              value={formData.description}
+              placeholder="e.g., Buy on the supermarket..."
+            ></textarea>
+          </div>
         </div>
       </div>
-
-      <div className="centered-container buttons add-grocery-list">
+      <div className="centered-container submit-cancel-btns">
         <button type="submit" className="btn green">
           Submit
         </button>

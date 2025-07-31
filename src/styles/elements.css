@@ -244,11 +244,6 @@ footer {
     margin: auto;
   }
 
-  /*LinkButton Component*/
-  .btn {
-    font-size: 1.4rem;
-  }
-
   /*FallBack component*/
   .fallback {
     width: 40%;

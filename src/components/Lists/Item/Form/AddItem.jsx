@@ -84,7 +84,7 @@ function AddItem() {
           <Card
             showGoBack={true}
             titleIcon={<IoAdd />}
-            titleText="Add Item"
+            titleText="Item"
             body={
               <ItemForm
                 handleOnSubmit={addItemToGroceryList}

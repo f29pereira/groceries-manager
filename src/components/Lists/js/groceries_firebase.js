@@ -144,7 +144,7 @@ export const fetchGroceryListById = async (listId) => {
   groceryListToCopy.created_at = formatDate(groceriesData.created_at);
 
   //items document references
-  const itemsList = groceriesData.items_list;
+  const itemsList = groceriesData.items_list.reverse();
 
   groceryListToCopy.itemsCount = itemsList.length;
 
