@@ -10,8 +10,8 @@ import Card from "../../Elements/Card";
 import Footer from "../../Static/Footer";
 
 function RemoveGroceriesList() {
-  const { groceriesList, setIsListEmpty } = useContext(GroceriesContext);
-  const { userLists, setUserLists } = useContext(ListContext);
+  const { groceriesList } = useContext(GroceriesContext);
+  const { userLists, setUserLists, setIsListEmpty } = useContext(ListContext);
   const { setIsNavHidden } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -67,7 +67,7 @@ function RemoveGroceriesList() {
                     </span>
 
                     <h3>Items Count:</h3>
-                    {groceriesList.itemsCount}
+                    {groceriesList.items_count}
                   </div>
                 </div>
 

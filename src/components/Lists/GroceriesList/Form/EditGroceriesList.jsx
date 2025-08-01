@@ -1,11 +1,13 @@
 import { useState, useEffect, useContext } from "react";
 import { GroceriesContext } from "../Groceries";
+import { ListContext } from "../../List";
 import { AuthContext } from "../../../../App";
 import { useNavigate } from "react-router";
 import { handleInputChange } from "../../../../utils/utils";
 import {
   fetchGroceryListNameDescById,
   updateGroceryList,
+  updateUserLists,
 } from "../../js/groceries_firebase";
 import { MdEdit } from "../../../../utils/icons";
 import Card from "../../../Elements/Card";
@@ -18,6 +20,7 @@ import Footer from "../../../Static/Footer";
 function EditGroceriesList() {
   const { groceriesList, isLoadingData, setIsLoadingData, setGroceriesList } =
     useContext(GroceriesContext);
+  const { userLists, setUserLists } = useContext(ListContext);
   const { setIsNavHidden } = useContext(AuthContext);
 
   const navigate = useNavigate();
@@ -55,6 +58,10 @@ function EditGroceriesList() {
     updateGroceryList(groceriesList, listFormData)
       .then((updatedGroceriesList) => {
         setGroceriesList(updatedGroceriesList);
+        return updateUserLists(updatedGroceriesList, userLists);
+      })
+      .then((listToUpdate) => {
+        setUserLists(listToUpdate);
         navigate(-1);
       })
       .catch((error) => {

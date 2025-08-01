@@ -89,7 +89,8 @@
   padding: 0.5rem;
 }
 
-.item-actions-container {
+/*GroceriesList component - user actions*/
+.actions-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -295,7 +296,7 @@ ul .remove-item-info {
   }
 
   /*GroceriesList component*/
-  .item-actions-container {
+  .actions-container {
     display: flex;
     flex-direction: row;
     justify-content: center;

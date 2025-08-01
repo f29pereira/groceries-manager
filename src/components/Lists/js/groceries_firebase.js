@@ -15,6 +15,7 @@ import {
   getDocumentRefSnapShot,
   validateString,
   validateArray,
+  validateObject,
 } from "../../../utils/utils";
 
 /**
@@ -49,7 +50,7 @@ export const addEmptyGroceryList = async (userId, formData, userLists) => {
     name: formData.name,
     description: formData.description,
     items_list: [],
-    itemCount: 0,
+    items_count: 0,
     created_at: formatDate(date),
   };
 
@@ -87,7 +88,7 @@ export const fetchAllUserLists = async (userId) => {
         name: list.data.name,
         created_at: date,
         description: list.data.description,
-        itemCount: itemsLength,
+        items_count: itemsLength,
       });
     }
   }
@@ -123,7 +124,7 @@ export const fetchGroceryListById = async (listId) => {
     name: "",
     description: "",
     items_list: [],
-    itemsCount: "",
+    items_count: "",
     created_at: "",
   };
 
@@ -145,7 +146,7 @@ export const fetchGroceryListById = async (listId) => {
   //items document references
   const itemsList = groceriesData.items_list.reverse();
 
-  groceryListToCopy.itemsCount = itemsList.length;
+  groceryListToCopy.items_count = itemsList.length;
 
   if (itemsList.length > 0) {
     for (const item of itemsList) {
@@ -251,6 +252,32 @@ export const updateGroceryList = async (groceriesList, formData) => {
   groceriesListObj.description = formData.description;
 
   return groceriesListObj;
+};
+
+/**
+ * Returns updated userLists
+ * @param {object} groceriesList - updated groceries list
+ * @param {array} userLists - array of groceries list
+ * @returns {array} - array of groceries list to update state
+ */
+export const updateUserLists = (groceriesList, userLists) => {
+  validateObject(groceriesList, "groceriesList");
+  validateArray(userLists, "userLists");
+
+  //userList to update state
+  const userListsObj = userLists.map((list) => {
+    if (list.id === groceriesList.id) {
+      return {
+        ...groceriesList,
+        name: groceriesList.name,
+        description: groceriesList.description,
+      };
+    }
+
+    return list;
+  });
+
+  return userListsObj;
 };
 
 /**

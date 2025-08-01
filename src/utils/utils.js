@@ -139,14 +139,28 @@ export const validateString = (value, valueName) => {
 
 /**
  * Checks if value is an array
- * @param {string} array - value to validate
- * @param {string} arrayName - value description name to appear on exception message
- * @throws {Error} - if value isn't array
+ * @param {string} array - array to validate
+ * @param {string} arrayName - array description name to appear on exception message
+ * @throws {Error} - if isn't array
  */
 export const validateArray = (array, arrayName) => {
   if (!Array.isArray(array)) {
     throw new Error(
       `Invalid data type: ${arrayName} must be an array. Current value: ${array}`
+    );
+  }
+};
+
+/**
+ * Checks if value is an object
+ * @param {object} object - object to validate
+ * @param {string} objectName - object description name to appear on exception message
+ * @throws {Error} - if isn't object
+ */
+export const validateObject = (object, objectName) => {
+  if (typeof object !== "object" || object === null) {
+    throw new Error(
+      `Invalid data type: ${objectName} must be an object. Current value: ${object}`
     );
   }
 };

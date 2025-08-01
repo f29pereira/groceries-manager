@@ -41,11 +41,11 @@ function AddItem() {
 
     addItem(groceriesList.id, itemFormData)
       .then((newItem) => {
-        //increment itemCount in userLists List state
+        //increment items_count in userLists List state
         setUserLists((prevUserList) =>
           prevUserList.map((list) =>
             list.id === groceriesList.id
-              ? { ...list, itemCount: list.itemCount + 1 }
+              ? { ...list, items_count: list.items_count + 1 }
               : list
           )
         );
@@ -53,7 +53,7 @@ function AddItem() {
         setGroceriesList((prevList) => ({
           ...prevList,
           items_list: [...prevList.items_list, newItem],
-          itemsCount: prevList.itemsCount + 1,
+          items_count: prevList.items_count + 1,
         }));
 
         if (isGroceriesListEmpty) {

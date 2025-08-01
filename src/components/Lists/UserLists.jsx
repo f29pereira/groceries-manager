@@ -1,5 +1,11 @@
 import { useContext } from "react";
-import { IoIosAddCircle, FaInfoCircle } from "../../utils/icons";
+import { Link } from "react-router";
+import {
+  IoIosAddCircle,
+  FaInfoCircle,
+  MdEdit,
+  MdDelete,
+} from "../../utils/icons";
 import { ListContext } from "./List";
 import Footer from "../Static/Footer";
 import LinkButton from "../Elements/LinkButton";
@@ -47,7 +53,7 @@ function UserLists() {
                     Creation Date
                   </div>
                   <div className="column-container itemCount">Items</div>
-                  <div className="column-container listInfo">List Info</div>
+                  <div className="column-container listInfo">Actions</div>
                 </div>
 
                 {isListEmpty ? (
@@ -62,17 +68,25 @@ function UserLists() {
                         {list.created_at}
                       </div>
                       <div className="column-container itemCount">
-                        {list.itemCount}
+                        {list.items_count}
                       </div>
                       <div className="column-container listInfo">
-                        <div className="centered-container">
-                          <LinkButton
-                            path={`/myLists/groceryList/${index}`}
-                            classNames="info-list-btn"
-                            icon={<FaInfoCircle className="info-icon" />}
+                        <div className="actions-container">
+                          <Link
+                            to={`/myLists/groceryList/${index}`}
+                            title="List Info"
                             state={{ index: index, id: list.id }}
-                            title="Groceries List Info"
-                          />
+                          >
+                            <FaInfoCircle className="info-icon" />
+                          </Link>
+
+                          <Link
+                            to={`/myLists/groceryList/${index}/remove`}
+                            title="Remove List"
+                            state={{ index: index, id: list.id }}
+                          >
+                            <MdDelete className="delete-icon" />
+                          </Link>
                         </div>
                       </div>
                     </div>

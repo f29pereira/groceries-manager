@@ -109,7 +109,6 @@
   border-bottom-right-radius: 5px;
   border: 1px solid var(--card-header);
   padding: 0.5rem 1rem;
-  margin-top: -1rem;
   width: 100%;
   transition: opacity 0.5s, visibility 0s 0.5s;
 }

@@ -49,11 +49,11 @@ function RemoveItem() {
       groceriesList.items_list
     )
       .then((updatedItemsList) => {
-        //decrement itemCount in userLists List state
+        //decrement items_count in userLists List state
         setUserLists((prevUserList) =>
           prevUserList.map((list) =>
             list.id === groceriesList.id
-              ? { ...list, itemCount: list.itemCount - 1 }
+              ? { ...list, items_count: list.items_count - 1 }
               : list
           )
         );
@@ -61,7 +61,7 @@ function RemoveItem() {
         setGroceriesList((prevList) => ({
           ...prevList,
           items_list: updatedItemsList,
-          itemsCount: prevList.itemsCount - 1,
+          items_count: prevList.items_count - 1,
         }));
 
         if (updatedItemsList.length === 0) {

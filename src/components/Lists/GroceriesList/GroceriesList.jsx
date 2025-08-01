@@ -75,7 +75,7 @@ function GroceriesList() {
               <div className="space-between-container counter-list">
                 <div className="centered-container">
                   <h2 className="counter">
-                    Items Count: <span>{groceriesList.itemsCount}</span>
+                    Items Count: <span>{groceriesList.items_count}</span>
                   </h2>
                 </div>
 
@@ -85,13 +85,6 @@ function GroceriesList() {
                     classNames="yellow edit-delete-btn"
                     icon={<MdEdit />}
                     title="Edit Groceries List"
-                  />
-
-                  <LinkButton
-                    path={`/myLists/groceryList/${groceriesList.index}/remove`}
-                    classNames="red edit-delete-btn"
-                    icon={<MdDelete />}
-                    title="Remove Groceries List"
                   />
                 </div>
               </div>
@@ -139,7 +132,7 @@ function GroceriesList() {
                         </span>
                       </div>
                       <div className="column-container itemActions">
-                        <div className="item-actions-container">
+                        <div className="actions-container">
                           <button
                             className="check-item"
                             onClick={() => {

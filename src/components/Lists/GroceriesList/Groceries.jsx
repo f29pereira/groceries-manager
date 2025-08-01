@@ -17,7 +17,7 @@ function Groceries() {
     name: "",
     description: "",
     items_list: [],
-    itemsCount: "",
+    items_count: "",
     created_at: "",
     isChecked: false,
   });
