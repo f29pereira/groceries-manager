@@ -1,17 +1,51 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router";
-import { IoIosAddCircle, MdDelete, FaEdit } from "../../../utils/icons";
+import {
+  IoIosAddCircle,
+  MdDelete,
+  MdOutlineCheckBoxOutlineBlank,
+  MdOutlineCheckBox,
+  MdEdit,
+} from "../../../utils/icons";
 import { GroceriesContext } from "./Groceries";
+import { AuthContext } from "../../../App";
+import { checkItemById } from "../js/items_firebase";
 import Footer from "../../Static/Footer";
 import LinkButton from "../../Elements/LinkButton";
 import Loading from "../../Elements/Loading";
 
 /**
- * Renders grocery list table
+ * Renders groceries list table with items
  */
 function GroceriesList() {
-  const { groceriesList, isLoadingData, isGroceriesListEmpty } =
-    useContext(GroceriesContext);
+  const {
+    groceriesList,
+    isLoadingData,
+    isGroceriesListEmpty,
+    setGroceriesList,
+  } = useContext(GroceriesContext);
+  const { setIsNavHidden } = useContext(AuthContext);
+
+  const [error, setError] = useState(null);
+
+  const toggleCheck = (itemId) => {
+    checkItemById(itemId, groceriesList.items_list)
+      .then((updatedItemsList) => {
+        setGroceriesList((prevList) => ({
+          ...prevList,
+          items_list: updatedItemsList,
+        }));
+      })
+      .catch((error) => {
+        setIsNavHidden(true);
+        setError(error);
+      });
+  };
+
+  if (error) {
+    console.log(error);
+    throw error; //error to be caught by ErrorBoundary
+  }
 
   return (
     <>
@@ -38,9 +72,9 @@ function GroceriesList() {
                 />
               </div>
 
-              <div className="space-between-container groceries-list-btns-container">
+              <div className="space-between-container counter-list">
                 <div className="centered-container">
-                  <h2 className="item-count">
+                  <h2 className="counter">
                     Items Count: <span>{groceriesList.itemsCount}</span>
                   </h2>
                 </div>
@@ -49,7 +83,7 @@ function GroceriesList() {
                   <LinkButton
                     path={`/myLists/groceryList/${groceriesList.index}/edit`}
                     classNames="yellow edit-delete-btn"
-                    icon={<FaEdit />}
+                    icon={<MdEdit />}
                     title="Edit Groceries List"
                   />
 
@@ -76,31 +110,58 @@ function GroceriesList() {
                   </div>
                 ) : (
                   groceriesList.items_list.map((item, index) => (
-                    <div key={index} className="row-container data">
+                    <div
+                      key={index}
+                      className={`row-container data ${
+                        item.isChecked ? "checked" : ""
+                      }`}
+                    >
                       <div className="column-container category">
                         <span
                           className="item-category"
-                          style={{ backgroundColor: item.category_color }}
+                          style={{
+                            backgroundColor: item.isChecked
+                              ? "#d3d3d3"
+                              : item.category_color,
+                          }}
                         >
                           {item.category_name}
                         </span>
                       </div>
                       <div className="column-container itemName">
-                        {item.name}
+                        <span className={`${item.isChecked ? "checked" : ""}`}>
+                          {item.name}
+                        </span>
                       </div>
                       <div className="column-container itemQuantity">
-                        {item.quantity}
+                        <span className={`${item.isChecked ? "checked" : ""}`}>
+                          {item.quantity}
+                        </span>
                       </div>
                       <div className="column-container itemActions">
                         <div className="item-actions-container">
+                          <button
+                            className="check-item"
+                            onClick={() => {
+                              toggleCheck(item.id);
+                            }}
+                          >
+                            {item.isChecked ? (
+                              <MdOutlineCheckBox />
+                            ) : (
+                              <MdOutlineCheckBoxOutlineBlank />
+                            )}
+                          </button>
+
                           <Link
                             to={`editItem/${index}`}
                             title="Edit Item"
                             state={{
                               itemId: item.id,
                             }}
+                            className={`${item.isChecked ? "checked" : ""}`}
                           >
-                            <FaEdit className="edit-icon" />
+                            <MdEdit className="edit-icon" />
                           </Link>
 
                           <Link
@@ -109,6 +170,7 @@ function GroceriesList() {
                             state={{
                               itemId: item.id,
                             }}
+                            className={`${item.isChecked ? "checked" : ""}`}
                           >
                             <MdDelete className="delete-icon" />
                           </Link>

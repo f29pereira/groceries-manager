@@ -34,6 +34,12 @@ function UserLists() {
                 />
               </div>
 
+              <div className="counter-list">
+                <h2 className="counter">
+                  Groceries Lists Count: <span>{userLists.length}</span>
+                </h2>
+              </div>
+
               <div className="table">
                 <div className="row-container table-header">
                   <div className="column-container name">Name</div>

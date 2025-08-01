@@ -7,7 +7,7 @@ import {
   fetchGroceryListNameDescById,
   updateGroceryList,
 } from "../../js/groceries_firebase";
-import { FaEdit } from "../../../../utils/icons";
+import { MdEdit } from "../../../../utils/icons";
 import Card from "../../../Elements/Card";
 import GroceriesListForm from "./GroceriesListForm";
 import Footer from "../../../Static/Footer";
@@ -78,7 +78,7 @@ function EditGroceriesList() {
         <div className="content card">
           <Card
             showGoBack={true}
-            titleIcon={<FaEdit />}
+            titleIcon={<MdEdit />}
             titleText="Grocery List"
             isLoading={isLoadingData}
             body={

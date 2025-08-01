@@ -55,14 +55,17 @@ function RemoveGroceriesList() {
             body={
               <>
                 <h2 className="remove-question">
-                  Do you wish to delete this
+                  Do you wish to delete the list named
                   <span> {groceriesList?.name}</span> ?
                 </h2>
 
                 <div className="centered-container remove-container">
                   <div className="remove-grid remove-list-col-rows">
                     <h3>Description:</h3>
-                    {groceriesList.description}
+                    <span className="groceries-description remove-list">
+                      {groceriesList.description}
+                    </span>
+
                     <h3>Items Count:</h3>
                     {groceriesList.itemsCount}
                   </div>

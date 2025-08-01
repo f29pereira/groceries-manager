@@ -45,6 +45,19 @@
   flex: 1;
 }
 
+/*List and Item counter*/
+.counter-list {
+  margin: 0.5rem 0;
+}
+
+.counter {
+  font-size: 1rem;
+}
+
+.counter span {
+  font-weight: normal;
+}
+
 /*GroceriesList component - Item Category*/
 .item-category {
   font-size: 0.8rem;
@@ -64,18 +77,7 @@
 
 .groceries-description {
   margin: 1rem 0;
-}
-
-.groceries-list-btns-container {
-  margin: 0.5rem 0;
-}
-
-.item-count {
-  font-size: 1rem;
-}
-
-.item-count span {
-  font-weight: normal;
+  line-height: 1.5rem;
 }
 
 .edit-delete-container {
@@ -90,8 +92,46 @@
 .item-actions-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 0.5rem;
   font-size: 1.5rem;
+}
+
+/*GroceriesList component - checked item*/
+.check-item {
+  background-color: transparent;
+  color: var(--card-header);
+  font-size: 1.5rem;
+}
+
+.row-container.data.checked {
+  background-color: var(--checked-item-row);
+}
+
+.row-container.data.checked:hover {
+  background-color: var(--checked-item-row);
+}
+
+a.checked {
+  pointer-events: none;
+}
+
+a.checked .edit-icon,
+a.checked .delete-icon {
+  color: var(--checked-item);
+}
+
+.row-container.data.checked::before {
+  content: "";
+  position: absolute;
+  background-color: black;
+  height: 0.15rem;
+  width: calc(100% / 4 * 3);
+}
+
+span.checked {
+  color: var(--checked-item);
 }
 
 /*GroceriesListForm component*/
@@ -135,10 +175,6 @@
   width: 100%;
 }
 
-.remove-item {
-  padding: 1rem;
-}
-
 ul .remove-item-info {
   color: var(--black);
   margin-bottom: 1rem;
@@ -153,6 +189,10 @@ ul .remove-item-info {
 .remove-list-col-rows {
   grid-template-rows: repeat(2, 1fr);
   grid-template-columns: repeat(2, 1fr);
+}
+
+.groceries-description.remove-list {
+  margin: 0;
 }
 
 @media (min-width: 800px) {
@@ -177,12 +217,12 @@ ul .remove-item-info {
 
   /*GroceriesList component*/
   .column-container.category,
-  .column-container.itemName {
+  .column-container.itemName,
+  .column-container.itemActions {
     flex: 1;
   }
 
-  .column-container.itemQuantity,
-  .column-container.itemActions {
+  .column-container.itemQuantity {
     flex: 0.5;
   }
 
@@ -204,16 +244,13 @@ ul .remove-item-info {
     font-size: 0.9rem;
   }
 
-  .item-actions-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 1.5rem;
-    font-size: 2rem;
-  }
-
   .btn.edit-delete-btn {
     font-size: 1.4rem;
+  }
+
+  /*GroceriesList component - checked item*/
+  .check-item {
+    font-size: 2rem;
   }
 
   /*RemoveItem and RemoveGroceriesList component*/
@@ -255,5 +292,14 @@ ul .remove-item-info {
   .remove-container {
     width: 60%;
     margin: auto;
+  }
+
+  /*GroceriesList component*/
+  .item-actions-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 2rem;
   }
 }

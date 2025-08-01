@@ -10,7 +10,6 @@ import {
   updateDoc,
   deleteDoc,
 } from "firebase/firestore";
-
 import {
   formatDate,
   getDocumentRefSnapShot,
@@ -156,6 +155,7 @@ export const fetchGroceryListById = async (listId) => {
       let categoryId = "";
       let categoryName = "";
       let categoryColor = "";
+      let itemIsChecked = false;
 
       //items document
       const itemDocument = await getDocumentRefSnapShot("items", item.id);
@@ -167,6 +167,7 @@ export const fetchGroceryListById = async (listId) => {
       itemId = itemSnapShot.id;
       itemName = itemSnapShotData.name;
       itemQuantity = itemSnapShotData.quantity;
+      itemIsChecked = itemSnapShotData.isChecked;
 
       //item_categories document
       const categoryRef = itemSnapShotData.grocery_categories_id;
@@ -183,6 +184,7 @@ export const fetchGroceryListById = async (listId) => {
         id: itemId,
         name: itemName,
         quantity: itemQuantity,
+        isChecked: itemIsChecked,
         category_id: categoryId,
         category_name: categoryName,
         category_color: categoryColor,

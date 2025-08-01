@@ -57,6 +57,7 @@ export const addItem = async (groceriesListId, formData) => {
     category_id: "",
     category_name: "",
     category_color: "",
+    isChecked: false,
   };
 
   //new item document
@@ -64,6 +65,7 @@ export const addItem = async (groceriesListId, formData) => {
     name: formData.name,
     quantity: formData.quantity,
     grocery_categories_id: categoryRef,
+    isChecked: false,
   };
 
   //add new document to items collection
@@ -187,6 +189,43 @@ export const updateItemById = async (itemId, formData, itemsList) => {
         category_id: formData.category_id,
         category_name: categoryData.name,
         category_color: categoryData.color,
+      };
+    }
+
+    return item;
+  });
+
+  return updatedItemsList;
+};
+
+/**
+ * Checks item document by given id
+ * @param {string} itemId   - item to be updated
+ * @param {array} itemsList - list of items
+ * @returns {object}        - list of items to update state
+ */
+export const checkItemById = async (itemId, itemsList) => {
+  validateString(itemId);
+
+  //item document
+  const itemDoc = await getDocumentRefSnapShot("items", itemId);
+  const itemReference = itemDoc.reference;
+  const itemSnapShot = itemDoc.snapShot;
+  validateItemSnapShot(itemSnapShot, itemId);
+
+  const isCheckedValue = itemSnapShot.data().isChecked;
+
+  //update item document isChecked field in firebase
+  await updateDoc(itemReference, {
+    isChecked: !isCheckedValue,
+  });
+
+  //list of items to update state
+  const updatedItemsList = itemsList.map((item) => {
+    if (item.id === itemId) {
+      return {
+        ...item,
+        isChecked: !isCheckedValue,
       };
     }
 

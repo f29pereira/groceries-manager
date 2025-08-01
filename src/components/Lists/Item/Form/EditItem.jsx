@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router";
 import { handleInputChange, showError } from "../../../../utils/utils";
 import { getItemById, updateItemById } from "../../js/items_firebase";
-import { FaEdit } from "../../../../utils/icons";
+import { MdEdit } from "../../../../utils/icons";
 import { GroceriesContext } from "../../GroceriesList/Groceries";
 import { AuthContext } from "../../../../App";
 import Card from "../../../Elements/Card";
@@ -82,7 +82,7 @@ function EditItem() {
         <div className="content card">
           <Card
             showGoBack={true}
-            titleIcon={<FaEdit />}
+            titleIcon={<MdEdit />}
             titleText="Edit Item"
             body={
               <ItemForm

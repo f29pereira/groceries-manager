@@ -19,7 +19,7 @@ function Groceries() {
     items_list: [],
     itemsCount: "",
     created_at: "",
-    index: "",
+    isChecked: false,
   });
   const [isLoadingData, setIsLoadingData] = useState(true);
   const [isGroceriesListEmpty, setIsGroceryListEmpty] = useState(false);

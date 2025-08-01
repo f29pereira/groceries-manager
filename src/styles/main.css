@@ -85,6 +85,7 @@ button {
   border-right: 1px solid var(--card-header);
   border-bottom: 1px solid var(--card-header);
   padding: 1rem 0.5rem;
+  position: relative;
 }
 
 .row-container.no-data {
@@ -171,7 +172,6 @@ button {
   /*Table*/
   .row-container {
     font-size: 1.2rem;
-    padding: 1.7rem;
   }
 
   /*User Action Icons*/
@@ -192,5 +192,6 @@ button {
   /*Table*/
   .row-container {
     font-size: 1.4rem;
+    padding: 1.7rem;
   }
 }
