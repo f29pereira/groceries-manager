@@ -73,7 +73,7 @@ export const addItem = async (groceriesListId, formData) => {
   const itemRef = doc(db, "items", id);
   await setDoc(itemRef, firebaseItemObj);
 
-  //update grocery list document with ref of new item
+  //update groceries list document with ref of new item
   await updateDoc(groceryListRef, {
     items_list: arrayUnion(itemRef),
   });
@@ -125,7 +125,7 @@ export const removeItemById = async (itemId, groceriesListId, itemsList) => {
 };
 
 /**
- * Returns item if exists on itemsList
+ * Returns item if exists on itemsList state
  * @param {string} itemId - item id
  * @param {array} itemsList - list of items
  * @returns {object} item

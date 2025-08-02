@@ -21,7 +21,7 @@ import {
 /**
  * Creates a new document on the groceries_list collection
  * @param {string} userId - authenticated user id
- * @param {array} userLists - array of groceries list
+ * @param {array} userLists - array of groceries lists
  * @returns {array} array of groceries list to update state
  */
 export const addEmptyGroceryList = async (userId, formData, userLists) => {
@@ -112,9 +112,38 @@ const userListsQuery = async (userId) => {
 };
 
 /**
+ * Returns groceries list from state
+ * @param {string} listId - groceries list id
+ * @param {array} userLists - array of groceries list
+ * @returns {object} object with name/description/items_count
+ */
+export const getGroceriesListById = (listId, userLists) => {
+  validateString(listId, "listId");
+  validateArray(userLists, "userLists");
+
+  const groceriesListObj = {
+    name: "",
+    description: "",
+    items_count: 0,
+  };
+
+  const list = userLists.find((list) => list.id === listId);
+
+  if (!list) {
+    throw new Error("Groceries list not found");
+  }
+
+  groceriesListObj.name = list.name;
+  groceriesListObj.description = list.description;
+  groceriesListObj.items_count = list.items_count;
+
+  return groceriesListObj;
+};
+
+/**
  * Fetches groceries_list document by given id
  * @param {string} listId - groceries_list document id
- * @returns {object} object with grocery list data
+ * @returns {object} object with groceries list data
  */
 export const fetchGroceryListById = async (listId) => {
   validateString(listId, "list ID");
@@ -124,7 +153,7 @@ export const fetchGroceryListById = async (listId) => {
     name: "",
     description: "",
     items_list: [],
-    items_count: "",
+    items_count: 0,
     created_at: "",
   };
 
@@ -197,32 +226,9 @@ export const fetchGroceryListById = async (listId) => {
 };
 
 /**
- * Fetches groceries_list document name/description fields by given id
- * @param {string} listId - groceries_list document id
- * @returns {object} - object with name/description fields
- */
-export const fetchGroceryListNameDescById = async (listId) => {
-  validateString(listId, "listId");
-
-  const document = await getDocumentRefSnapShot("groceries_list", listId);
-  const snapShot = document.snapShot;
-  validateGroceriesListSnapShot(snapShot, listId);
-
-  const groceryListToCopy = {
-    name: "",
-    description: "",
-  };
-
-  groceryListToCopy.name = snapShot.data().name;
-  groceryListToCopy.description = snapShot.data().description;
-
-  return groceryListToCopy;
-};
-
-/**
  * Updates groceries_list document name/description fields by given id
  * @param {object} groceriesList  - groceries list to be updated
- * @param {object} formData  - grocery list form data
+ * @param {object} formData  - groceries list form data
  * @returns {object} - groceries list object to update state
  */
 export const updateGroceryList = async (groceriesList, formData) => {

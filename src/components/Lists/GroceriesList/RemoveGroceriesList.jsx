@@ -1,25 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useContext } from "react";
-import { useNavigate } from "react-router";
-import { GroceriesContext } from "./Groceries";
+import { useLocation, useNavigate } from "react-router";
 import { ListContext } from "../List";
 import { AuthContext } from "../../../App";
-import { deleteGroceryListById } from "../js/groceries_firebase";
+import {
+  getGroceriesListById,
+  deleteGroceryListById,
+} from "../js/groceries_firebase";
 import { MdDelete } from "../../../utils/icons";
 import Card from "../../Elements/Card";
 import Footer from "../../Static/Footer";
 
 function RemoveGroceriesList() {
-  const { groceriesList } = useContext(GroceriesContext);
   const { userLists, setUserLists, setIsListEmpty } = useContext(ListContext);
   const { setIsNavHidden } = useContext(AuthContext);
 
   const navigate = useNavigate();
+  const location = useLocation();
 
+  const [listData, setListData] = useState({
+    name: "",
+    description: "",
+    items_count: "",
+  });
   const [error, setError] = useState(null);
 
+  useEffect(() => {
+    const getGroceryListData = () => {
+      try {
+        const groceriesList = getGroceriesListById(
+          location.state?.id,
+          userLists
+        );
+        setListData(groceriesList);
+      } catch (error) {
+        setIsNavHidden(true);
+        setError(error);
+      }
+    };
+
+    getGroceryListData();
+  }, []);
+
   const removeGroceryList = () => {
-    deleteGroceryListById(groceriesList.id, userLists)
+    deleteGroceryListById(location.state?.id, userLists)
       .then((updatedUserLists) => {
         setUserLists(updatedUserLists);
 
@@ -56,18 +80,18 @@ function RemoveGroceriesList() {
               <>
                 <h2 className="remove-question">
                   Do you wish to delete the list named
-                  <span> {groceriesList?.name}</span> ?
+                  <span> {listData.name}</span> ?
                 </h2>
 
                 <div className="centered-container remove-container">
                   <div className="remove-grid remove-list-col-rows">
                     <h3>Description:</h3>
                     <span className="groceries-description remove-list">
-                      {groceriesList.description}
+                      {listData.description}
                     </span>
 
                     <h3>Items Count:</h3>
-                    {groceriesList.items_count}
+                    {listData.items_count}
                   </div>
                 </div>
 

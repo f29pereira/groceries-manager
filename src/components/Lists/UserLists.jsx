@@ -83,7 +83,7 @@ function UserLists() {
                           <Link
                             to={`/myLists/groceryList/${index}/remove`}
                             title="Remove List"
-                            state={{ index: index, id: list.id }}
+                            state={{ id: list.id }}
                           >
                             <MdDelete className="delete-icon" />
                           </Link>

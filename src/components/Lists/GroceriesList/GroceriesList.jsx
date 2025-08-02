@@ -51,7 +51,7 @@ function GroceriesList() {
     <>
       <main>
         {isLoadingData ? (
-          <Loading message="Loading groceries list items" />
+          <Loading message="Loading groceries list" />
         ) : (
           <div className="content list">
             <header className="header groceries">

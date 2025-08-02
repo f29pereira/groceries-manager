@@ -36,7 +36,7 @@ function Groceries() {
 
           const groceriesListData = {
             ...data,
-            index: location.state?.index,
+            index: location.state?.index, //url index
           };
 
           setGroceriesList(groceriesListData);
