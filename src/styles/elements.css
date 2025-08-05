@@ -1,6 +1,5 @@
 /*Loading component*/
 .loading-container {
-  border: 1px solid var(--card-header);
   border-radius: 5px;
   padding: 1rem;
 }

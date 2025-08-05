@@ -7,6 +7,7 @@ import { addEmptyGroceryList } from "../../js/groceries_firebase";
 import { IoAdd } from "../../../../utils/icons";
 import Card from "../../../Elements/Card";
 import GroceriesListForm from "./GroceriesListForm";
+import Footer from "../../../Static/Footer";
 
 /**
  * Renders the form to create a new Grocery List
@@ -73,6 +74,8 @@ function AddGroceriesList() {
           ></Card>
         </div>
       </main>
+
+      <Footer />
     </>
   );
 }
