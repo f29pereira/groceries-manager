@@ -1,4 +1,39 @@
 import { FirebaseError } from "firebase/app";
+import { db } from "../firebase/firebase";
+import { doc, getDoc } from "firebase/firestore";
+
+/**
+ * Returns the document reference and snapshot for a given collection/document id
+ * @param {string} collectionName - collection name
+ * @param {string} documentId     - document id
+ * @returns {object}              - object with reference/snapShot attributes
+ */
+export const getDocumentRefSnapShot = async (collectionName, documentId) => {
+  const docRef = doc(db, collectionName, documentId);
+  const docSnapshot = await getDoc(docRef);
+
+  return {
+    reference: docRef,
+    snapShot: docSnapshot,
+  };
+};
+
+/**
+ * Formats date YYY/MM/DD
+ * @param {string} date - date timestamp
+ */
+export const formatDate = (date) => {
+  let newDate = "";
+
+  if (date !== null && typeof date === "string") {
+    const year = date.slice(0, 4);
+    const month = date.slice(5, 7);
+    const day = date.slice(8, 10);
+    newDate = `${year}/${month}/${day}`;
+  }
+
+  return newDate;
+};
 
 /**
  * Sets the current input value change to state
@@ -84,4 +119,48 @@ const getErrorDescription = (errorCode) => {
   }
 
   return error;
+};
+
+/**
+ * Checks if value is a string
+ * @param {string} value - value to validate
+ * @param {string} valueName - value description name to appear on exception message
+ * @throws {Error} - if value isn't string
+ */
+export const validateString = (value, valueName) => {
+  if (typeof value !== "string") {
+    throw new Error(
+      `Invalid data type: ${valueName} must be string. Current value: ${value}`
+    );
+  }
+
+  return;
+};
+
+/**
+ * Checks if value is an array
+ * @param {string} array - array to validate
+ * @param {string} arrayName - array description name to appear on exception message
+ * @throws {Error} - if isn't array
+ */
+export const validateArray = (array, arrayName) => {
+  if (!Array.isArray(array)) {
+    throw new Error(
+      `Invalid data type: ${arrayName} must be an array. Current value: ${array}`
+    );
+  }
+};
+
+/**
+ * Checks if value is an object
+ * @param {object} object - object to validate
+ * @param {string} objectName - object description name to appear on exception message
+ * @throws {Error} - if isn't object
+ */
+export const validateObject = (object, objectName) => {
+  if (typeof object !== "object" || object === null) {
+    throw new Error(
+      `Invalid data type: ${objectName} must be an object. Current value: ${object}`
+    );
+  }
 };

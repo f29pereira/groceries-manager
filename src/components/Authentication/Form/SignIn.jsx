@@ -38,7 +38,7 @@ function SignIn() {
       .then((userCredential) => {
         setCurrentUser(userCredential.user);
         setisSignedIn((prev) => !prev);
-        navigate("/groceries/list");
+        navigate("/myLists");
       })
       .catch((error) => {
         showError(error, setErrorMsg);
@@ -47,29 +47,33 @@ function SignIn() {
 
   return (
     <>
-      <Card
-        showGoBack={false}
-        titleIcon={<FaUser />}
-        titleText="Sign In"
-        body={
-          <>
-            <UserForm
-              handleOnSubmit={signInUser}
-              description="Welcome back. Sign In to get acess to your custom groceries list."
-              errorMsg={errorMsg}
-              handleChange={handleChange}
-              formData={signInFormData}
-              forgotPassword={false}
-              submitBtnTxt="Sign In"
-            />
-            <p id="create-account">Don't have an account ?</p>
-            <Link to="/signUp" className="click-link">
-              Sign up here
-            </Link>
-          </>
-        }
-      />
-
+      <main>
+        <div className="content card">
+          <Card
+            showGoBack={false}
+            titleIcon={<FaUser />}
+            titleText="Sign In"
+            body={
+              <>
+                <UserForm
+                  handleOnSubmit={signInUser}
+                  description="Welcome back"
+                  errorMsg={errorMsg}
+                  handleChange={handleChange}
+                  formData={signInFormData}
+                  forgotPassword={false}
+                  showPasswordRules={false}
+                  submitBtnTxt="Sign In"
+                />
+                <p id="create-account">Don't have an account ?</p>
+                <Link to="/signUp" className="click-link">
+                  Sign up here
+                </Link>
+              </>
+            }
+          />
+        </div>
+      </main>
       <Footer />
     </>
   );

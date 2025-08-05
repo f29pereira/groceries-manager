@@ -1,7 +1,12 @@
 import { useContext } from "react";
 import { Link } from "react-router";
 import { AuthContext } from "../../App";
-import { IoIosAddCircle, MdDelete, FaRegListAlt } from "../../utils/icons";
+import {
+  IoIosAddCircle,
+  MdOutlineCheckBox,
+  FaRegListAlt,
+  IoClipboardOutline,
+} from "../../utils/icons";
 import Footer from "./Footer";
 
 function Home() {
@@ -24,14 +29,19 @@ function Home() {
             </div>
           </header>
 
-          <section>
-            <p className="home-text">
-              Create your custom groceries list and buy only what you really
-              need.
+          <section className="home-text">
+            <p>
+              Easily create and manage your grocery lists. Simply add items, and
+              check them off as you shop.
+            </p>
+
+            <p>
+              Stay organized, buy only what you really need, and save time on
+              your next trip to the store!
             </p>
 
             {!isSignedIn ? (
-              <p className="home-text">
+              <p>
                 Interested ?
                 <Link to="/signUp" className="click-link sign-up-home">
                   Sign up here
@@ -46,10 +56,20 @@ function Home() {
           <div className="features-container">
             <div className="features-card">
               <div className="centered-column-container">
+                <IoClipboardOutline className="features-icon" />
+                <h3 className="info-title">Create grocery lists</h3>
+                <p className="info-text">
+                  Create unlimited grocery lists to keep all your shopping
+                  organized.
+                </p>
+              </div>
+            </div>
+            <div className="features-card">
+              <div className="centered-column-container">
                 <IoIosAddCircle className="features-icon" />
                 <h3 className="info-title">Add items</h3>
                 <p className="info-text">
-                  Just add the name, quantity and category to add an item to
+                  Add the name, quantity, and category to include an item in
                   your list.
                 </p>
               </div>
@@ -57,7 +77,7 @@ function Home() {
             <div className="features-card">
               <div className="centered-column-container">
                 <FaRegListAlt className="features-icon" />
-                <h3 className="info-title">Check your list</h3>
+                <h3 className="info-title">Review your list</h3>
                 <p className="info-text">
                   Easily review all the items you've added in one place.
                 </p>
@@ -65,10 +85,10 @@ function Home() {
             </div>
             <div className="features-card">
               <div className="centered-column-container">
-                <MdDelete className="features-icon" />
-                <h3 className="info-title">Remove items</h3>
+                <MdOutlineCheckBox className="features-icon" />
+                <h3 className="info-title">Check off items</h3>
                 <p className="info-text">
-                  Don't need an item on the list? Just remove it!
+                  Check off items as you shop to track your progress.
                 </p>
               </div>
             </div>

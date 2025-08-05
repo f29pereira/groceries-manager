@@ -14,7 +14,7 @@
 }
 
 /*Forms*/
-.main-form {
+.form-wrapper {
   padding: 1rem;
 }
 
@@ -34,13 +34,36 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: auto;
+  width: 100%;
+  margin-bottom: 1rem;
 }
 
 .form-label {
   font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.left-container.label-required {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
+}
+
+.input-icon-container {
+  display: flex;
+  height: 2.125rem;
+  width: 100%;
+}
+
+.input-icon {
+  background-color: var(--card-header);
+  color: var(--white);
+  font-size: 1.4rem;
+  padding: 1rem;
+}
+
+.textarea-icon {
+  font-size: 1.8rem;
+  padding: 0.5rem;
 }
 
 .form-input {
@@ -48,30 +71,79 @@
   padding: 0.5rem;
   margin-bottom: 1rem;
   width: 100%;
+  height: 100%;
 }
 
 .form-input:focus {
-  border-color: var(--submit);
+  border-color: var(--card-header);
   outline: none;
 }
 
 .select-input {
   border: 1px solid var(--gray);
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 1rem;
 }
 
 #create-account {
   font-size: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
 }
 
-.reset-password {
-  align-self: flex-start;
+/*Textarea*/
+.form-input.text-description {
+  text-align: center;
+  resize: none;
+  line-height: 1.5rem;
+  min-height: 4rem;
+  max-height: 6rem;
+  transition: height 0.5s ease;
+  padding: 0.8rem 0.5rem;
+}
+
+/*Password rules*/
+.password-rules {
+  opacity: 0;
+  visibility: hidden;
+  background-color: var(--password-rules);
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid var(--card-header);
+  padding: 0.5rem 1rem;
+  width: 100%;
+  transition: opacity 0.5s, visibility 0s 0.5s;
+}
+
+.password-rules-pop-up:focus-within .password-rules {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s, visibility 0s 0s;
+}
+
+.rules-list {
+  text-align: left;
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
+.rules-item {
+  color: var(--black);
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+/*Form Buttons*/
+.submit-cancel-btns {
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.buttons {
+  gap: 2rem;
 }
 
 /*Error Messages*/
 .input-error-msg {
-  color: var(--red);
+  color: var(--btn-danger);
   font-size: 1rem;
   line-height: 1.5rem;
 }
@@ -102,11 +174,28 @@
 
 @media (min-width: 800px) {
   .input-container {
-    width: auto;
+    width: 60%;
   }
 
-  .form-description {
-    line-height: 1.5rem;
-    margin: 1rem 0;
+  /*Textarea*/
+  .form-input.text-description {
+    text-align: left;
+    min-height: 5rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .input-container {
+    width: 30%;
+  }
+
+  .form-input {
+    font-size: 1rem;
+  }
+
+  /*Textarea*/
+  .form-input.text-description {
+    text-align: left;
+    min-height: 6rem;
   }
 }

@@ -1,188 +1,306 @@
-.header.groceries {
-  text-align: center;
+.content.list {
+  padding: 1rem;
 }
 
-.btn .add-item-icon {
-  font-size: 1.2rem;
-  margin-right: 0.5rem;
+/*MyLists component*/
+.add-container {
+  margin: 2rem 0;
 }
 
-.item-count-container {
-  display: flex;
-  margin: 1rem 0 0.5rem 0;
+/*MyLists component info button*/
+.btn.info-list-btn {
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  margin: 0;
 }
 
-.item-count {
+/*MyLists component table rows*/
+.column-container.name {
   font-weight: bold;
 }
 
-.item-count span {
-  font-weight: normal;
-  margin-left: 0.5rem;
+.column-container.name {
+  flex: 2;
 }
 
-/*Groceries List*/
-.groceries-list {
-  background-color: #faf9f6;
-  border-bottom: none;
-}
-
-.groceries-row-container {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.groceries-column-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/*Groceries List - columns*/
-.groceries-column-container.category {
+.column-container.creationDate,
+.column-container.itemCount,
+.column-container.listInfo {
   flex: 1;
 }
 
-.groceries-column-container.groceryItem {
-  flex: 0.5;
+.column-container.creationDate,
+.column-container.itemCount {
+  font-size: 1rem;
 }
 
-.groceries-column-container.quantity {
-  flex: 0.5;
+/*GroceriesList component*/
+.column-container.category,
+.column-container.itemName {
+  flex: 2;
 }
 
-.groceries-column-container.actions {
-  flex: 0.5;
+.column-container.itemQuantity,
+.column-container.itemActions {
+  flex: 1;
 }
 
-.groceries-row-container.centered {
-  justify-content: center;
+/*List and Item counter*/
+.counter-list {
+  margin: 0.5rem 0;
 }
 
-.groceries-row-container.groceries-header {
-  background: linear-gradient(90deg, var(--submit) 0%, var(--nav-green) 50%);
-  color: var(--white);
-  font-size: 1.2rem;
-  font-weight: bold;
-  border-radius: 5px 5px 0 0;
-  padding: 1rem 0.5rem;
+.counter {
+  font-size: 1rem;
 }
 
-.no-list {
-  background-color: var(--ligth-green);
-  font-size: 1.2rem;
-  padding: 1rem;
-  border-radius: 10px;
+.counter span {
+  font-weight: normal;
 }
 
-.groceries-row-container.item-data,
-.groceries-row-container.centered {
-  padding: 1rem;
-  border-left: 1px solid var(--submit);
-  border-right: 1px solid var(--submit);
-  border-bottom: 1px solid var(--submit);
-}
-
-.groceries-row-container.item-data:hover {
-  background-color: var(--ligth-green);
-}
-
+/*GroceriesList component - Item Category*/
 .item-category {
-  text-align: center;
-  font-size: 0.7rem;
-  font-weight: 500;
+  font-size: 0.8rem;
+  font-weight: bold;
   border-radius: 5px;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.3rem;
 }
 
-.remove-item-icon {
-  color: var(--cancel);
+.header.groceries {
+  margin-top: 2rem;
+}
+
+.header.groceries,
+.groceries-description {
+  text-align: center;
+}
+
+.groceries-description {
+  margin: 1rem 0;
+  line-height: 1.5rem;
+}
+
+.edit-delete-container {
+  gap: 1rem;
+}
+
+.btn.edit-delete-btn {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+/*GroceriesList component - user actions*/
+.actions-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 1.5rem;
 }
 
-/*Remove Item*/
-.remove-item-container {
-  border: 1px solid var(--submit);
-  background-color: var(--ligth-gray);
+/*GroceriesList component - checked item*/
+.check-item {
+  background-color: transparent;
+  color: var(--card-header);
+  font-size: 1.5rem;
 }
 
-.remove-item {
+.row-container.data.checked {
+  background-color: var(--checked-item-row);
+}
+
+.row-container.data.checked:hover {
+  background-color: var(--checked-item-row);
+}
+
+a.checked {
+  pointer-events: none;
+}
+
+a.checked .edit-icon,
+a.checked .delete-icon {
+  color: var(--checked-item);
+}
+
+.row-container.data.checked::before {
+  content: "";
+  position: absolute;
+  background-color: black;
+  height: 0.15rem;
+  width: calc(100% / 4 * 3);
+}
+
+span.checked {
+  color: var(--checked-item);
+}
+
+/*GroceriesListForm component*/
+.input-container.add-list {
+  margin-bottom: 4rem;
+}
+
+/*Remove grid Info*/
+.remove-grid {
+  display: grid;
+  align-items: center;
+  gap: 1rem 0.5rem;
+  border-radius: 5px;
+  border: 1px solid var(--btn-danger-hover);
+  background-color: var(--remove-item);
   padding: 1rem;
+}
+
+.remove-question {
+  font-weight: normal;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.remove-question span {
+  font-weight: bold;
+}
+
+/*RemoveItem component*/
+.remove-item-col-rows {
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.remove-item-question span {
+  margin-left: 0.5rem;
+  font-weight: bold;
+}
+
+.item-category.remove-item {
+  width: 100%;
 }
 
 ul .remove-item-info {
   color: var(--black);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
 .remove-item-btns {
   gap: 2rem;
-}
-
-.remove-item-question {
   margin-top: 1rem;
 }
 
+/*RemoveGroceriesList component*/
+.remove-list-col-rows {
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.groceries-description.remove-list {
+  margin: 0;
+}
+
 @media (min-width: 800px) {
-  .header.groceries {
+  .content.list {
+    padding: 2rem;
+  }
+
+  /*MyLists component*/
+  .column-container.itemCount {
+    text-align: center;
+  }
+
+  /*MyLists component Item Category*/
+  .item-category {
+    width: 60%;
+  }
+
+  /*MyLists component info button*/
+  .btn.info-list-btn {
     font-size: 2rem;
-    margin-bottom: 1rem;
   }
 
-  .btn .add-item-icon {
-    font-size: 2.2rem;
+  /*GroceriesList component*/
+  .column-container.category,
+  .column-container.itemName,
+  .column-container.itemActions {
+    flex: 1;
   }
 
-  .btn.add-item {
-    font-size: 1.5rem;
+  .column-container.itemQuantity {
+    flex: 0.5;
+  }
+
+  .column-container.category {
+    align-items: center;
+  }
+
+  .header.groceries {
+    display: block;
+    text-align: center;
+    margin-bottom: 0;
   }
 
   .item-count {
-    font-size: 1.5rem;
-  }
-
-  .groceries-row-container.groceries-header {
-    font-size: 1.5rem;
-  }
-
-  .groceries-row-container.item-data,
-  .groceries-row-container.centered {
-    font-size: 1.3rem;
-  }
-
-  .item-category {
     font-size: 1.2rem;
   }
 
-  .groceries-column-container.category {
-    flex: 2;
+  .item-category {
+    font-size: 0.9rem;
   }
 
-  .groceries-column-container.groceryItem {
-    flex: 1;
+  .btn.edit-delete-btn {
+    font-size: 1.4rem;
   }
 
-  .groceries-column-container.quantity {
-    flex: 1;
+  /*GroceriesList component - checked item*/
+  .check-item {
+    font-size: 2rem;
   }
 
-  .groceries-column-container.actions {
-    flex: 1;
+  /*RemoveItem and RemoveGroceriesList component*/
+  .remove-container {
+    width: 70%;
+    margin: auto;
+  }
+
+  /*GroceriesListForm component*/
+  .input-container.add-list {
+    margin-bottom: 6rem;
   }
 }
 
 @media (min-width: 1200px) {
-  .groceries-row-container.groceries-header {
-    font-size: 1.7rem;
+  .content.list {
+    padding: 3rem;
   }
 
-  .groceries-row-container.item-data,
-  .groceries-row-container.centered {
-    font-size: 1.5rem;
-  }
-
-  .item-category {
+  /*MyLists component table rows*/
+  .column-container.name,
+  .column-container.itemCount,
+  .column-container.listInfo,
+  .column-container.creationDate {
     font-size: 1.4rem;
+  }
+
+  /*MyLists component Item Category*/
+  .item-category {
+    padding: 0.5rem;
+    width: 40%;
+  }
+
+  .btn.edit-delete-btn {
+    font-size: 1.8rem;
+  }
+
+  /*RemoveItem and RemoveGroceriesList component*/
+  .remove-container {
+    width: 60%;
+    margin: auto;
+  }
+
+  /*GroceriesList component*/
+  .actions-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 2rem;
   }
 }

@@ -1,4 +1,4 @@
-import { BiError } from "../../utils/icons";
+import { BiError } from "../../../utils/icons";
 
 /**
  * Component that renders a error message

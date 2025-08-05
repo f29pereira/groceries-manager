@@ -1,4 +1,15 @@
 /*Loading component*/
+.loading-container {
+  border-radius: 5px;
+  padding: 1rem;
+}
+
+.loading-title {
+  text-align: center;
+  color: var(--card-header);
+}
+
+/*LoadingIcon component*/
 @keyframes rotate {
   from {
     transform: rotate(0deg);
@@ -8,9 +19,7 @@
   }
 }
 
-.loading-container {
-  display: flex;
-  align-items: center;
+.loading-icon-container {
   padding: 1rem;
   margin: 1rem 0;
 }
@@ -18,30 +27,21 @@
 .loading-icon {
   animation: rotate 3s linear infinite;
   font-size: 1.5rem;
+  color: var(--card-header);
   margin-right: 1rem;
 }
 
-/*Card Component*/
-.card-container {
-  padding: 2rem;
+.loading-text {
+  font-size: 1.2rem;
 }
 
+/*Card Component*/
 .card-header {
-  background: linear-gradient(
-    90deg,
-    var(--submit) 0%,
-    var(--nav-green) 35%,
-    var(--ligth-green) 100%
-  );
+  background-color: var(--card-header);
   color: var(--white);
   border-radius: 10px 10px 0 0;
-  padding: 1rem;
+  padding: 0.5rem;
   border-bottom: none;
-}
-
-.card-header .title-container {
-  display: flex;
-  justify-content: space-between;
 }
 
 .go-back-btn {
@@ -50,7 +50,7 @@
 
 .card-header .icon {
   font-size: 2rem;
-  margin-right: 1rem;
+  margin-right: 0.5rem;
   color: var(--white);
 }
 
@@ -62,8 +62,8 @@
   visibility: hidden;
 }
 
-.card-header .title {
-  font-size: 1.5rem;
+.card-header-title {
+  font-size: 1.2rem;
 }
 
 .go-back-btn {
@@ -79,22 +79,177 @@
   text-align: center;
 }
 
+/*LinkButton Component*/
+.btn {
+  font-size: 1.2rem;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  color: var(--white);
+}
+
+.btn-icon-gap {
+  gap: 10px;
+}
+
+.green {
+  background-color: var(--btn-success);
+}
+
+.btn.green:hover {
+  background-color: var(--btn-success-hover);
+}
+
+.red {
+  background-color: var(--btn-danger);
+}
+
+.btn.red:hover {
+  background-color: var(--btn-danger-hover);
+}
+
+.blue {
+  background-color: var(--btn-info);
+}
+
+.yellow {
+  background-color: var(--btn-warning);
+}
+
+/*RequiredField component*/
+.centered-container.required-wrapper {
+  margin-left: 1rem;
+}
+
+.required-container {
+  display: inline;
+}
+
+.required-icon {
+  color: var(--btn-danger-hover);
+  font-size: 0.6rem;
+  margin-right: 0.2rem;
+}
+
+.required-text {
+  position: relative;
+  opacity: 0;
+  visibility: hidden;
+  background-color: var(--ligth-red);
+  color: var(--btn-danger-hover);
+  font-size: 0.8rem;
+  border-radius: 5px;
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.5rem;
+}
+
+.required-text::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid var(--ligth-red);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.required-wrapper:hover .required-text {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s;
+}
+
+/*FallBack component*/
+.fallback {
+  border-radius: 5px;
+  border: 1px solid var(--cancel);
+  padding: 1rem;
+}
+
+.fallback-msg {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+/*Footer Component*/
+footer {
+  background-color: var(--nav-green);
+  padding: 1rem;
+  color: var(--white);
+}
+
+.footer-icon {
+  font-size: 2rem;
+}
+
+.footer-text {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
 @media (min-width: 800px) {
+  /*Loading component*/
+  .loading-container {
+    width: 60%;
+    margin: auto;
+  }
+
+  /*Card component*/
   .card-container {
-    padding: 3rem;
+    width: 80%;
+    margin: auto;
+  }
+
+  .card-header {
+    padding: 1rem;
   }
 
   .card-header .icon {
     font-size: 2.5rem;
   }
 
-  .card-header .title {
-    font-size: 2rem;
+  .card-header-title {
+    font-size: 1.8rem;
+  }
+
+  /*LinkButton component*/
+  .btn.add-item {
+    font-size: 1.5rem;
+  }
+
+  /*FallBack component*/
+  .fallback-msg {
+    font-size: 1.6rem;
+  }
+
+  /*Footer component*/
+  .footer-text {
+    font-size: 1.2rem;
+    font-weight: bold;
   }
 }
 
 @media (min-width: 1200px) {
+  /*Loading component*/
+  .loading-container {
+    width: 40%;
+    margin: auto;
+  }
+
+  /*Card component*/
   .card-container {
-    padding: 5rem;
+    width: 60%;
+    margin: auto;
+  }
+
+  /*FallBack component*/
+  .fallback {
+    width: 40%;
+    margin: auto;
+  }
+
+  .fallback-msg {
+    font-size: 1.8rem;
   }
 }
