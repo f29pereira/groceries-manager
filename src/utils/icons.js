@@ -1,9 +1,9 @@
 import { BsList } from "react-icons/bs";
 import { IoMdCloseCircle, IoIosAddCircle } from "react-icons/io";
 import { TbPaperBag, TbLockPassword } from "react-icons/tb";
-import { BiError, BiTag } from "react-icons/bi";
+import { BiError, BiTag, BiCheck } from "react-icons/bi";
 import { FaUser, FaUserPlus, FaRegListAlt, FaAsterisk } from "react-icons/fa";
-import { AiOutlineLoading3Quarters } from "react-icons/ai";
+import { AiOutlineLoading3Quarters, AiFillCloseCircle } from "react-icons/ai";
 import {
   MdDelete,
   MdAlternateEmail,
@@ -11,7 +11,13 @@ import {
   MdOutlineCheckBox,
   MdEdit,
 } from "react-icons/md";
-import { IoAdd, IoArrowBackCircle, IoText } from "react-icons/io5";
+import {
+  IoAdd,
+  IoClose,
+  IoArrowBackCircle,
+  IoText,
+  IoClipboardOutline,
+} from "react-icons/io5";
 import { RiWeightLine } from "react-icons/ri";
 import { FaInfoCircle } from "react-icons/fa";
 import { PiChatText } from "react-icons/pi";
@@ -24,7 +30,7 @@ export {
   IoIosAddCircle, //add circle
   BsList, //hamburguer
   IoMdCloseCircle,
-  TbPaperBag, //close
+  TbPaperBag, //paper bag
   BiError, //warning
   AiOutlineLoading3Quarters, //loading
   IoArrowBackCircle, //go back
@@ -40,4 +46,7 @@ export {
   MdOutlineCheckBoxOutlineBlank, //blank checkbox
   MdOutlineCheckBox, //checked checkbox
   MdEdit, //edit
+  BiCheck, //success
+  IoClose, //close
+  IoClipboardOutline, //clipboard
 };

@@ -71,13 +71,23 @@
 }
 
 .header.groceries,
-.groceries-description {
+.groceries-desc-date {
   text-align: center;
 }
 
-.groceries-description {
+/*GroceriesList component - Info Section*/
+.groceries-info {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.groceries-info p {
   margin: 1rem 0;
   line-height: 1.5rem;
+}
+
+.groceries-toast {
+  align-self: flex-start; /* Move this item to the top */
 }
 
 .edit-delete-container {
@@ -192,7 +202,7 @@ ul .remove-item-info {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.groceries-description.remove-list {
+.groceries-info.remove-list {
   margin: 0;
 }
 
@@ -216,6 +226,10 @@ ul .remove-item-info {
     font-size: 2rem;
   }
 
+  .header.groceries {
+    text-align: left;
+  }
+
   /*GroceriesList component*/
   .column-container.category,
   .column-container.itemName,
@@ -229,12 +243,6 @@ ul .remove-item-info {
 
   .column-container.category {
     align-items: center;
-  }
-
-  .header.groceries {
-    display: block;
-    text-align: center;
-    margin-bottom: 0;
   }
 
   .item-count {

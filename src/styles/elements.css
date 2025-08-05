@@ -159,17 +159,41 @@
   transition: opacity 0.5s;
 }
 
-/*FallBack component*/
-.fallback {
+/*Toast Component*/
+.toast-container {
   border-radius: 5px;
-  border: 1px solid var(--cancel);
-  padding: 1rem;
+  font-size: 1.2rem;
 }
 
-.fallback-msg {
-  font-size: 1.4rem;
-  text-align: center;
-  margin-bottom: 1rem;
+.toast-info {
+  padding: 0.8rem;
+}
+
+.toast-icon {
+  color: var(--white);
+  font-size: 2.5rem;
+  margin-right: 1rem;
+}
+
+.toast-message {
+  font-weight: bold;
+}
+
+.close-container {
+  padding-top: 0.2rem;
+  padding-right: 0.4rem;
+  align-self: flex-start;
+  margin-left: 1rem;
+}
+
+.toast-close {
+  color: var(--white);
+  font-size: 1.5rem;
+}
+
+.toast-container.success {
+  background-color: var(--btn-success);
+  color: var(--card-header);
 }
 
 /*Footer Component*/
@@ -186,6 +210,19 @@ footer {
 .footer-text {
   font-size: 1rem;
   font-weight: bold;
+}
+
+/*FallBack component*/
+.fallback {
+  border-radius: 5px;
+  border: 1px solid var(--cancel);
+  padding: 1rem;
+}
+
+.fallback-msg {
+  font-size: 1.4rem;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 800px) {

@@ -58,7 +58,7 @@ function UserLists() {
 
                 {isListEmpty ? (
                   <div className="row-container no-data">
-                    No groceries list created yet. Click the "Add List" button.
+                    No grocery lists created yet. Click the "Add List" button.
                   </div>
                 ) : (
                   userLists.map((list, index) => (
