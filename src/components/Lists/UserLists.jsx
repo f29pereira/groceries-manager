@@ -1,12 +1,8 @@
-import { useContext } from "react";
-import { Link } from "react-router";
-import {
-  IoIosAddCircle,
-  FaInfoCircle,
-  MdEdit,
-  MdDelete,
-} from "../../utils/icons";
+import { useContext, useEffect } from "react";
+import { ToastContext } from "../Elements/Toast/ToastProvider";
 import { ListContext } from "./List";
+import { Link } from "react-router";
+import { IoIosAddCircle, FaInfoCircle, MdDelete } from "../../utils/icons";
 import Footer from "../Static/Footer";
 import LinkButton from "../Elements/LinkButton";
 import Loading from "../Elements/Loading";
@@ -15,7 +11,16 @@ import Loading from "../Elements/Loading";
  * Renders all groceries lists created by the user
  */
 function UserLists() {
+  const { toast, clearToast } = useContext(ToastContext);
   const { userLists, isLoadingData, isListEmpty } = useContext(ListContext);
+
+  useEffect(() => {
+    if (toast) {
+      setTimeout(() => {
+        clearToast();
+      }, 5000);
+    }
+  }, [toast]);
 
   return (
     <>
@@ -24,7 +29,8 @@ function UserLists() {
           <Loading message="Loading your lists" />
         ) : (
           <div className="content list">
-            <div className="centered-container">
+            <div className="centered-column-container">
+              {toast ? toast : null}
               <header className="header groceries">
                 <h1>My Lists</h1>
               </header>

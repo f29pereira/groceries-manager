@@ -1,16 +1,25 @@
 import { useState, useContext } from "react";
-import { ListContext } from "../../List";
 import { AuthContext } from "../../../../App";
+import { ToastContext } from "../../../Elements/Toast/ToastProvider";
+import { ListContext } from "../../List";
+import { GroceriesContext } from "../../GroceriesList/Groceries";
 import { useNavigate } from "react-router";
 import { addItem } from "../../js/items_firebase";
 import { handleInputChange, showError } from "../../../../utils/utils";
 import { IoAdd } from "../../../../utils/icons";
-import { GroceriesContext } from "../../GroceriesList/Groceries";
 import Card from "../../../Elements/Card";
 import ItemForm from "./ItemForm";
+import Toast from "../../../Elements/Toast/Toast";
 import Footer from "../../../Static/Footer";
 
+/**
+ * Adds item to a groceries list
+ */
 function AddItem() {
+  //useContext Hooks
+  const { setIsNavHidden } = useContext(AuthContext);
+  const { setToast } = useContext(ToastContext);
+  const { setUserLists } = useContext(ListContext);
   const {
     groceriesList,
     setGroceriesList,
@@ -18,19 +27,16 @@ function AddItem() {
     setIsGroceryListEmpty,
   } = useContext(GroceriesContext);
 
-  const { setUserLists } = useContext(ListContext);
-
-  const { setIsNavHidden } = useContext(AuthContext);
-
-  const navigate = useNavigate();
-
+  //useState Hooks
   const [itemFormData, setItemFormData] = useState({
     name: "",
     quantity: "",
     category_id: "",
   });
-
   const [error, setError] = useState(null);
+
+  //useNavigate Hook
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     handleInputChange(event, setItemFormData);
@@ -60,6 +66,7 @@ function AddItem() {
           setIsGroceryListEmpty(false);
         }
 
+        setToast(<Toast type="success" message="Item added successfully" />);
         navigate(-1);
       })
       .catch((error) => {

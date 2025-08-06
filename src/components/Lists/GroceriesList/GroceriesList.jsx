@@ -1,5 +1,7 @@
-import { useContext, useState } from "react";
-import { Link } from "react-router";
+import { useContext, useEffect, useState } from "react";
+import { Link, useLocation } from "react-router";
+import { AuthContext } from "../../../App";
+import { ToastContext } from "../../Elements/Toast/ToastProvider";
 import {
   IoIosAddCircle,
   MdDelete,
@@ -8,7 +10,6 @@ import {
   MdEdit,
 } from "../../../utils/icons";
 import { GroceriesContext } from "./Groceries";
-import { AuthContext } from "../../../App";
 import { checkItemById } from "../js/items_firebase";
 import Footer from "../../Static/Footer";
 import LinkButton from "../../Elements/LinkButton";
@@ -18,15 +19,30 @@ import Loading from "../../Elements/Loading";
  * Renders groceries list table with items
  */
 function GroceriesList() {
+  //useContext Hooks
+  const { setIsNavHidden } = useContext(AuthContext);
+  const { toast, clearToast } = useContext(ToastContext);
   const {
     groceriesList,
     isLoadingData,
     isGroceriesListEmpty,
     setGroceriesList,
   } = useContext(GroceriesContext);
-  const { setIsNavHidden } = useContext(AuthContext);
 
+  //useState Hooks
   const [error, setError] = useState(null);
+
+  //useLocation Hook
+  const location = useLocation();
+
+  //useEffect Hook
+  useEffect(() => {
+    if (toast) {
+      setTimeout(() => {
+        clearToast();
+      }, 5000);
+    }
+  }, [toast]);
 
   const toggleCheck = (itemId) => {
     checkItemById(itemId, groceriesList.items_list)
@@ -54,15 +70,20 @@ function GroceriesList() {
           <Loading message="Loading groceries list" />
         ) : (
           <div className="content list">
-            <header className="header groceries">
-              <h1>{groceriesList.name}</h1>
-            </header>
+            <div className="toast-header-container">
+              <header className="header groceries">
+                <h1>{groceriesList.name}</h1>
+              </header>
+
+              <div className="centered-container">{toast ? toast : null}</div>
+            </div>
+
+            <section className="groceries-info">
+              <p>{groceriesList.description}</p>
+              <p>Created at: {groceriesList.created_at}</p>
+            </section>
 
             <section>
-              <p className="groceries-description">
-                {groceriesList.description}
-              </p>
-
               <div className="centered-container add-container">
                 <LinkButton
                   path={`/myLists/groceryList/${groceriesList.index}/addItem`}

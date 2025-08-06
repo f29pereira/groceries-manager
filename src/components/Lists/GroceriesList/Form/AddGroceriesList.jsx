@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../../App";
+import { ToastContext } from "../../../Elements/Toast/ToastProvider";
 import { ListContext } from "../../List";
 import { useNavigate } from "react-router";
 import { handleInputChange, showError } from "../../../../utils/utils";
@@ -7,22 +8,25 @@ import { addEmptyGroceryList } from "../../js/groceries_firebase";
 import { IoAdd } from "../../../../utils/icons";
 import Card from "../../../Elements/Card";
 import GroceriesListForm from "./GroceriesListForm";
+import Toast from "../../../Elements/Toast/Toast";
 import Footer from "../../../Static/Footer";
 
 /**
  * Renders the form to create a new Grocery List
  */
 function AddGroceriesList() {
+  //useContext Hooks
   const { currentUser, setIsNavHidden } = useContext(AuthContext);
+  const { setToast } = useContext(ToastContext);
   const { userLists, setUserLists, isListEmpty, setIsListEmpty } =
     useContext(ListContext);
   const navigate = useNavigate();
 
+  //useState Hooks
   const [listFormData, setListFormData] = useState({
     name: "",
     description: "",
   });
-
   const [error, setError] = useState(null);
 
   const handleChange = (event) => {
@@ -38,6 +42,10 @@ function AddGroceriesList() {
         if (isListEmpty) {
           setIsListEmpty(false);
         }
+
+        setToast(
+          <Toast type="success" message="Groceries list added successfully" />
+        );
         navigate(-1);
       })
       .catch((error) => {

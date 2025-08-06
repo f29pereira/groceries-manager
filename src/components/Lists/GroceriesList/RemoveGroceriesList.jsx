@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { ListContext } from "../List";
 import { AuthContext } from "../../../App";
+import { ToastContext } from "../../Elements/Toast/ToastProvider";
+import { ListContext } from "../List";
 import {
   getGroceriesListById,
   deleteGroceryListById,
 } from "../js/groceries_firebase";
 import { MdDelete } from "../../../utils/icons";
 import Card from "../../Elements/Card";
+import Toast from "../../Elements/Toast/Toast";
 import Footer from "../../Static/Footer";
 
 function RemoveGroceriesList() {
-  const { userLists, setUserLists, setIsListEmpty } = useContext(ListContext);
+  //useContext Hooks
   const { setIsNavHidden } = useContext(AuthContext);
+  const { setToast } = useContext(ToastContext);
+  const { userLists, setUserLists, setIsListEmpty } = useContext(ListContext);
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
+  //useState Hooks
   const [listData, setListData] = useState({
     name: "",
     description: "",
@@ -25,6 +27,11 @@ function RemoveGroceriesList() {
   });
   const [error, setError] = useState(null);
 
+  //React router Hooks
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  //useEffect Hook
   useEffect(() => {
     const getGroceryListData = () => {
       try {
@@ -51,7 +58,10 @@ function RemoveGroceriesList() {
           setIsListEmpty(true);
         }
 
-        navigate("/myLists");
+        setToast(
+          <Toast type="success" message="Groceries list removed successfully" />
+        );
+        navigate(-1);
       })
       .catch((error) => {
         setIsNavHidden(true);

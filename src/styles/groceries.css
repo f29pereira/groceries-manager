@@ -226,10 +226,6 @@ ul .remove-item-info {
     font-size: 2rem;
   }
 
-  .header.groceries {
-    text-align: left;
-  }
-
   /*GroceriesList component*/
   .column-container.category,
   .column-container.itemName,
@@ -304,6 +300,20 @@ ul .remove-item-info {
   }
 
   /*GroceriesList component*/
+  .header.groceries {
+    text-align: left;
+  }
+
+  /*GroceriesList component - Info Section*/
+  .groceries-info {
+    text-align: left;
+    margin: 2rem 0;
+  }
+
+  .groceries-info p {
+    margin: 2rem 0;
+  }
+
   .actions-container {
     display: flex;
     flex-direction: row;

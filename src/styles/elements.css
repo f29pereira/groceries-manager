@@ -159,6 +159,13 @@
   transition: opacity 0.5s;
 }
 
+/*Toast and Page Header container*/
+.toast-header-container {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
 /*Toast Component*/
 .toast-container {
   border-radius: 5px;
@@ -189,11 +196,17 @@
 .toast-close {
   color: var(--white);
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .toast-container.success {
   background-color: var(--btn-success);
   color: var(--card-header);
+}
+
+.toast-container.error {
+  background-color: var(--ligth-red);
+  color: var(--btn-danger);
 }
 
 /*Footer Component*/
@@ -278,6 +291,12 @@ footer {
   .card-container {
     width: 60%;
     margin: auto;
+  }
+
+  /*Toast and Page Header container*/
+  .toast-header-container {
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   /*FallBack component*/
