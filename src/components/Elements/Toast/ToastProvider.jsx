@@ -6,14 +6,34 @@ export const ToastContext = createContext();
  * Provides ToastContext for the rest of the app. Displays Toast Notification.
  */
 function ToastProvider({ children }) {
-  const [toast, setToast] = useState(null);
+  const [toast, setToast] = useState({
+    type: "",
+    message: "",
+  });
 
   const clearToast = () => {
-    setToast(null);
+    setToast({
+      type: "",
+      message: "",
+    });
+  };
+
+  const clearSuccessToast = () => {
+    if (toast?.type === "success") {
+      clearToast();
+    }
+  };
+
+  const clearErrorToast = () => {
+    if (toast?.type === "error") {
+      clearToast();
+    }
   };
 
   return (
-    <ToastContext value={{ toast, setToast, clearToast }}>
+    <ToastContext
+      value={{ toast, setToast, clearSuccessToast, clearErrorToast }}
+    >
       {children}
     </ToastContext>
   );

@@ -73,10 +73,18 @@ function RemoveItem() {
           setIsGroceryListEmpty(true);
         }
 
-        setToast(<Toast type="success" message="Item removed successfully" />);
+        setToast({
+          type: "success",
+          message: "Item removed successfully",
+        });
         navigate(-1);
       })
       .catch((error) => {
+        setToast({
+          type: "error",
+          message:
+            "Failed to remove item from your grocery list. Please try again.",
+        });
         setIsNavHidden(true);
         setError(error);
       });

@@ -5,19 +5,20 @@ import { Link } from "react-router";
 import { IoIosAddCircle, FaInfoCircle, MdDelete } from "../../utils/icons";
 import Footer from "../Static/Footer";
 import LinkButton from "../Elements/LinkButton";
+import Toast from "../Elements/Toast/Toast";
 import Loading from "../Elements/Loading";
 
 /**
  * Renders all groceries lists created by the user
  */
 function UserLists() {
-  const { toast, clearToast } = useContext(ToastContext);
+  const { toast, clearSuccessToast } = useContext(ToastContext);
   const { userLists, isLoadingData, isListEmpty } = useContext(ListContext);
 
   useEffect(() => {
     if (toast) {
       setTimeout(() => {
-        clearToast();
+        clearSuccessToast();
       }, 5000);
     }
   }, [toast]);
@@ -30,7 +31,10 @@ function UserLists() {
         ) : (
           <div className="content list">
             <div className="centered-column-container">
-              {toast ? toast : null}
+              {toast && toast?.type === "success" && toast?.message ? (
+                <Toast type={toast.type} message={toast.message} />
+              ) : null}
+
               <header className="header groceries">
                 <h1>My Lists</h1>
               </header>

@@ -63,12 +63,17 @@ function EditGroceriesList() {
       })
       .then((listToUpdate) => {
         setUserLists(listToUpdate);
-        setToast(
-          <Toast type="success" message="Groceries list updated successfully" />
-        );
+        setToast({
+          type: "success",
+          message: "Groceries list updated successfully",
+        });
         navigate(-1);
       })
       .catch((error) => {
+        setToast({
+          type: "error",
+          message: "Failed to edit groceries list. Please try again.",
+        });
         setIsNavHidden(true);
         setError(error);
       });

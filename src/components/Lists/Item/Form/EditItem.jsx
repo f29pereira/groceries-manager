@@ -69,10 +69,18 @@ function EditItem() {
           items_list: updatedItemsList,
         }));
 
-        setToast(<Toast type="success" message="Item updated successfully" />);
+        setToast({
+          type: "success",
+          message: "Item updated successfully",
+        });
         navigate(-1);
       })
       .catch((error) => {
+        setToast({
+          type: "error",
+          message:
+            "Failed to edit item from your grocery list. Please try again.",
+        });
         setIsNavHidden(true);
         setError(error);
       });

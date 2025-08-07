@@ -19,15 +19,15 @@ function Toast({ type, message }) {
       <div className="centered-container">
         <div className="centered-container toast-info">
           {type === "success" ? (
-            <BiCheck className="toast-icon" />
+            <BiCheck className={`toast-icon ${type}`} />
           ) : (
-            <BiError />
+            <BiError className={`toast-icon ${type}`} />
           )}
           <span className="toast-message">{message}</span>
         </div>
 
         <div className="close-container">
-          <IoClose className="toast-close" onClick={closeToast} />
+          <IoClose className={`toast-close ${type}`} onClick={closeToast} />
         </div>
       </div>
     </div>

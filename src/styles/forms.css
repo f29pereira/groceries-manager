@@ -149,8 +149,8 @@
 }
 
 .generic-error-container {
-  background-color: var(--cancel);
-  color: var(--white);
+  background-color: var(--ligth-red);
+  color: var(--btn-danger-hover);
   display: flex;
   align-items: center;
   border-radius: 5px;
@@ -186,7 +186,7 @@
 
 @media (min-width: 1200px) {
   .input-container {
-    width: 30%;
+    width: 40%;
   }
 
   .form-input {

@@ -20,7 +20,7 @@ import {
 } from "react-icons/io5";
 import { RiWeightLine } from "react-icons/ri";
 import { FaInfoCircle } from "react-icons/fa";
-import { PiChatText } from "react-icons/pi";
+import { PiChatText, PiFileMagnifyingGlass } from "react-icons/pi";
 
 export {
   FaUserPlus, //add user
@@ -49,4 +49,5 @@ export {
   BiCheck, //success
   IoClose, //close
   IoClipboardOutline, //clipboard
+  PiFileMagnifyingGlass, //page finding
 };

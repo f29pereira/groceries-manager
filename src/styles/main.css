@@ -2,9 +2,9 @@
 @import "smallScreenNav.css";
 @import "medBigScreenNav.css";
 @import "home.css";
-@import "pageNotFound.css";
 @import "forms.css";
 @import "groceries.css";
+@import "error.css";
 @import "elements.css";
 
 * {

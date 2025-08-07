@@ -43,12 +43,17 @@ function AddGroceriesList() {
           setIsListEmpty(false);
         }
 
-        setToast(
-          <Toast type="success" message="Groceries list added successfully" />
-        );
+        setToast({
+          type: "success",
+          message: "Groceries list added successfully",
+        });
         navigate(-1);
       })
       .catch((error) => {
+        setToast({
+          type: "error",
+          message: "Failed to add groceries list. Please try again.",
+        });
         setIsNavHidden(true);
         setError(error);
       });

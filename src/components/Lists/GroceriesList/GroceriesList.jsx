@@ -14,6 +14,7 @@ import { checkItemById } from "../js/items_firebase";
 import Footer from "../../Static/Footer";
 import LinkButton from "../../Elements/LinkButton";
 import Loading from "../../Elements/Loading";
+import Toast from "../../Elements/Toast/Toast";
 
 /**
  * Renders groceries list table with items
@@ -21,7 +22,7 @@ import Loading from "../../Elements/Loading";
 function GroceriesList() {
   //useContext Hooks
   const { setIsNavHidden } = useContext(AuthContext);
-  const { toast, clearToast } = useContext(ToastContext);
+  const { toast, clearSuccessToast } = useContext(ToastContext);
   const {
     groceriesList,
     isLoadingData,
@@ -39,7 +40,7 @@ function GroceriesList() {
   useEffect(() => {
     if (toast) {
       setTimeout(() => {
-        clearToast();
+        clearSuccessToast();
       }, 5000);
     }
   }, [toast]);
@@ -75,7 +76,11 @@ function GroceriesList() {
                 <h1>{groceriesList.name}</h1>
               </header>
 
-              <div className="centered-container">{toast ? toast : null}</div>
+              <div className="centered-container">
+                {toast && toast?.type === "success" && toast?.message ? (
+                  <Toast type={toast.type} message={toast.message} />
+                ) : null}
+              </div>
             </div>
 
             <section className="groceries-info">
