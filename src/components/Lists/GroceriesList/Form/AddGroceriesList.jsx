@@ -8,7 +8,6 @@ import { addEmptyGroceryList } from "../../js/groceries_firebase";
 import { IoAdd } from "../../../../utils/icons";
 import Card from "../../../Elements/Card";
 import GroceriesListForm from "./GroceriesListForm";
-import Toast from "../../../Elements/Toast/Toast";
 import Footer from "../../../Static/Footer";
 
 /**
@@ -28,6 +27,7 @@ function AddGroceriesList() {
     description: "",
   });
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (event) => {
     handleInputChange(event, setListFormData);
@@ -35,6 +35,7 @@ function AddGroceriesList() {
 
   const addList = (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
     addEmptyGroceryList(currentUser.uid, listFormData, userLists)
       .then((groceriesList) => {
@@ -56,6 +57,9 @@ function AddGroceriesList() {
         });
         setIsNavHidden(true);
         setError(error);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
   };
 
@@ -82,6 +86,7 @@ function AddGroceriesList() {
                 handleChange={handleChange}
                 formData={listFormData}
                 handleCancel={clearData}
+                isSubmitting={isSubmitting}
               />
             }
           ></Card>

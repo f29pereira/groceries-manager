@@ -1,4 +1,4 @@
-import { IoText, PiChatText } from "../../../../utils/icons";
+import { IoText, PiChatText, BsThreeDots } from "../../../../utils/icons";
 import RequiredField from "../../../Elements/RequiredField";
 
 /**
@@ -7,12 +7,14 @@ import RequiredField from "../../../Elements/RequiredField";
  * @param {function} handleChange       - sets name/description state values
  * @param {string} formData             - name/description state values
  * @param {funcion} handleCancel        - cancel button onClick function
+ * @param {boolean} isSubmitting        - form is submitting
  */
 function GroceriesListForm({
   handleOnSubmit,
   handleChange,
   formData,
   handleCancel,
+  isSubmitting,
 }) {
   return (
     <form
@@ -66,10 +68,21 @@ function GroceriesListForm({
         </div>
       </div>
       <div className="centered-container submit-cancel-btns">
-        <button type="submit" className="btn green">
-          Submit
+        <button type="submit" className="btn green" disabled={isSubmitting}>
+          {isSubmitting ? (
+            <div className="centered-container">
+              Submitting
+              <BsThreeDots className="submitting-icon" />
+            </div>
+          ) : (
+            "Submit"
+          )}
         </button>
-        <button className="btn red" onClick={handleCancel}>
+        <button
+          className="btn red"
+          onClick={handleCancel}
+          disabled={isSubmitting}
+        >
           Cancel
         </button>
       </div>

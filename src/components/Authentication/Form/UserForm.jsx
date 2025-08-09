@@ -1,6 +1,10 @@
 import { Link } from "react-router";
 import ErrorMessage from "../../ErrorHandling/Errors/ErrorMessage";
-import { MdAlternateEmail, TbLockPassword } from "../../../utils/icons";
+import {
+  MdAlternateEmail,
+  TbLockPassword,
+  BsThreeDots,
+} from "../../../utils/icons";
 import RequiredField from "../../Elements/RequiredField";
 
 /**
@@ -13,6 +17,8 @@ import RequiredField from "../../Elements/RequiredField";
  * @param {boolean} forgotPassword      - shows forgotPassword link
  * @param {boolean} showPasswordRules   - shows pop up with password rules
  * @param {string} submitBtnTxt         - submit button text
+ * @param {boolean} isSubmitting        - form is submitting
+ * @param {string} submittingBtnThx     - button text when form is submitting
  */
 function UserForm({
   handleOnSubmit,
@@ -23,6 +29,8 @@ function UserForm({
   forgotPassword,
   showPasswordRules,
   submitBtnTxt,
+  isSubmitting,
+  submittingBtnThx,
 }) {
   return (
     <form
@@ -33,9 +41,7 @@ function UserForm({
       {errorMsg.generic.length > 0 ? (
         <ErrorMessage type="generic">{errorMsg.generic}</ErrorMessage>
       ) : null}
-
       <p className="form-description">{description}</p>
-
       <div className="input-container">
         <div className="left-container label-required">
           <label htmlFor="user-email" className="form-label">
@@ -107,15 +113,21 @@ function UserForm({
           <ErrorMessage type="input">{errorMsg.password}</ErrorMessage>
         ) : null}
       </div>
-
       {forgotPassword ? (
         <Link to="/resetPassword" className="click-link reset-password">
           Forgot Password ?
         </Link>
       ) : null}
 
-      <button type="submit" className="btn green">
-        {submitBtnTxt}
+      <button type="submit" className="btn green" disabled={isSubmitting}>
+        {isSubmitting ? (
+          <div className="centered-container">
+            {submittingBtnThx}
+            <BsThreeDots className="submitting-icon" />
+          </div>
+        ) : (
+          submitBtnTxt
+        )}
       </button>
     </form>
   );

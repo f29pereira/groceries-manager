@@ -72,7 +72,7 @@ This project was built using **Vite** and **React 19**.
 
 ![Empty Groceries list page](src/assets/images/readme/groceries/groceriesLists_empty.png)
 
-**Add items** - to add a new item users must fill out the name, quantity and categories fields.
+**Add items** - to add a new item users must fill out the "Name", "Quantity" and "Category" fields.
 
 ![Add item to groceries list page](src/assets/images/readme/item/add_item.png)
 
@@ -95,6 +95,8 @@ This project was built using **Vite** and **React 19**.
 **Remove Item** - users can remove an item from a groceries list, if the item is unchecked.
 
 ![Remove item page](src/assets/images/readme/item/remove_item.png)
+
+![Remove item success](src/assets/images/readme/item/remove_item_success.png)
 
 <br>
 

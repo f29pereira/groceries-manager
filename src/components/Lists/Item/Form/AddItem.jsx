@@ -34,6 +34,7 @@ function AddItem() {
     category_id: "",
   });
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   //useNavigate Hook
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ function AddItem() {
 
   const addItemToGroceryList = (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
     addItem(groceriesList.id, itemFormData)
       .then((newItem) => {
@@ -79,6 +81,9 @@ function AddItem() {
         });
         setIsNavHidden(true);
         setError(error);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
   };
 
@@ -105,6 +110,7 @@ function AddItem() {
                 handleChange={handleChange}
                 formData={itemFormData}
                 handleCancel={clearData}
+                isSubmitting={isSubmitting}
               />
             }
           />

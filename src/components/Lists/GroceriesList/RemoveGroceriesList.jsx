@@ -8,9 +8,8 @@ import {
   getGroceriesListById,
   deleteGroceryListById,
 } from "../js/groceries_firebase";
-import { MdDelete } from "../../../utils/icons";
+import { MdDelete, BsThreeDots } from "../../../utils/icons";
 import Card from "../../Elements/Card";
-import Toast from "../../Elements/Toast/Toast";
 import Footer from "../../Static/Footer";
 
 function RemoveGroceriesList() {
@@ -26,6 +25,7 @@ function RemoveGroceriesList() {
     items_count: "",
   });
   const [error, setError] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   //React router Hooks
   const navigate = useNavigate();
@@ -50,6 +50,8 @@ function RemoveGroceriesList() {
   }, []);
 
   const removeGroceryList = () => {
+    setIsDeleting(true);
+
     deleteGroceryListById(location.state?.id, userLists)
       .then((updatedUserLists) => {
         setUserLists(updatedUserLists);
@@ -71,6 +73,9 @@ function RemoveGroceriesList() {
         });
         setIsNavHidden(true);
         setError(error);
+      })
+      .finally(() => {
+        setIsDeleting(false);
       });
   };
 
@@ -111,10 +116,25 @@ function RemoveGroceriesList() {
                 </div>
 
                 <div className="centered-container submit-cancel-btns">
-                  <button className="btn green" onClick={removeGroceryList}>
-                    Confirm
+                  <button
+                    className="btn green"
+                    onClick={removeGroceryList}
+                    disabled={isDeleting}
+                  >
+                    {isDeleting ? (
+                      <div className="centered-container">
+                        Deleting List
+                        <BsThreeDots className="submitting-icon" />
+                      </div>
+                    ) : (
+                      "Confirm"
+                    )}
                   </button>
-                  <button className="btn red" onClick={handleGoBack}>
+                  <button
+                    className="btn red"
+                    onClick={handleGoBack}
+                    disabled={isDeleting}
+                  >
                     Cancel
                   </button>
                 </div>

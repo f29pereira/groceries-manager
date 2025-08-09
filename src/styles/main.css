@@ -45,6 +45,7 @@ p {
 
 button {
   border: none;
+  transition: background-color 0.5s, color 0.5s;
 }
 
 .click-link {
@@ -162,6 +163,23 @@ button {
 .space-between-container {
   display: flex;
   justify-content: space-between;
+}
+
+/*disabled button*/
+button:disabled {
+  cursor: not-allowed;
+  background-color: var(--ligth-gray);
+  color: var(--checked-item);
+}
+
+.btn:disabled:hover {
+  background-color: var(--ligth-gray);
+}
+
+/*Button form submitting icon*/
+.submitting-icon {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
 }
 
 @media (min-width: 800px) {

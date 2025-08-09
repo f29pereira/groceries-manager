@@ -5,9 +5,8 @@ import { ListContext } from "../List";
 import { GroceriesContext } from "../GroceriesList/Groceries";
 import { useLocation, useNavigate } from "react-router";
 import { getItemById, removeItemById } from "../js/items_firebase";
-import { MdDelete } from "../../../utils/icons";
+import { MdDelete, BsThreeDots } from "../../../utils/icons";
 import Card from "../../Elements/Card";
-import Toast from "../../Elements/Toast/Toast";
 import Footer from "../../Static/Footer";
 
 /**
@@ -24,6 +23,7 @@ function RemoveItem() {
   //useState Hooks
   const [itemToRemove, setItemToRemove] = useState({});
   const [error, setError] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   //React Router Hooks
   const location = useLocation();
@@ -48,6 +48,8 @@ function RemoveItem() {
   }, []);
 
   const removeItemFromGroceryList = () => {
+    setIsDeleting(true);
+
     removeItemById(
       location.state?.itemId,
       groceriesList.id,
@@ -87,6 +89,9 @@ function RemoveItem() {
         });
         setIsNavHidden(true);
         setError(error);
+      })
+      .finally(() => {
+        setIsDeleting(false);
       });
   };
 
@@ -136,10 +141,22 @@ function RemoveItem() {
                   <button
                     className="btn green"
                     onClick={removeItemFromGroceryList}
+                    disabled={isDeleting}
                   >
-                    Confirm
+                    {isDeleting ? (
+                      <div className="centered-container">
+                        Deleting Item
+                        <BsThreeDots className="submitting-icon" />
+                      </div>
+                    ) : (
+                      "Confirm"
+                    )}
                   </button>
-                  <button className="btn red" onClick={handleGoBack}>
+                  <button
+                    className="btn red"
+                    onClick={handleGoBack}
+                    disabled={isDeleting}
+                  >
                     Cancel
                   </button>
                 </div>

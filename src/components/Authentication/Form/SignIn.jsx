@@ -10,19 +10,23 @@ import UserForm from "./UserForm";
 import Footer from "../../Static/Footer";
 
 function SignIn() {
+  //useContext Hooks
   const { setisSignedIn, setCurrentUser } = useContext(AuthContext);
-  const navigate = useNavigate();
 
+  //useState Hooks
   const [signInFormData, setSignInFormData] = useState({
     email: "",
     password: "",
   });
-
   const [errorMsg, setErrorMsg] = useState({
     generic: "",
     email: "",
     password: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  //useNavigate Hooks
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     handleInputChange(event, setSignInFormData);
@@ -30,6 +34,8 @@ function SignIn() {
 
   const signInUser = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
     signInWithEmailAndPassword(
       auth,
       signInFormData.email,
@@ -42,6 +48,9 @@ function SignIn() {
       })
       .catch((error) => {
         showError(error, setErrorMsg);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
   };
 
@@ -64,6 +73,8 @@ function SignIn() {
                   forgotPassword={false}
                   showPasswordRules={false}
                   submitBtnTxt="Sign In"
+                  isSubmitting={isSubmitting}
+                  submittingBtnThx="Signing In"
                 />
                 <p id="create-account">Don't have an account ?</p>
                 <Link to="/signUp" className="click-link">

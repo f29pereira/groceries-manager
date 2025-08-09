@@ -10,19 +10,23 @@ import UserForm from "./UserForm";
 import Footer from "../../Static/Footer";
 
 function SignUp() {
+  //useContext Hooks
   const { setisSignedIn, setCurrentUser } = useContext(AuthContext);
+
+  //useNavigate Hooks
   const navigate = useNavigate();
 
+  //useState Hooks
   const [signUpFormData, setSignUpFormData] = useState({
     email: "",
     password: "",
   });
-
   const [errorMsg, setErrorMsg] = useState({
     generic: "",
     email: "",
     password: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (event) => {
     handleInputChange(event, setSignUpFormData);
@@ -30,6 +34,8 @@ function SignUp() {
 
   const signUpUser = (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
     createUserWithEmailAndPassword(
       auth,
       signUpFormData.email,
@@ -38,10 +44,13 @@ function SignUp() {
       .then((userCredential) => {
         setCurrentUser(userCredential.user);
         setisSignedIn((prev) => !prev);
-        navigate("myLists");
+        navigate("/myLists");
       })
       .catch((error) => {
         showError(error, setErrorMsg);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
   };
 
@@ -62,6 +71,8 @@ function SignUp() {
                 formData={signUpFormData}
                 showPasswordRules={true}
                 submitBtnTxt="Sign Up"
+                isSubmitting={isSubmitting}
+                submittingBtnThx="Signing Up"
               />
             }
           />

@@ -1,4 +1,4 @@
-import { BsList } from "react-icons/bs";
+import { BsList, BsThreeDots } from "react-icons/bs";
 import { IoMdCloseCircle, IoIosAddCircle } from "react-icons/io";
 import { TbPaperBag, TbLockPassword } from "react-icons/tb";
 import { BiError, BiTag, BiCheck } from "react-icons/bi";
@@ -29,6 +29,7 @@ export {
   MdAlternateEmail, //user e-mail
   IoIosAddCircle, //add circle
   BsList, //hamburguer
+  BsThreeDots, //...
   IoMdCloseCircle,
   TbPaperBag, //paper bag
   BiError, //warning

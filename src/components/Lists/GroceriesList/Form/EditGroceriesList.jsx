@@ -31,6 +31,7 @@ function EditGroceriesList() {
     description: "",
   });
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   //useNavigate Hook
   const navigate = useNavigate();
@@ -55,6 +56,7 @@ function EditGroceriesList() {
 
   const editGroceryList = (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
     updateGroceryList(groceriesList, listFormData)
       .then((updatedGroceriesList) => {
@@ -76,6 +78,9 @@ function EditGroceriesList() {
         });
         setIsNavHidden(true);
         setError(error);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
   };
 
@@ -102,6 +107,7 @@ function EditGroceriesList() {
                 handleChange={handleChange}
                 formData={listFormData}
                 handleCancel={goBack}
+                isSubmitting={isSubmitting}
               />
             }
           ></Card>

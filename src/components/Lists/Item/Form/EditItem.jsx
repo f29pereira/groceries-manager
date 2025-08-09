@@ -8,7 +8,6 @@ import { GroceriesContext } from "../../GroceriesList/Groceries";
 import { ToastContext } from "../../../Elements/Toast/ToastProvider";
 import Card from "../../../Elements/Card";
 import ItemForm from "./ItemForm";
-import Toast from "../../../Elements/Toast/Toast";
 import Footer from "../../../Static/Footer";
 
 /**
@@ -27,14 +26,11 @@ function EditItem() {
     category_id: "",
   });
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   //React Router Hooks
   const location = useLocation();
   const navigate = useNavigate();
-
-  const handleChange = (event) => {
-    handleInputChange(event, setEditItemFormData);
-  };
 
   //useEffect Hook
   useEffect(() => {
@@ -55,8 +51,13 @@ function EditItem() {
     setItemData();
   }, []);
 
+  const handleChange = (event) => {
+    handleInputChange(event, setEditItemFormData);
+  };
+
   const editItem = (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
     updateItemById(
       location.state?.itemId,
@@ -83,6 +84,9 @@ function EditItem() {
         });
         setIsNavHidden(true);
         setError(error);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
   };
 
@@ -109,6 +113,7 @@ function EditItem() {
                 handleChange={handleChange}
                 formData={editItemFormData}
                 handleCancel={goBack}
+                isSubmitting={isSubmitting}
               />
             }
           />
