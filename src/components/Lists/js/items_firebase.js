@@ -13,6 +13,7 @@ import {
   getDocumentRefSnapShot,
   validateArray,
   validateString,
+  compareStrings,
 } from "../../../utils/utils";
 import {
   validateGroceriesListSnapShot,
@@ -206,6 +207,7 @@ export const updateItemById = async (itemId, formData, itemsList) => {
  */
 export const checkItemById = async (itemId, itemsList) => {
   validateString(itemId);
+  validateArray(itemsList);
 
   //item document
   const itemDoc = await getDocumentRefSnapShot("items", itemId);
@@ -270,4 +272,37 @@ const validateItemFormData = (formData) => {
   validateString(formData.category_id, "category Id");
 
   return;
+};
+
+/**
+ * Sorts items list by category and name
+ * @param {array} itemsList - list of items to sort
+ * @param {string} categoriesOrder - categories sorting order (asc/desc)
+ * @param {string} itemsNameOrder - items name sorting order (asc/desc)
+ * @returns {array} sorted items list
+ */
+export const sortItems = (itemsList, categoriesOrder, itemsNameOrder) => {
+  validateArray(itemsList);
+  validateString(categoriesOrder);
+  validateString(itemsNameOrder);
+
+  const itemsListSorted = [...itemsList];
+
+  itemsListSorted.sort((a, b) => {
+    const categoriesComparison =
+      categoriesOrder === "asc"
+        ? compareStrings(a.category_name, b.category_name)
+        : compareStrings(b.category_name, a.category_name);
+
+    if (categoriesComparison !== 0) {
+      // If categories are different, skip item name comparison
+      return categoriesComparison;
+    }
+
+    return itemsNameOrder === "asc"
+      ? compareStrings(a.name, b.name)
+      : compareStrings(b.name, a.name);
+  });
+
+  return itemsListSorted;
 };

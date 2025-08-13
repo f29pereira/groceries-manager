@@ -17,6 +17,8 @@ import {
   IoArrowBackCircle,
   IoText,
   IoClipboardOutline,
+  IoArrowUpCircle,
+  IoArrowDownCircle,
 } from "react-icons/io5";
 import { RiWeightLine } from "react-icons/ri";
 import { FaInfoCircle } from "react-icons/fa";
@@ -51,4 +53,6 @@ export {
   IoClose, //close
   IoClipboardOutline, //clipboard
   PiFileMagnifyingGlass, //page finding
+  IoArrowUpCircle, //circle with arrow up
+  IoArrowDownCircle, //circle with arrow down
 };

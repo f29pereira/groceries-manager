@@ -164,3 +164,16 @@ export const validateObject = (object, objectName) => {
     );
   }
 };
+
+/**
+ * Compares two strings and returns number
+ * @param {string} firstString - first string value
+ * @param {string} secondString - second string value
+ * @returns {number} returns -1 (firstString < secondString), 1 (firstString > secondString), 0 (firstString = secondString)
+ */
+export const compareStrings = (firstString, secondString) => {
+  validateString(firstString);
+  validateString(secondString);
+
+  return firstString.toLowerCase().localeCompare(secondString.toLowerCase());
+};

@@ -179,7 +179,7 @@ button:disabled {
 /*Button form submitting icon*/
 .submitting-icon {
   margin-left: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
 }
 
 @media (min-width: 800px) {

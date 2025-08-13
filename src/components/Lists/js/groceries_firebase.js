@@ -17,6 +17,7 @@ import {
   validateArray,
   validateObject,
 } from "../../../utils/utils";
+import { sortItems } from "./items_firebase";
 
 /**
  * Creates a new document on the groceries_list collection
@@ -173,7 +174,7 @@ export const fetchGroceryListById = async (listId) => {
   groceryListToCopy.created_at = formatDate(groceriesData.created_at);
 
   //items document references
-  const itemsList = groceriesData.items_list.reverse();
+  const itemsList = groceriesData.items_list;
 
   groceryListToCopy.items_count = itemsList.length;
 
@@ -222,7 +223,10 @@ export const fetchGroceryListById = async (listId) => {
     }
   }
 
-  return groceryListToCopy;
+  return {
+    ...groceryListToCopy,
+    items_list: sortItems(groceryListToCopy.items_list, "asc", "asc"),
+  };
 };
 
 /**

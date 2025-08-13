@@ -10,11 +10,13 @@ import {
   MdEdit,
 } from "../../../utils/icons";
 import { GroceriesContext } from "./Groceries";
-import { checkItemById } from "../js/items_firebase";
+import { checkItemById, sortItems } from "../js/items_firebase";
 import Footer from "../../Static/Footer";
 import LinkButton from "../../Elements/LinkButton";
 import Loading from "../../Elements/Loading";
 import Toast from "../../Elements/Toast/Toast";
+import SortIcon from "../../Elements/SortIcon";
+import useSort from "../../customHooks/useSort";
 
 /**
  * Renders groceries list table with items
@@ -25,9 +27,9 @@ function GroceriesList() {
   const { toast, clearSuccessToast } = useContext(ToastContext);
   const {
     groceriesList,
+    setGroceriesList,
     isLoadingData,
     isGroceriesListEmpty,
-    setGroceriesList,
   } = useContext(GroceriesContext);
 
   //useState Hooks
@@ -36,15 +38,16 @@ function GroceriesList() {
   //useLocation Hook
   const location = useLocation();
 
-  //useEffect Hook
-  useEffect(() => {
-    if (toast) {
-      setTimeout(() => {
-        clearSuccessToast();
-      }, 5000);
-    }
-  }, [toast]);
+  //custom Hooks
+  const { sorting: categorySort, toggleSortOrder: categorySortOrder } =
+    useSort("category");
+  const { sorting: itemNameSort, toggleSortOrder: itemNameSortOrder } =
+    useSort("itemName");
 
+  /**
+   * Toggles item check
+   * @param {string} itemId - item id
+   */
   const toggleCheck = (itemId) => {
     checkItemById(itemId, groceriesList.items_list)
       .then((updatedItemsList) => {
@@ -58,6 +61,53 @@ function GroceriesList() {
         setError(error);
       });
   };
+
+  /**
+   * Toggles the sorting order for given column
+   * @param {string} column_name - column name to toggle sort
+   */
+  const toggleColumnSort = (column_name) => {
+    if (column_name === "category") {
+      categorySortOrder();
+    } else if (column_name === "itemName") {
+      itemNameSortOrder();
+    }
+  };
+
+  //useEffect Hooks
+  useEffect(() => {
+    if (toast) {
+      setTimeout(() => {
+        clearSuccessToast();
+      }, 5000);
+    }
+  }, [toast]);
+
+  useEffect(() => {
+    if (groceriesList?.items_list.length) {
+      try {
+        const sortedItems = sortItems(
+          groceriesList.items_list,
+          categorySort.order,
+          itemNameSort.order
+        );
+
+        const groceriesListData = {
+          ...groceriesList,
+          items_list: sortedItems,
+        };
+
+        setGroceriesList(groceriesListData);
+      } catch (error) {
+        setToast({
+          type: "error",
+          message: "Failed to sort items. Please try again.",
+        });
+        setIsNavHidden(true);
+        setError(error);
+      }
+    }
+  }, [categorySort, itemNameSort]);
 
   if (error) {
     console.log(error);
@@ -117,8 +167,32 @@ function GroceriesList() {
 
               <div className="table">
                 <div className="row-container table-header">
-                  <div className="column-container category">Category</div>
-                  <div className="column-container itemName">Item</div>
+                  <div className="column-container category">
+                    <div className="centered-container">
+                      Category
+                      <div
+                        className="column-container"
+                        onClick={() => {
+                          toggleColumnSort("category");
+                        }}
+                      >
+                        <SortIcon order={categorySort.order} />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="column-container itemName">
+                    <div className="centered-container">
+                      Item
+                      <div
+                        className="column-container"
+                        onClick={() => {
+                          toggleColumnSort("itemName");
+                        }}
+                      >
+                        <SortIcon order={itemNameSort.order} />
+                      </div>
+                    </div>
+                  </div>
                   <div className="column-container itemQuantity">Qty</div>
                   <div className="column-container itemActions">Actions</div>
                 </div>
