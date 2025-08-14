@@ -16,8 +16,8 @@ import {
   validateString,
   validateArray,
   validateObject,
+  sortColumns,
 } from "../../../utils/utils";
-import { sortItems } from "./items_firebase";
 
 /**
  * Creates a new document on the groceries_list collection
@@ -52,7 +52,8 @@ export const addEmptyGroceryList = async (userId, formData, userLists) => {
     description: formData.description,
     items_list: [],
     items_count: 0,
-    created_at: formatDate(date),
+    created_at: date,
+    formatted_created_at: formatDate(date),
   };
 
   let updatedUserLists = userLists;
@@ -82,19 +83,25 @@ export const fetchAllUserLists = async (userId) => {
     for (const list of userLists) {
       const items = list.data.items_list;
       const itemsLength = items ? items.length : 0;
-      const date = formatDate(list.data.created_at);
 
       userListsCopy.push({
         id: list.id,
         name: list.data.name,
-        created_at: date,
+        created_at: list.data.created_at,
+        formatted_created_at: formatDate(list.data.created_at),
         description: list.data.description,
         items_count: itemsLength,
       });
     }
   }
 
-  return userListsCopy.reverse();
+  //Object to sort columns
+  const sortDateObj = {
+    order: "desc",
+    attrToOrder: "created_at",
+  };
+
+  return sortColumns(userListsCopy, sortDateObj);
 };
 
 /**
@@ -223,9 +230,24 @@ export const fetchGroceryListById = async (listId) => {
     }
   }
 
+  //Objects to sort columns
+  const sortCategoriesObj = {
+    order: "asc",
+    attrToOrder: "category_name",
+  };
+
+  const sortItemsNameObj = {
+    order: "asc",
+    attrToOrder: "name",
+  };
+
   return {
     ...groceryListToCopy,
-    items_list: sortItems(groceryListToCopy.items_list, "asc", "asc"),
+    items_list: sortColumns(
+      groceryListToCopy.items_list,
+      sortCategoriesObj,
+      sortItemsNameObj
+    ),
   };
 };
 

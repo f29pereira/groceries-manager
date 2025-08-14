@@ -21,18 +21,30 @@ export const getDocumentRefSnapShot = async (collectionName, documentId) => {
 /**
  * Formats date YYY/MM/DD
  * @param {string} date - date timestamp
+ * @returns {string} formated date
  */
 export const formatDate = (date) => {
-  let newDate = "";
+  validateString(date);
 
-  if (date !== null && typeof date === "string") {
-    const year = date.slice(0, 4);
-    const month = date.slice(5, 7);
-    const day = date.slice(8, 10);
-    newDate = `${year}/${month}/${day}`;
-  }
+  const year = date.slice(0, 4);
+  const month = date.slice(5, 7);
+  const day = date.slice(8, 10);
+  const time = formatTime(date.split("T")[1]);
 
-  return newDate;
+  return `${year}/${month}/${day} - ${time}`;
+};
+
+/**
+ * Formats time HH:MM
+ * @param {string} time - timestamp
+ * @returns {string} formated time
+ */
+const formatTime = (time) => {
+  validateString(time);
+
+  let formatedTime = time.slice(0, 5);
+
+  return formatedTime;
 };
 
 /**
@@ -176,4 +188,53 @@ export const compareStrings = (firstString, secondString) => {
   validateString(secondString);
 
   return firstString.toLowerCase().localeCompare(secondString.toLowerCase());
+};
+
+/**
+ * Sorts list by given columns
+ * @param {array} listToSort - list to be sorted
+ * @param {string} firstColumnObj - column object (sort order/attribute name to order) to be sorted
+ * @param {string} secondColumnObj - column object (sort order/attribute name to order) to be sorted
+ * @returns {array} sorted list
+ */
+export const sortColumns = (
+  listToSort,
+  firstColumnObj,
+  secondColumnObj = {}
+) => {
+  validateArray(listToSort);
+  validateObject(firstColumnObj);
+  validateObject(secondColumnObj);
+
+  const listSorted = [...listToSort];
+
+  listSorted.sort((a, b) => {
+    const firstColumnComparison =
+      firstColumnObj.order === "asc"
+        ? compareStrings(
+            a[firstColumnObj.attrToOrder],
+            b[firstColumnObj.attrToOrder]
+          )
+        : compareStrings(
+            b[firstColumnObj.attrToOrder],
+            a[firstColumnObj.attrToOrder]
+          );
+
+    if (firstColumnComparison !== 0) {
+      // If first column values are different, skip second column comparison
+      return firstColumnComparison;
+    }
+
+    return secondColumnObj.order === "asc"
+      ? compareStrings(
+          a[secondColumnObj.attrToOrder],
+          b[secondColumnObj.attrToOrder]
+        )
+      : compareStrings(
+          b[secondColumnObj.attrToOrder],
+          a[secondColumnObj.attrToOrder]
+        );
+  });
+
+  return listSorted;
 };

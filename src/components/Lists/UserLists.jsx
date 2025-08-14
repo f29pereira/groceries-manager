@@ -3,18 +3,28 @@ import { ToastContext } from "../Elements/Toast/ToastProvider";
 import { ListContext } from "./List";
 import { Link } from "react-router";
 import { IoIosAddCircle, FaInfoCircle, MdDelete } from "../../utils/icons";
+import { sortColumns } from "../../utils/utils";
 import Footer from "../Static/Footer";
 import LinkButton from "../Elements/LinkButton";
 import Toast from "../Elements/Toast/Toast";
 import Loading from "../Elements/Loading";
+import useSort from "../customHooks/useSort";
+import SortIcon from "../Elements/SortIcon";
 
 /**
  * Renders all groceries lists created by the user
  */
 function UserLists() {
+  //useContext Hooks
   const { toast, clearSuccessToast } = useContext(ToastContext);
-  const { userLists, isLoadingData, isListEmpty } = useContext(ListContext);
+  const { userLists, setUserLists, isLoadingData, isListEmpty } =
+    useContext(ListContext);
 
+  //custom Hook
+  const { sorting, toggleSortOrder } = useSort("created_at", "desc");
+
+  //useEffect Hook
+  //clears toast notification after 5 seconds
   useEffect(() => {
     if (toast) {
       setTimeout(() => {
@@ -22,6 +32,34 @@ function UserLists() {
       }, 5000);
     }
   }, [toast]);
+
+  //updates grocery lists sort order when sorting order changes value
+  useEffect(() => {
+    if (userLists.length) {
+      try {
+        const sortedGroceryList = sortColumns(userLists, {
+          order: sorting.order,
+          attrToOrder: "created_at",
+        });
+
+        setUserLists(sortedGroceryList);
+      } catch (error) {
+        setToast({
+          type: "error",
+          message: "Failed to sort your lists. Please try again.",
+        });
+        setIsNavHidden(true);
+        setError(error);
+      }
+    }
+  }, [sorting.order]);
+
+  /**
+   * Toggles the sorting order for given column
+   */
+  const toggleColumnSort = () => {
+    toggleSortOrder();
+  };
 
   return (
     <>
@@ -60,7 +98,17 @@ function UserLists() {
                 <div className="row-container table-header">
                   <div className="column-container name">Name</div>
                   <div className="column-container creationDate">
-                    Creation Date
+                    <div className="centered-container">
+                      Creation Date
+                      <div
+                        className="column-container"
+                        onClick={() => {
+                          toggleColumnSort();
+                        }}
+                      >
+                        <SortIcon order={sorting.order} />
+                      </div>
+                    </div>
                   </div>
                   <div className="column-container itemCount">Items</div>
                   <div className="column-container listInfo">Actions</div>
@@ -75,7 +123,7 @@ function UserLists() {
                     <div key={index} className="row-container data">
                       <div className="column-container name">{list.name}</div>
                       <div className="column-container creationDate">
-                        {list.created_at}
+                        {list.formatted_created_at}
                       </div>
                       <div className="column-container itemCount">
                         {list.items_count}

@@ -10,7 +10,8 @@ import {
   MdEdit,
 } from "../../../utils/icons";
 import { GroceriesContext } from "./Groceries";
-import { checkItemById, sortItems } from "../js/items_firebase";
+import { checkItemById } from "../js/items_firebase";
+import { sortColumns } from "../../../utils/utils";
 import Footer from "../../Static/Footer";
 import LinkButton from "../../Elements/LinkButton";
 import Loading from "../../Elements/Loading";
@@ -75,6 +76,7 @@ function GroceriesList() {
   };
 
   //useEffect Hooks
+  //clears toast notification after 5 seconds
   useEffect(() => {
     if (toast) {
       setTimeout(() => {
@@ -83,13 +85,14 @@ function GroceriesList() {
     }
   }, [toast]);
 
+  //updates groceries list sort order when categorySort/itemNameSort changes value
   useEffect(() => {
     if (groceriesList?.items_list.length) {
       try {
-        const sortedItems = sortItems(
+        const sortedItems = sortColumns(
           groceriesList.items_list,
-          categorySort.order,
-          itemNameSort.order
+          { order: categorySort.order, attrToOrder: "category_name" },
+          { order: itemNameSort.order, attrToOrder: "name" }
         );
 
         const groceriesListData = {
