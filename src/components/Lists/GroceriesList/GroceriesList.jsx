@@ -10,8 +10,7 @@ import {
   MdEdit,
 } from "../../../utils/icons";
 import { GroceriesContext } from "./Groceries";
-import { checkItemById } from "../js/items_firebase";
-import { sortColumns } from "../../../utils/utils";
+import { checkItemById, getSortedAndCheckedItems } from "../js/items_firebase";
 import Footer from "../../Static/Footer";
 import LinkButton from "../../Elements/LinkButton";
 import Loading from "../../Elements/Loading";
@@ -25,7 +24,7 @@ import useSort from "../../customHooks/useSort";
 function GroceriesList() {
   //useContext Hooks
   const { setIsNavHidden } = useContext(AuthContext);
-  const { toast, clearSuccessToast } = useContext(ToastContext);
+  const { toast, setToast, clearSuccessToast } = useContext(ToastContext);
   const {
     groceriesList,
     setGroceriesList,
@@ -41,16 +40,16 @@ function GroceriesList() {
 
   //custom Hooks
   const { sorting: categorySort, toggleSortOrder: categorySortOrder } =
-    useSort("category");
+    useSort("category_name");
   const { sorting: itemNameSort, toggleSortOrder: itemNameSortOrder } =
-    useSort("itemName");
+    useSort("name");
 
   /**
    * Toggles item check
    * @param {string} itemId - item id
    */
   const toggleCheck = (itemId) => {
-    checkItemById(itemId, groceriesList.items_list)
+    checkItemById(itemId, groceriesList.items_list, categorySort, itemNameSort)
       .then((updatedItemsList) => {
         setGroceriesList((prevList) => ({
           ...prevList,
@@ -89,10 +88,10 @@ function GroceriesList() {
   useEffect(() => {
     if (groceriesList?.items_list.length) {
       try {
-        const sortedItems = sortColumns(
+        const sortedItems = getSortedAndCheckedItems(
           groceriesList.items_list,
-          { order: categorySort.order, attrToOrder: "category_name" },
-          { order: itemNameSort.order, attrToOrder: "name" }
+          { column_name: categorySort.column_name, order: categorySort.order },
+          { column_name: itemNameSort.column_name, order: itemNameSort.order }
         );
 
         const groceriesListData = {
@@ -154,7 +153,7 @@ function GroceriesList() {
               <div className="space-between-container counter-list">
                 <div className="centered-container">
                   <h2 className="counter">
-                    Items Count: <span>{groceriesList.items_count}</span>
+                    Items Count: <span>{groceriesList?.items_count}</span>
                   </h2>
                 </div>
 
@@ -173,27 +172,31 @@ function GroceriesList() {
                   <div className="column-container category">
                     <div className="centered-container">
                       Category
-                      <div
-                        className="column-container"
-                        onClick={() => {
-                          toggleColumnSort("category");
-                        }}
-                      >
-                        <SortIcon order={categorySort.order} />
-                      </div>
+                      {groceriesList?.items_count > 1 ? (
+                        <div
+                          className="column-container"
+                          onClick={() => {
+                            toggleColumnSort("category");
+                          }}
+                        >
+                          <SortIcon order={categorySort.order} />
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                   <div className="column-container itemName">
                     <div className="centered-container">
                       Item
-                      <div
-                        className="column-container"
-                        onClick={() => {
-                          toggleColumnSort("itemName");
-                        }}
-                      >
-                        <SortIcon order={itemNameSort.order} />
-                      </div>
+                      {groceriesList?.items_count > 1 ? (
+                        <div
+                          className="column-container"
+                          onClick={() => {
+                            toggleColumnSort("itemName");
+                          }}
+                        >
+                          <SortIcon order={itemNameSort.order} />
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                   <div className="column-container itemQuantity">Qty</div>

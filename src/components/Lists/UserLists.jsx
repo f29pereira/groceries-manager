@@ -1,4 +1,5 @@
-import { useContext, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
+import { AuthContext } from "../../App";
 import { ToastContext } from "../Elements/Toast/ToastProvider";
 import { ListContext } from "./List";
 import { Link } from "react-router";
@@ -16,9 +17,13 @@ import SortIcon from "../Elements/SortIcon";
  */
 function UserLists() {
   //useContext Hooks
-  const { toast, clearSuccessToast } = useContext(ToastContext);
+  const { setIsNavHidden } = useContext(AuthContext);
+  const { toast, setToast, clearSuccessToast } = useContext(ToastContext);
   const { userLists, setUserLists, isLoadingData, isListEmpty } =
     useContext(ListContext);
+
+  //useState Hook
+  const [error, setError] = useState(null);
 
   //custom Hook
   const { sorting, toggleSortOrder } = useSort("created_at", "desc");
@@ -38,8 +43,8 @@ function UserLists() {
     if (userLists.length) {
       try {
         const sortedGroceryList = sortColumns(userLists, {
+          column_name: sorting.column_name,
           order: sorting.order,
-          attrToOrder: "created_at",
         });
 
         setUserLists(sortedGroceryList);
@@ -60,6 +65,11 @@ function UserLists() {
   const toggleColumnSort = () => {
     toggleSortOrder();
   };
+
+  if (error) {
+    console.log(error);
+    throw error; //error to be caught by ErrorBoundary
+  }
 
   return (
     <>
@@ -100,14 +110,16 @@ function UserLists() {
                   <div className="column-container creationDate">
                     <div className="centered-container">
                       Creation Date
-                      <div
-                        className="column-container"
-                        onClick={() => {
-                          toggleColumnSort();
-                        }}
-                      >
-                        <SortIcon order={sorting.order} />
-                      </div>
+                      {userLists.length > 1 ? (
+                        <div
+                          className="column-container"
+                          onClick={() => {
+                            toggleColumnSort();
+                          }}
+                        >
+                          <SortIcon order={sorting.order} />
+                        </div>
+                      ) : null}
                     </div>
                   </div>
                   <div className="column-container itemCount">Items</div>

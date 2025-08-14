@@ -2,8 +2,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../../App";
 import { ToastContext } from "../../Elements/Toast/ToastProvider";
 import { Outlet, useLocation } from "react-router";
-import { fetchGroceryListById } from "../js/groceries_firebase";
-import Toast from "../../Elements/Toast/Toast";
+import { fetchGroceriesListById } from "../js/groceries_firebase";
 
 export const GroceriesContext = createContext();
 /**
@@ -34,7 +33,7 @@ function Groceries() {
   //useEffect Hook
   useEffect(() => {
     const getGroceryList = () => {
-      fetchGroceryListById(location.state?.id)
+      fetchGroceriesListById(location.state?.id)
         .then((data) => {
           setIsLoadingData(false);
           if (data.items_list.length === 0) {

@@ -193,8 +193,8 @@ export const compareStrings = (firstString, secondString) => {
 /**
  * Sorts list by given columns
  * @param {array} listToSort - list to be sorted
- * @param {string} firstColumnObj - column object (sort order/attribute name to order) to be sorted
- * @param {string} secondColumnObj - column object (sort order/attribute name to order) to be sorted
+ * @param {{ column_name: string, order: "asc" | "desc" }} firstColumnObj - first column sorting object
+ * @param {{ column_name: string, order: "asc" | "desc" }} secondColumnObj - second column sorting object
  * @returns {array} sorted list
  */
 export const sortColumns = (
@@ -212,12 +212,12 @@ export const sortColumns = (
     const firstColumnComparison =
       firstColumnObj.order === "asc"
         ? compareStrings(
-            a[firstColumnObj.attrToOrder],
-            b[firstColumnObj.attrToOrder]
+            a[firstColumnObj.column_name],
+            b[firstColumnObj.column_name]
           )
         : compareStrings(
-            b[firstColumnObj.attrToOrder],
-            a[firstColumnObj.attrToOrder]
+            b[firstColumnObj.column_name],
+            a[firstColumnObj.column_name]
           );
 
     if (firstColumnComparison !== 0) {
@@ -227,12 +227,12 @@ export const sortColumns = (
 
     return secondColumnObj.order === "asc"
       ? compareStrings(
-          a[secondColumnObj.attrToOrder],
-          b[secondColumnObj.attrToOrder]
+          a[secondColumnObj.column_name],
+          b[secondColumnObj.column_name]
         )
       : compareStrings(
-          b[secondColumnObj.attrToOrder],
-          a[secondColumnObj.attrToOrder]
+          b[secondColumnObj.column_name],
+          a[secondColumnObj.column_name]
         );
   });
 

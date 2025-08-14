@@ -18,6 +18,7 @@ import {
   validateObject,
   sortColumns,
 } from "../../../utils/utils";
+import { getSortedAndCheckedItems } from "./items_firebase";
 
 /**
  * Creates a new document on the groceries_list collection
@@ -98,7 +99,7 @@ export const fetchAllUserLists = async (userId) => {
   //Object to sort columns
   const sortDateObj = {
     order: "desc",
-    attrToOrder: "created_at",
+    column_name: "created_at",
   };
 
   return sortColumns(userListsCopy, sortDateObj);
@@ -153,7 +154,7 @@ export const getGroceriesListById = (listId, userLists) => {
  * @param {string} listId - groceries_list document id
  * @returns {object} object with groceries list data
  */
-export const fetchGroceryListById = async (listId) => {
+export const fetchGroceriesListById = async (listId) => {
   validateString(listId, "list ID");
 
   const groceryListToCopy = {
@@ -218,6 +219,7 @@ export const fetchGroceryListById = async (listId) => {
       categoryName = categorySnapshotData.name;
       categoryColor = categorySnapshotData.color;
 
+      //groceries list item
       groceryListToCopy.items_list.push({
         id: itemId,
         name: itemName,
@@ -230,20 +232,19 @@ export const fetchGroceryListById = async (listId) => {
     }
   }
 
-  //Objects to sort columns
+  //Objects to sort columns "Category" and "Item"
   const sortCategoriesObj = {
     order: "asc",
-    attrToOrder: "category_name",
+    column_name: "category_name",
   };
-
   const sortItemsNameObj = {
     order: "asc",
-    attrToOrder: "name",
+    column_name: "name",
   };
 
   return {
     ...groceryListToCopy,
-    items_list: sortColumns(
+    items_list: getSortedAndCheckedItems(
       groceryListToCopy.items_list,
       sortCategoriesObj,
       sortItemsNameObj
