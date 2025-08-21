@@ -85,6 +85,7 @@
   border-radius: 5px;
   padding: 0.5rem 1rem;
   color: var(--white);
+  margin: 1rem 0;
 }
 
 .btn-icon-gap {
@@ -226,11 +227,66 @@
   color: var(--btn-danger);
 }
 
-/*SortIcon Component*/
+/*SortIcon component*/
 .arrow {
   font-size: 1.2rem;
   cursor: pointer;
   margin-left: 0.5rem;
+}
+
+.arrow:hover {
+  color: var(--ligth-green);
+}
+
+/*DateTime component*/
+.date-container {
+  margin-bottom: 1rem;
+}
+
+.time-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date-time-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--card-header);
+}
+
+/*ImageWithContent component*/
+.img-content {
+  padding: 3rem;
+}
+
+.img-content-container {
+  display: flex;
+  gap: 0.5rem;
+  border: 1px solid var(--gray);
+  border-radius: 10px;
+  max-width: 700px;
+}
+
+.img-content-container img {
+  display: none;
+  object-fit: fill;
+  height: auto;
+  width: 40%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.img-content-container .content-show {
+  width: 100%;
+  padding: 1rem;
+}
+
+/*GMLogo*/
+.logo {
+  color: var(--nav-green);
+  font-size: 1.5rem;
 }
 
 /*FallBack component*/
@@ -248,7 +304,7 @@ h1.fallback-msg {
 /*Footer Component*/
 footer {
   background-color: var(--nav-green);
-  padding: 1rem;
+  padding: 0.5rem;
   color: var(--white);
 }
 
@@ -259,6 +315,13 @@ footer {
 .footer-text {
   font-size: 1rem;
   font-weight: bold;
+}
+
+@media (min-width: 700px) {
+  /*ImageWithContent component*/
+  .img-content-container img {
+    display: block;
+  }
 }
 
 @media (min-width: 800px) {
@@ -301,12 +364,41 @@ footer {
     font-size: 1.8rem;
   }
 
+  /*DateTime component*/
+  .time-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .date-time-icon {
+    margin-bottom: unset;
+  }
+
+  /*ImageWithContent component*/
+  .img-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 0;
+  }
+
+  .img-content-container .content-show {
+    width: 60%;
+  }
+
   /*FallBack component*/
   .fallback-msg {
     font-size: 1.6rem;
   }
 
   /*Footer component*/
+  footer {
+    padding: 1rem;
+  }
+
   .footer-text {
     font-size: 1.2rem;
     font-weight: bold;

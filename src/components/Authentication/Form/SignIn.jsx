@@ -4,10 +4,8 @@ import { useNavigate, Link } from "react-router";
 import { auth } from "../../../firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { handleInputChange, showError } from "../../../utils/utils";
-import { FaUser } from "../../../utils/icons";
-import Card from "../../Elements/Card";
+import ImageWithContent from "../../Elements/ImageWithContent";
 import UserForm from "./UserForm";
-import Footer from "../../Static/Footer";
 
 function SignIn() {
   //useContext Hooks
@@ -25,7 +23,7 @@ function SignIn() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  //useNavigate Hooks
+  //useNavigate Hook
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -57,12 +55,11 @@ function SignIn() {
   return (
     <>
       <main>
-        <div className="content card">
-          <Card
-            showGoBack={false}
-            titleIcon={<FaUser />}
-            titleText="Sign In"
-            body={
+        <div>
+          <ImageWithContent
+            imgSrc="src\assets\images\static\unsplash_strawberry.jpg"
+            imgAlt="Strawberry in yellow background"
+            content={
               <>
                 <UserForm
                   handleOnSubmit={signInUser}
@@ -71,21 +68,23 @@ function SignIn() {
                   handleChange={handleChange}
                   formData={signInFormData}
                   forgotPassword={false}
+                  showRequiredFields={false}
                   showPasswordRules={false}
                   submitBtnTxt="Sign In"
                   isSubmitting={isSubmitting}
                   submittingBtnThx="Signing In"
                 />
-                <p id="create-account">Don't have an account ?</p>
-                <Link to="/signUp" className="click-link">
-                  Sign up here
-                </Link>
+                <div className="centered-column-container">
+                  <p id="create-account">Don't have an account ?</p>
+                  <Link to="/signUp" className="click-link">
+                    Sign up here
+                  </Link>
+                </div>
               </>
             }
           />
         </div>
       </main>
-      <Footer />
     </>
   );
 }

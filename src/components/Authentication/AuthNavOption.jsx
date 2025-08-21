@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../App";
 import { Link } from "react-router";
+import { FaRegUserCircle } from "../../utils/icons";
 import SignOut from "./SignOut";
 
 function AuthNavOption() {
@@ -11,8 +12,8 @@ function AuthNavOption() {
       {isSignedIn ? (
         <SignOut />
       ) : (
-        <Link to="signIn" className="auth-option">
-          Sign In
+        <Link to="signIn">
+          <FaRegUserCircle />
         </Link>
       )}
     </>

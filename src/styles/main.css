@@ -1,6 +1,5 @@
 @import "colors.css";
-@import "smallScreenNav.css";
-@import "medBigScreenNav.css";
+@import "nav.css";
 @import "home.css";
 @import "forms.css";
 @import "groceries.css";
@@ -22,12 +21,34 @@ nav {
   background-color: var(--nav-green);
 }
 
-ul {
-  list-style: none;
+/*Root Grid*/
+#root {
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "nav" "main";
 }
 
-li {
-  color: var(--white);
+#root nav {
+  grid-area: nav;
+}
+
+/*Main Grid*/
+#root main {
+  grid-area: main;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+}
+
+.content {
+  padding: 3rem;
+}
+
+ul {
+  list-style: none;
 }
 
 li,
@@ -51,10 +72,6 @@ button {
 .click-link {
   color: var(--card-header);
   text-decoration: underline;
-}
-
-.content {
-  padding: 3rem;
 }
 
 a,
@@ -180,6 +197,11 @@ button:disabled {
 .submitting-icon {
   margin-left: 0.5rem;
   font-size: 1.5rem;
+}
+
+/*Active Navigation*/
+.active-nav-link {
+  border-bottom: 2px solid var(--white);
 }
 
 @media (min-width: 800px) {

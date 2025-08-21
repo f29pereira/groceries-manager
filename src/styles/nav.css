@@ -1,13 +1,63 @@
-/*Hamburguer*/
-#hamburguer-container {
+/*Hamburguer and MedBigScreen components*/
+.fixed-nav {
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+
+/*MedBigScreen component*/
+#nav-container {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 3rem;
+}
+
+.nav-items {
+  font-size: 1.5rem;
+}
+
+#nav-groceries {
+  margin-right: 3rem;
+}
+
+.nav-logo {
+  margin-right: auto;
+  font-weight: bold;
+}
+
+.logo-icon {
+  font-size: 2rem;
+  margin-right: 0.5rem;
+}
+
+@media (min-width: 401px) and (max-width: 534px) {
+  .nav-items {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 400px) and (max-width: 600px) {
+  #nav-container {
+    display: flex;
+    align-items: center;
+    padding: 1.2rem;
+  }
+}
+
+/*Hamburguer and Menu components*/
+/*Hamburguer*/
+.hamburguer-list {
   align-items: center;
   padding: 0.5rem 1rem;
 }
 
 .icon-items {
   font-size: 1.6rem;
+}
+
+.icon-text {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .icon-items#list {

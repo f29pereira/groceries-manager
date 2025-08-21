@@ -41,10 +41,11 @@ function App() {
       >
         <ToastProvider>
           <Routes>
+            <Route path="signUp" element={<SignUp />} />
+            <Route path="signIn" element={<SignIn />} />
+
             <Route path="/" element={<Nav />}>
               <Route index element={<Home />} />
-              <Route path="signUp" element={<SignUp />} />
-              <Route path="signIn" element={<SignIn />} />
 
               <Route element={<AuthRequired />}>
                 <Route

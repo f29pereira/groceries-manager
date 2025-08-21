@@ -6,6 +6,7 @@ import {
   BsThreeDots,
 } from "../../../utils/icons";
 import RequiredField from "../../Elements/RequiredField";
+import GMLogo from "../../Elements/GMLogo";
 
 /**
  * Renders user email/password authentication form
@@ -15,6 +16,7 @@ import RequiredField from "../../Elements/RequiredField";
  * @param {function} handleChange       - sets email/password state values
  * @param {string} formData             - email/password state values
  * @param {boolean} forgotPassword      - shows forgotPassword link
+ * @param {boolean} showRequiredFields  - shows required field icon
  * @param {boolean} showPasswordRules   - shows pop up with password rules
  * @param {string} submitBtnTxt         - submit button text
  * @param {boolean} isSubmitting        - form is submitting
@@ -27,6 +29,7 @@ function UserForm({
   handleChange,
   formData,
   forgotPassword,
+  showRequiredFields = true,
   showPasswordRules,
   submitBtnTxt,
   isSubmitting,
@@ -41,18 +44,20 @@ function UserForm({
       {errorMsg.generic.length > 0 ? (
         <ErrorMessage type="generic">{errorMsg.generic}</ErrorMessage>
       ) : null}
+
+      <GMLogo />
+
       <p className="form-description">{description}</p>
-      <div className="input-container">
+
+      <div className="input-container user-form">
         <div className="left-container label-required">
           <label htmlFor="user-email" className="form-label">
             Email
           </label>
-          <RequiredField />
+          {showRequiredFields ? <RequiredField /> : null}
         </div>
         <div className="input-icon-container">
-          <div className="centered-container input-icon">
-            <MdAlternateEmail />
-          </div>
+          <MdAlternateEmail className="input-icon" />
           <input
             id="user-email"
             type="email"
@@ -73,7 +78,7 @@ function UserForm({
           <label htmlFor="user-password" className="form-label">
             Password
           </label>
-          <RequiredField />
+          {showRequiredFields ? <RequiredField /> : null}
         </div>
 
         <div

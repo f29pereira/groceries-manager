@@ -21,12 +21,20 @@ import {
   IoArrowDownCircle,
 } from "react-icons/io5";
 import { RiWeightLine } from "react-icons/ri";
-import { FaInfoCircle } from "react-icons/fa";
+import {
+  FaInfoCircle,
+  FaRegCalendar,
+  FaClock,
+  FaRegUserCircle,
+  FaUserCircle,
+} from "react-icons/fa";
 import { PiChatText, PiFileMagnifyingGlass } from "react-icons/pi";
 
 export {
   FaUserPlus, //add user
   FaUser, //user
+  FaRegUserCircle, //user circle - not signed in
+  FaUserCircle, //user circle - signed in
   TbLockPassword, //user password
   MdAlternateEmail, //user e-mail
   IoIosAddCircle, //add circle
@@ -55,4 +63,6 @@ export {
   PiFileMagnifyingGlass, //page finding
   IoArrowUpCircle, //circle with arrow up
   IoArrowDownCircle, //circle with arrow down
+  FaRegCalendar, //calendar
+  FaClock, //clock
 };
