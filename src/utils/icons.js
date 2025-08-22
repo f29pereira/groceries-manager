@@ -27,6 +27,8 @@ import {
   FaClock,
   FaRegUserCircle,
   FaUserCircle,
+  FaCheckSquare,
+  FaWindowClose,
 } from "react-icons/fa";
 import { PiChatText, PiFileMagnifyingGlass } from "react-icons/pi";
 
@@ -65,4 +67,6 @@ export {
   IoArrowDownCircle, //circle with arrow down
   FaRegCalendar, //calendar
   FaClock, //clock
+  FaCheckSquare, //check square
+  FaWindowClose, //close square
 };

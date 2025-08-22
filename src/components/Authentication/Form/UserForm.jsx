@@ -7,9 +7,11 @@ import {
 } from "../../../utils/icons";
 import RequiredField from "../../Elements/RequiredField";
 import GMLogo from "../../Elements/GMLogo";
+import PasswordRules from "../PasswordRules";
 
 /**
  * Renders user email/password authentication form
+ * @param {string} formType             - form type (signIn/signUp)
  * @param {function} handleOnSubmit     - on submit function
  * @param {string} description          - form description
  * @param {string} errorMsg             - input specific/generic error message
@@ -20,9 +22,10 @@ import GMLogo from "../../Elements/GMLogo";
  * @param {boolean} showPasswordRules   - shows pop up with password rules
  * @param {string} submitBtnTxt         - submit button text
  * @param {boolean} isSubmitting        - form is submitting
- * @param {string} submittingBtnThx     - button text when form is submitting
+ * @param {string} submittingBtnTxt     - button text when form is submitting
  */
 function UserForm({
+  type = "",
   handleOnSubmit,
   description,
   errorMsg,
@@ -33,7 +36,7 @@ function UserForm({
   showPasswordRules,
   submitBtnTxt,
   isSubmitting,
-  submittingBtnThx,
+  submittingBtnTxt,
 }) {
   return (
     <form
@@ -86,14 +89,14 @@ function UserForm({
             showPasswordRules ? "password-rules-pop-up" : ""
           }`}
         >
-          <div className="input-icon-container">
+          <div className="input-icon-container password">
             <div className="centered-container input-icon">
               <TbLockPassword />
             </div>
             <input
               id="user-password"
               type="password"
-              className="form-input password"
+              className="form-input"
               required
               name="password"
               onChange={handleChange}
@@ -102,15 +105,7 @@ function UserForm({
             />
           </div>
           {showPasswordRules ? (
-            <div className="password-rules">
-              <ul className="rules-list">
-                <li className="rules-item">minimum 8 characters</li>
-                <li className="rules-item">1 lower case character</li>
-                <li className="rules-item">1 upper case character</li>
-                <li className="rules-item">1 numeric case character (0-9)</li>
-                <li className="rules-item">1 non-alphanumeric character</li>
-              </ul>
-            </div>
+            <PasswordRules password={formData.password} />
           ) : null}
         </div>
 
@@ -124,10 +119,14 @@ function UserForm({
         </Link>
       ) : null}
 
-      <button type="submit" className="btn green" disabled={isSubmitting}>
+      <button
+        type="submit"
+        className={`btn green ${type}`}
+        disabled={isSubmitting}
+      >
         {isSubmitting ? (
           <div className="centered-container">
-            {submittingBtnThx}
+            {submittingBtnTxt}
             <BsThreeDots className="submitting-icon" />
           </div>
         ) : (

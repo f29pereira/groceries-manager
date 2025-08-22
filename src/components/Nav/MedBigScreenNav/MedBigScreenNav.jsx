@@ -12,14 +12,30 @@ function MedBigScrenNav() {
       {isNavHidden ? null : (
         <nav>
           <ul id="nav-container">
-            <li className="item-icon">
-              <TbPaperBag />
-            </li>
-            <li className="nav-items nav-hover" id="nav-home">
-              <NavLink to="/">Groceries Manager</NavLink>
+            <li className="nav-logo">
+              <div className="centered-container">
+                <TbPaperBag className="logo-icon" />
+                <div className="nav-items nav-hover">
+                  <NavLink
+                    to="/"
+                    className={({ isActive }) =>
+                      isActive ? "active-nav-link" : null
+                    }
+                  >
+                    Groceries Manager
+                  </NavLink>
+                </div>
+              </div>
             </li>
             <li className="nav-items nav-hover" id="nav-groceries">
-              <NavLink to="myLists">My Lists</NavLink>
+              <NavLink
+                to="myLists"
+                className={({ isActive }) =>
+                  isActive ? "active-nav-link" : null
+                }
+              >
+                My Lists
+              </NavLink>
             </li>
             <li className="nav-items">
               <AuthNavOption />

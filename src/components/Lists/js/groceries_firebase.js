@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import {
   formatDate,
+  formatTime,
   getDocumentRefSnapShot,
   validateString,
   validateArray,
@@ -51,10 +52,10 @@ export const addEmptyGroceryList = async (userId, formData, userLists) => {
     id: groceryId,
     name: formData.name,
     description: formData.description,
-    items_list: [],
     items_count: 0,
     created_at: date,
-    formatted_created_at: formatDate(date),
+    created_at_date: formatDate(date),
+    created_at_time: formatTime(date),
   };
 
   let updatedUserLists = userLists;
@@ -89,9 +90,10 @@ export const fetchAllUserLists = async (userId) => {
         id: list.id,
         name: list.data.name,
         created_at: list.data.created_at,
-        formatted_created_at: formatDate(list.data.created_at),
         description: list.data.description,
         items_count: itemsLength,
+        created_at_date: formatDate(list.data.created_at),
+        created_at_time: formatTime(list.data.created_at),
       });
     }
   }

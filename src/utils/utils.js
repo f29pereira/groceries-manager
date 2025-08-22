@@ -29,20 +29,20 @@ export const formatDate = (date) => {
   const year = date.slice(0, 4);
   const month = date.slice(5, 7);
   const day = date.slice(8, 10);
-  const time = formatTime(date.split("T")[1]);
 
-  return `${year}/${month}/${day} - ${time}`;
+  return `${year}/${month}/${day}`;
 };
 
 /**
  * Formats time HH:MM
- * @param {string} time - timestamp
+ * @param {string} date - date timestamp
  * @returns {string} formated time
  */
-const formatTime = (time) => {
-  validateString(time);
+export const formatTime = (date) => {
+  validateString(date);
 
-  let formatedTime = time.slice(0, 5);
+  let extractTime = date.split("T")[1];
+  let formatedTime = extractTime.slice(0, 5);
 
   return formatedTime;
 };
@@ -114,8 +114,7 @@ const getErrorDescription = (errorCode) => {
     error.description = "Invalid email";
   } else if (errorCode === "auth/password-does-not-meet-requirements") {
     error.type = "password";
-    error.description =
-      "Password must contain: at least 8 characters, a lower case character, an upper case character and a non-alphanumeric character";
+    error.description = "Your password doesn't meet the requirements.";
   } else if (errorCode === "auth/invalid-credential") {
     error.type = "generic";
     error.description = "Invalid credentials";
@@ -131,6 +130,20 @@ const getErrorDescription = (errorCode) => {
   }
 
   return error;
+};
+
+/**
+ * Checks if password meets requirements
+ * @param {string} password
+ */
+export const validatePassword = (password) => {
+  validateString(password);
+
+  const regex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\^\\$\\*\\.\\[\\]\\{\\}\\(\\)\\?\\\"!@#%&/\\\\,><':;\\|_~]).{8,}$"
+  );
+
+  return regex.test(password);
 };
 
 /**

@@ -1,12 +1,18 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../App";
 import { useNavigate, Link } from "react-router";
 import { signOut } from "firebase/auth";
+import { FaUserCircle } from "../../utils/icons";
 
 function SignOut() {
-  const navigate = useNavigate();
-
+  //useContext Hook
   const { setisSignedIn, setCurrentUser } = useContext(AuthContext);
+
+  //useState Hook
+  const [error, setError] = useState(null);
+
+  //useNavigate Hook
+  const navigate = useNavigate();
 
   const signOutUser = () => {
     signOut(auth)
@@ -16,13 +22,14 @@ function SignOut() {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error.code);
+        setIsNavHidden(true);
+        setError(error);
       });
   };
 
   return (
-    <Link to="/signIn" className="auth-option" onClick={signOutUser}>
-      Sign Out
+    <Link to="/signIn" onClick={signOutUser}>
+      <FaUserCircle />
     </Link>
   );
 }

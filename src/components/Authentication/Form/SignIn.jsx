@@ -53,39 +53,37 @@ function SignIn() {
   };
 
   return (
-    <>
-      <main>
-        <div>
-          <ImageWithContent
-            imgSrc="src\assets\images\static\unsplash_strawberry.jpg"
-            imgAlt="Strawberry in yellow background"
-            content={
-              <>
-                <UserForm
-                  handleOnSubmit={signInUser}
-                  description="Welcome back"
-                  errorMsg={errorMsg}
-                  handleChange={handleChange}
-                  formData={signInFormData}
-                  forgotPassword={false}
-                  showRequiredFields={false}
-                  showPasswordRules={false}
-                  submitBtnTxt="Sign In"
-                  isSubmitting={isSubmitting}
-                  submittingBtnThx="Signing In"
-                />
-                <div className="centered-column-container">
-                  <p id="create-account">Don't have an account ?</p>
-                  <Link to="/signUp" className="click-link">
-                    Sign up here
-                  </Link>
-                </div>
-              </>
-            }
-          />
-        </div>
-      </main>
-    </>
+    <main className="auth-background">
+      <ImageWithContent
+        type="signin"
+        imgSrc="src\assets\images\static\unsplash_strawberry.jpg"
+        imgAlt="Strawberry in yellow background"
+        content={
+          <>
+            <UserForm
+              type="signin"
+              handleOnSubmit={signInUser}
+              description="Welcome back"
+              errorMsg={errorMsg}
+              handleChange={handleChange}
+              formData={signInFormData}
+              forgotPassword={false}
+              showRequiredFields={false}
+              showPasswordRules={false}
+              submitBtnTxt="Sign In"
+              isSubmitting={isSubmitting}
+              submittingBtnTxt="Signing In"
+            />
+            <div className="centered-column-container">
+              <p className="signup-link-text">Don't have an account ?</p>
+              <Link to="/signUp" className="click-link">
+                Sign up here
+              </Link>
+            </div>
+          </>
+        }
+      />
+    </main>
   );
 }
 

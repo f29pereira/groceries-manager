@@ -1,13 +1,15 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../../App";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
 import { auth } from "../../../firebase/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { handleInputChange, showError } from "../../../utils/utils";
-import { FaUserPlus } from "../../../utils/icons";
-import Card from "../../Elements/Card";
+import {
+  handleInputChange,
+  showError,
+  validatePassword,
+} from "../../../utils/utils";
+import ImageWithContent from "../../Elements/ImageWithContent";
 import UserForm from "./UserForm";
-import Footer from "../../Static/Footer";
 
 function SignUp() {
   //useContext Hooks
@@ -27,6 +29,20 @@ function SignUp() {
     password: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  //useEffect Hook
+  // Removes password input errorMsg when password meets requirements
+  useEffect(() => {
+    if (
+      errorMsg.password.length > 0 &&
+      validatePassword(signUpFormData.password)
+    ) {
+      setErrorMsg((prev) => ({
+        ...prev,
+        password: "",
+      }));
+    }
+  }, [signUpFormData.password]);
 
   const handleChange = (event) => {
     handleInputChange(event, setSignUpFormData);
@@ -55,32 +71,35 @@ function SignUp() {
   };
 
   return (
-    <>
-      <main>
-        <div className="content card">
-          <Card
-            showGoBack={true}
-            titleIcon={<FaUserPlus />}
-            titleText="Sign Up"
-            body={
-              <UserForm
-                handleOnSubmit={signUpUser}
-                description="Create an account with email/password"
-                errorMsg={errorMsg}
-                handleChange={handleChange}
-                formData={signUpFormData}
-                showPasswordRules={true}
-                submitBtnTxt="Sign Up"
-                isSubmitting={isSubmitting}
-                submittingBtnThx="Signing Up"
-              />
-            }
-          />
-        </div>
-      </main>
-
-      <Footer />
-    </>
+    <main className="auth-background">
+      <ImageWithContent
+        type="signup"
+        imgSrc="src\assets\images\static\unsplash_kiwi.jpg"
+        imgAlt="Kiwi in yellow background"
+        content={
+          <>
+            <UserForm
+              type="signup"
+              handleOnSubmit={signUpUser}
+              description="Create an account"
+              errorMsg={errorMsg}
+              handleChange={handleChange}
+              formData={signUpFormData}
+              showPasswordRules={true}
+              submitBtnTxt="Sign Up"
+              isSubmitting={isSubmitting}
+              submittingBtnTxt="Signing Up"
+            />
+            <div className="centered-column-container">
+              <p className="signin-link-text">Already have an account ?</p>
+              <Link to="/signIn" className="click-link">
+                Sign in here
+              </Link>
+            </div>
+          </>
+        }
+      />
+    </main>
   );
 }
 

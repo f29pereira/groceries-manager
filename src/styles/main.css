@@ -137,6 +137,10 @@ button {
   color: var(--btn-warning);
 }
 
+.success-icon {
+  color: var(--btn-success);
+}
+
 .delete-icon {
   color: var(--btn-danger);
 }

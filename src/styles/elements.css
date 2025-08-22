@@ -85,7 +85,6 @@
   border-radius: 5px;
   padding: 0.5rem 1rem;
   color: var(--white);
-  margin: 1rem 0;
 }
 
 .btn-icon-gap {
@@ -98,6 +97,16 @@
 
 .btn.green:hover {
   background-color: var(--btn-success-hover);
+}
+
+/*Sign In button*/
+.btn.green.signin {
+  margin: 2rem 0;
+}
+
+/*Sign Up button*/
+.btn.green.signup {
+  margin-bottom: 1rem;
 }
 
 .red {
@@ -258,15 +267,15 @@
 
 /*ImageWithContent component*/
 .img-content {
-  padding: 3rem;
+  padding: 1.5rem;
 }
 
 .img-content-container {
   display: flex;
   gap: 0.5rem;
-  border: 1px solid var(--gray);
+  border: 5px solid var(--soft-white);
   border-radius: 10px;
-  max-width: 700px;
+  background-color: var(--soft-white);
 }
 
 .img-content-container img {
@@ -279,14 +288,14 @@
 }
 
 .img-content-container .content-show {
-  width: 100%;
   padding: 1rem;
+  width: 100%;
 }
 
 /*GMLogo*/
 .logo {
   color: var(--nav-green);
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 /*FallBack component*/
@@ -382,11 +391,24 @@ footer {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 0;
   }
 
   .img-content-container .content-show {
     width: 60%;
+  }
+
+  /*SignIn SignUp page*/
+  .img-content-container.signin,
+  .img-content-container.signup {
+    width: 45rem;
+    height: 45rem;
+  }
+
+  .img-content-container.signin img,
+  .img-content-container.signin .content-show,
+  .img-content-container.signup img,
+  .img-content-container.signup .content-show {
+    width: 50%;
   }
 
   /*FallBack component*/
@@ -428,6 +450,11 @@ footer {
   .arrow {
     font-size: 2rem;
     margin-left: 1rem;
+  }
+
+  /*GMLogo*/
+  .logo {
+    font-size: 2.5rem;
   }
 
   /*FallBack component*/
