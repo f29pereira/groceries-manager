@@ -11,9 +11,10 @@ import Toast from "../Elements/Toast/Toast";
 import Loading from "../Elements/Loading";
 import useSort from "../customHooks/useSort";
 import SortIcon from "../Elements/SortIcon";
+import DateTime from "../Elements/DateTime";
 
 /**
- * Renders all groceries lists created by the user
+ * Renders all grocery lists created by the user
  */
 function UserLists() {
   //useContext Hooks
@@ -72,24 +73,36 @@ function UserLists() {
   }
 
   return (
-    <>
-      <main>
-        {isLoadingData ? (
-          <Loading message="Loading your lists" />
-        ) : (
-          <div className="content list">
-            <div className="centered-column-container">
+    <main>
+      {isLoadingData ? (
+        <Loading message="Loading your lists" />
+      ) : (
+        <div className="content list">
+          <div className="toast-header">
+            {/*Toast Notification*/}
+            <div className="centered-column-container toast">
               {toast && toast?.type === "success" && toast?.message ? (
                 <Toast type={toast.type} message={toast.message} />
               ) : null}
-
-              <header className="header groceries">
-                <h1>My Lists</h1>
-              </header>
             </div>
 
-            <section>
-              <div className="centered-container add-container">
+            {/*Header*/}
+            <header className="title">
+              <h1>My Grocery Lists</h1>
+            </header>
+          </div>
+
+          <section>
+            <div className="space-between-container counter-add-list">
+              {/*List Counter*/}
+              <div className="counter-list">
+                <h2 className="counter">
+                  Lists Count: <span>{userLists.length}</span>
+                </h2>
+              </div>
+
+              {/*Add Groceries List*/}
+              <div className="centered-container">
                 <LinkButton
                   path="/myLists/addList/"
                   classNames="green"
@@ -97,79 +110,76 @@ function UserLists() {
                   name="Add List"
                 />
               </div>
+            </div>
 
-              <div className="counter-list">
-                <h2 className="counter">
-                  Groceries Lists Count: <span>{userLists.length}</span>
-                </h2>
-              </div>
-
-              <div className="table">
-                <div className="row-container table-header">
-                  <div className="column-container name">Name</div>
-                  <div className="column-container creationDate">
-                    <div className="centered-container">
-                      Creation Date
-                      {userLists.length > 1 ? (
-                        <div
-                          className="column-container"
-                          onClick={() => {
-                            toggleColumnSort();
-                          }}
-                        >
-                          <SortIcon order={sorting.order} />
-                        </div>
-                      ) : null}
-                    </div>
+            {/*Grocery Lists Table*/}
+            <div className="table">
+              <div className="row-container table-header">
+                <div className="column-container name">Name</div>
+                <div className="column-container creationDate">
+                  <div className="centered-container">
+                    Date Added
+                    {userLists.length > 1 ? (
+                      <div
+                        className="column-container"
+                        onClick={() => {
+                          toggleColumnSort();
+                        }}
+                      >
+                        <SortIcon order={sorting.order} />
+                      </div>
+                    ) : null}
                   </div>
-                  <div className="column-container itemCount">Items</div>
-                  <div className="column-container listInfo">Actions</div>
                 </div>
+                <div className="column-container itemCount">Items</div>
+                <div className="column-container listInfo">Actions</div>
+              </div>
 
-                {isListEmpty ? (
-                  <div className="row-container no-data">
-                    No grocery lists created yet. Click the "Add List" button.
-                  </div>
-                ) : (
-                  userLists.map((list, index) => (
-                    <div key={index} className="row-container data">
-                      <div className="column-container name">{list.name}</div>
-                      <div className="column-container creationDate">
-                        {list.formatted_created_at}
-                      </div>
-                      <div className="column-container itemCount">
-                        {list.items_count}
-                      </div>
-                      <div className="column-container listInfo">
-                        <div className="actions-container">
-                          <Link
-                            to={`/myLists/groceryList/${index}`}
-                            title="List Info"
-                            state={{ index: index, id: list.id }}
-                          >
-                            <FaInfoCircle className="info-icon" />
-                          </Link>
+              {isListEmpty ? (
+                <div className="row-container no-data">
+                  No grocery lists created yet. Click the "Add List" button.
+                </div>
+              ) : (
+                userLists.map((list, index) => (
+                  <div key={index} className="row-container data">
+                    <div className="column-container name">{list.name}</div>
+                    <div className="column-container creationDate gap">
+                      <DateTime
+                        date={list.created_at_date}
+                        time={list.created_at_time}
+                      />
+                    </div>
+                    <div className="column-container itemCount">
+                      {list.items_count}
+                    </div>
+                    <div className="column-container listInfo">
+                      <div className="actions-container">
+                        <Link
+                          to={`/myLists/groceryList/${index}`}
+                          title="List Info"
+                          state={{ index: index, id: list.id }}
+                        >
+                          <FaInfoCircle className="info-icon" />
+                        </Link>
 
-                          <Link
-                            to={`/myLists/groceryList/${index}/remove`}
-                            title="Remove List"
-                            state={{ id: list.id }}
-                          >
-                            <MdDelete className="delete-icon" />
-                          </Link>
-                        </div>
+                        <Link
+                          to={`/myLists/groceryList/${index}/remove`}
+                          title="Remove List"
+                          state={{ id: list.id }}
+                        >
+                          <MdDelete className="delete-icon" />
+                        </Link>
                       </div>
                     </div>
-                  ))
-                )}
-              </div>
-            </section>
-          </div>
-        )}
-      </main>
-
+                  </div>
+                ))
+              )}
+            </div>
+          </section>
+        </div>
+      )}
       <Footer />
-    </>
+    </main>
   );
 }
 

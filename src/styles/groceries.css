@@ -3,10 +3,6 @@
 }
 
 /*MyLists component*/
-.add-container {
-  margin: 2rem 0;
-}
-
 /*MyLists component info button*/
 .btn.info-list-btn {
   font-size: 1.5rem;
@@ -32,6 +28,31 @@
 .column-container.creationDate,
 .column-container.itemCount {
   font-size: 1rem;
+}
+
+/*MyLists and GroceriesList components - toast notifications and header*/
+.toast-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 2rem 0;
+}
+
+.groceries-list-card {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 1rem 1rem;
+}
+
+.groceries-list-card .toast-header {
+  margin: 0;
+}
+
+/*MyLists and GroceriesList components - list counter and add button*/
+.counter-add-list {
+  align-items: flex-end;
+  margin-bottom: 1rem;
 }
 
 /*GroceriesList component*/
@@ -226,6 +247,21 @@ ul .remove-item-info {
     font-size: 2rem;
   }
 
+  /*MyLists and GroceriesList components - toast notifications and header*/
+  .toast-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .title {
+    order: 1;
+  }
+
+  .toast {
+    order: 2;
+  }
+
   /*GroceriesList component*/
   .column-container.category,
   .column-container.itemName,
@@ -251,6 +287,11 @@ ul .remove-item-info {
 
   .btn.edit-delete-btn {
     font-size: 1.4rem;
+  }
+
+  /*GroceriesList component - Info Section*/
+  .groceries-info {
+    text-align: left;
   }
 
   /*GroceriesList component - checked item*/

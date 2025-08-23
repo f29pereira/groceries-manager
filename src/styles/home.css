@@ -94,12 +94,6 @@
     align-items: flex-start;
   }
 
-  .header {
-    display: flex;
-    gap: 3rem;
-    margin-bottom: 3rem;
-  }
-
   .home-title {
     font-size: 4rem;
     text-align: left;
