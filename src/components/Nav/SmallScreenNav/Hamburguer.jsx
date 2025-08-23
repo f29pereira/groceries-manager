@@ -6,7 +6,6 @@ import { BsList, TbPaperBag } from "../../../utils/icons";
 
 function Hamburguer({ isHamburguerOpen, handleClick }) {
   const { isNavHidden } = useContext(AuthContext);
-  //<nav className="fixed-nav">
   return (
     <>
       {!isHamburguerOpen ? (

@@ -1,15 +1,9 @@
 /*Hamburguer and MedBigScreen components*/
-.fixed-nav {
-  position: fixed;
-  width: 100%;
-  z-index: 1000;
-}
-
 /*MedBigScreen component*/
 #nav-container {
   display: flex;
   align-items: center;
-  padding: 1.2rem 3rem;
+  padding: 1rem 3rem;
 }
 
 .nav-items {
@@ -28,20 +22,6 @@
 .logo-icon {
   font-size: 2rem;
   margin-right: 0.5rem;
-}
-
-@media (min-width: 401px) and (max-width: 534px) {
-  .nav-items {
-    font-size: 1.2rem;
-  }
-}
-
-@media (min-width: 400px) and (max-width: 600px) {
-  #nav-container {
-    display: flex;
-    align-items: center;
-    padding: 1.2rem;
-  }
 }
 
 /*Hamburguer and Menu components*/
@@ -109,4 +89,36 @@
 
 .item .description:hover {
   border-bottom: 2px solid var(--white);
+}
+
+/*SignInNav component*/
+.auth-nav {
+  padding: 0.2rem;
+}
+
+.auth-nav-text {
+  display: none;
+}
+
+@media (min-width: 800px) {
+  #nav-container {
+    padding: 0.625rem 3rem;
+  }
+
+  /*SignInNav component*/
+  .auth-nav {
+    border: 2px solid var(--soft-white);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+  }
+
+  .auth-nav:hover {
+    background-color: var(--nav-green-hover);
+  }
+
+  .auth-nav-text {
+    display: inline-block;
+    font-size: 1rem;
+    margin-left: 0.4rem;
+  }
 }

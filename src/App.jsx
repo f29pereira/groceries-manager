@@ -5,6 +5,7 @@ import Nav from "./components/Nav/Nav";
 import Home from "./components/Static/Home";
 import SignUp from "./components/Authentication/Form/SignUp";
 import SignIn from "./components/Authentication/Form/SignIn";
+import SignOut from "./components/Authentication/SignOut";
 import AuthRequired from "./components/Authentication/AuthRequired";
 import ErrorBoundary from "./components/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import List from "./components/Lists/List";
@@ -43,6 +44,7 @@ function App() {
           <Routes>
             <Route path="signUp" element={<SignUp />} />
             <Route path="signIn" element={<SignIn />} />
+            <Route path="signout" element={<SignOut />} />
 
             <Route path="/" element={<Nav />}>
               <Route index element={<Home />} />

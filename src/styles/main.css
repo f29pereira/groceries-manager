@@ -165,19 +165,12 @@ button {
   flex-direction: column;
 }
 
-.column-container.full-height {
-  min-height: 100vh;
-}
-
-.column-container main {
-  flex: 1;
-}
-
 /*Centered Column flex container*/
 .centered-column-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 /*Space between flex container*/
@@ -206,6 +199,10 @@ button:disabled {
 /*Active Navigation*/
 .active-nav-link {
   border-bottom: 2px solid var(--white);
+}
+
+.full-height {
+  height: 100vh;
 }
 
 @media (min-width: 800px) {

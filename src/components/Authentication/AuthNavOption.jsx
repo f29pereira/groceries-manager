@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../App";
 import { Link } from "react-router";
-import { FaRegUserCircle } from "../../utils/icons";
-import SignOut from "./SignOut";
+import AuthNavIconText from "./Elements/AuthNavIconText";
 
 function AuthNavOption() {
   const { isSignedIn } = useContext(AuthContext);
@@ -10,10 +9,12 @@ function AuthNavOption() {
   return (
     <>
       {isSignedIn ? (
-        <SignOut />
+        <Link to="signOut">
+          <AuthNavIconText signedIn={isSignedIn} text="Sign Out" />
+        </Link>
       ) : (
         <Link to="signIn">
-          <FaRegUserCircle />
+          <AuthNavIconText signedIn={isSignedIn} text="Sign In" />
         </Link>
       )}
     </>

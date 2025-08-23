@@ -31,6 +31,7 @@ import {
   FaWindowClose,
 } from "react-icons/fa";
 import { PiChatText, PiFileMagnifyingGlass } from "react-icons/pi";
+import { GoSignOut } from "react-icons/go";
 
 export {
   FaUserPlus, //add user
@@ -69,4 +70,5 @@ export {
   FaClock, //clock
   FaCheckSquare, //check square
   FaWindowClose, //close square
+  GoSignOut, //sign out
 };

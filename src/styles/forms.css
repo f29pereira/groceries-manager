@@ -99,7 +99,7 @@
   padding: 0.8rem 0.5rem;
 }
 
-/*SignIn and SignUp components*/
+/*SignIn, SignUp and SignOut components background*/
 .auth-background {
   background: radial-gradient(
     circle,
@@ -138,6 +138,11 @@
 .rules-icon {
   font-size: 1.2rem;
   margin-right: 0.5rem;
+}
+
+.sign-out-text {
+  text-align: center;
+  margin: 1rem 0;
 }
 
 /*Form Buttons*/

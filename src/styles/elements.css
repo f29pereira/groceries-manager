@@ -397,9 +397,10 @@ footer {
     width: 60%;
   }
 
-  /*SignIn SignUp page*/
+  /*SignIn, SignUp and SignOut page*/
   .img-content-container.signin,
-  .img-content-container.signup {
+  .img-content-container.signup,
+  .img-content-container.signout {
     width: 45rem;
     height: 45rem;
   }
@@ -407,8 +408,16 @@ footer {
   .img-content-container.signin img,
   .img-content-container.signin .content-show,
   .img-content-container.signup img,
-  .img-content-container.signup .content-show {
+  .img-content-container.signup .content-show,
+  .img-content-container.signout img,
+  .img-content-container.signout .content-show {
     width: 50%;
+  }
+
+  .img-content-container.signout .content-show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   /*FallBack component*/
