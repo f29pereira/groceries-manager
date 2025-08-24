@@ -145,6 +145,7 @@ function UserLists() {
                     <div className="column-container name">{list.name}</div>
                     <div className="column-container creationDate gap">
                       <DateTime
+                        isDisplayInline={false}
                         date={list.created_at_date}
                         time={list.created_at_time}
                       />

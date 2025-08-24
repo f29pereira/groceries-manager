@@ -39,16 +39,6 @@
   margin: 1rem 0 2rem 0;
 }
 
-.groceries-list-card {
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 1rem 1rem;
-}
-
-.groceries-list-card .toast-header {
-  margin: 0;
-}
-
 /*MyLists and GroceriesList components - list counter and add button*/
 .counter-add-list {
   align-items: flex-end;
@@ -56,6 +46,25 @@
 }
 
 /*GroceriesList component*/
+.groceries-list-card {
+  text-align: center;
+  border: 1px solid var(--card-header);
+  border-radius: 5px;
+  padding: 1rem 2rem;
+  margin: 1rem 0 2rem 0;
+}
+
+.groceries-list-card .toast-header {
+  margin: 0;
+}
+
+/*GroceriesList component - date/time*/
+.groceries-list-card .date-time-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .column-container.category,
 .column-container.itemName {
   flex: 2;
@@ -99,7 +108,7 @@
 /*GroceriesList component - Info Section*/
 .groceries-info {
   text-align: center;
-  margin: 1rem 0;
+  margin: 2rem 0;
 }
 
 .groceries-info p {
@@ -113,11 +122,6 @@
 
 .edit-delete-container {
   gap: 1rem;
-}
-
-.btn.edit-delete-btn {
-  font-size: 1rem;
-  padding: 0.5rem;
 }
 
 /*GroceriesList component - user actions*/
@@ -262,6 +266,17 @@ ul .remove-item-info {
     order: 2;
   }
 
+  .groceries-list-card {
+    text-align: left;
+  }
+
+  /*GroceriesList component - date/time*/
+  .groceries-list-card .date-time-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
   /*GroceriesList component*/
   .column-container.category,
   .column-container.itemName,
@@ -285,13 +300,10 @@ ul .remove-item-info {
     font-size: 0.9rem;
   }
 
-  .btn.edit-delete-btn {
-    font-size: 1.4rem;
-  }
-
   /*GroceriesList component - Info Section*/
   .groceries-info {
     text-align: left;
+    margin-top: 3rem;
   }
 
   /*GroceriesList component - checked item*/
@@ -328,10 +340,6 @@ ul .remove-item-info {
   .item-category {
     padding: 0.5rem;
     width: 40%;
-  }
-
-  .btn.edit-delete-btn {
-    font-size: 1.8rem;
   }
 
   /*RemoveItem and RemoveGroceriesList component*/

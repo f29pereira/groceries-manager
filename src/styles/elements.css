@@ -81,7 +81,7 @@
 
 /*LinkButton Component*/
 .btn {
-  font-size: 1.2rem;
+  font-size: 1rem;
   border-radius: 5px;
   padding: 0.5rem 1rem;
   color: var(--white);
@@ -169,13 +169,6 @@
   transition: opacity 0.5s;
 }
 
-/*Toast and Page Header container*/
-.toast-header-container {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-}
-
 /*Toast Component*/
 .toast-container {
   border-radius: 5px;
@@ -259,6 +252,14 @@
   margin-right: 0.5rem;
   margin-bottom: 0.5rem;
   color: var(--card-header);
+}
+
+.date-time-text {
+  font-size: 0.9rem;
+}
+
+.date-column {
+  margin-bottom: 1rem;
 }
 
 /*ImageWithContent component*/
@@ -354,9 +355,9 @@ footer {
     font-size: 1.8rem;
   }
 
-  /*LinkButton component*/
-  .btn.add-item {
-    font-size: 1.5rem;
+  /*LinkButton Component*/
+  .btn {
+    font-size: 1.2rem;
   }
 
   /*Toast Component*/
@@ -370,6 +371,10 @@ footer {
   }
 
   /*DateTime component*/
+  .date-time-text {
+    font-size: 1rem;
+  }
+
   .time-container {
     display: flex;
     flex-direction: row;
@@ -443,12 +448,6 @@ footer {
   .card-container {
     width: 60%;
     margin: auto;
-  }
-
-  /*Toast and Page Header container*/
-  .toast-header-container {
-    flex-direction: row;
-    justify-content: space-between;
   }
 
   /*SortIcon Component*/

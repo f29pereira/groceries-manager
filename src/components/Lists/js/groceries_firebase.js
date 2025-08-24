@@ -165,7 +165,8 @@ export const fetchGroceriesListById = async (listId) => {
     description: "",
     items_list: [],
     items_count: 0,
-    created_at: "",
+    created_at_date: "",
+    created_at_time: "",
   };
 
   //groceries_list document
@@ -181,7 +182,8 @@ export const fetchGroceriesListById = async (listId) => {
   groceryListToCopy.id = listId;
   groceryListToCopy.name = groceriesData.name;
   groceryListToCopy.description = groceriesData.description;
-  groceryListToCopy.created_at = formatDate(groceriesData.created_at);
+  groceryListToCopy.created_at_date = formatDate(groceriesData.created_at);
+  groceryListToCopy.created_at_time = formatTime(groceriesData.created_at);
 
   //items document references
   const itemsList = groceriesData.items_list;

@@ -17,6 +17,7 @@ import Loading from "../../Elements/Loading";
 import Toast from "../../Elements/Toast/Toast";
 import SortIcon from "../../Elements/SortIcon";
 import useSort from "../../customHooks/useSort";
+import DateTime from "../../Elements/DateTime";
 
 /**
  * Renders groceries list table with items
@@ -122,46 +123,61 @@ function GroceriesList() {
         <Loading message="Loading groceries list" />
       ) : (
         <div className="content list">
-          <div className="toast-header-container">
-            <header className="header groceries">
-              <h1>{groceriesList.name}</h1>
-            </header>
+          <div className="groceries-list-card">
+            <div className="toast-header">
+              {/*Toast Notification*/}
+              <div className="centered-column-container toast">
+                {toast && toast?.type === "success" && toast?.message ? (
+                  <Toast type={toast.type} message={toast.message} />
+                ) : null}
+              </div>
 
-            <div className="centered-container">
-              {toast && toast?.type === "success" && toast?.message ? (
-                <Toast type={toast.type} message={toast.message} />
-              ) : null}
+              {/*Header*/}
+              <header className="title">
+                <h1>{groceriesList.name}</h1>
+              </header>
             </div>
-          </div>
 
-          <section className="groceries-info">
-            <p>{groceriesList.description}</p>
-            <p>Created at: {groceriesList.created_at}</p>
-          </section>
-
-          <section>
-            <div className="centered-container add-container">
-              <LinkButton
-                path={`/myLists/groceryList/${groceriesList.index}/addItem`}
-                classNames="green"
-                icon={<IoIosAddCircle />}
-                name="Add Item"
+            <div className="date-time-container">
+              {/*Groceries Date/Time added*/}
+              <DateTime
+                date={groceriesList.created_at_date}
+                time={groceriesList.created_at_time}
               />
             </div>
 
-            <div className="space-between-container counter-list">
-              <div className="centered-container">
+            <section className="groceries-info">
+              <p>{groceriesList.description}</p>
+            </section>
+
+            {/*Update Groeries List*/}
+            <div className="right-container">
+              <LinkButton
+                path={`/myLists/groceryList/${groceriesList.index}/edit`}
+                classNames="yellow"
+                name="Edit"
+                icon={<MdEdit />}
+                title="Edit Groceries List"
+              />
+            </div>
+          </div>
+
+          <section>
+            <div className="space-between-container counter-add-list">
+              {/*Items Counter*/}
+              <div className="counter-list">
                 <h2 className="counter">
                   Items Count: <span>{groceriesList?.items_count}</span>
                 </h2>
               </div>
 
-              <div className="centered-container edit-delete-container">
+              {/*Add Item to Groceries List*/}
+              <div className="centered-container">
                 <LinkButton
-                  path={`/myLists/groceryList/${groceriesList.index}/edit`}
-                  classNames="yellow edit-delete-btn"
-                  icon={<MdEdit />}
-                  title="Edit Groceries List"
+                  path={`/myLists/groceryList/${groceriesList.index}/addItem`}
+                  classNames="green"
+                  icon={<IoIosAddCircle />}
+                  name="Add Item"
                 />
               </div>
             </div>
@@ -239,6 +255,7 @@ function GroceriesList() {
                     <div className="column-container itemActions">
                       <div className="actions-container">
                         <button
+                          title="Check Item"
                           className="check-item"
                           onClick={() => {
                             toggleCheck(item.id);

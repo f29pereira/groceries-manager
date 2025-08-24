@@ -167,6 +167,12 @@ button {
   align-items: center;
 }
 
+.right-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
 /*Column flex container*/
 .column-container {
   display: flex;
