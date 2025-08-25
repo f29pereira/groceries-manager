@@ -19,15 +19,22 @@
   flex: 2;
 }
 
-.column-container.creationDate,
 .column-container.itemCount,
+.column-container.creationDate,
 .column-container.listInfo {
   flex: 1;
 }
 
-.column-container.creationDate,
 .column-container.itemCount {
-  font-size: 1rem;
+  text-align: right;
+}
+
+.column-container.listInfo {
+  text-align: right;
+}
+
+.creation-date-text {
+  text-align: center;
 }
 
 /*MyLists and GroceriesList components - toast notifications and header*/
@@ -50,7 +57,7 @@
   text-align: center;
   border: 1px solid var(--card-header);
   border-radius: 5px;
-  padding: 1rem 2rem;
+  padding: 1rem;
   margin: 1rem 0 2rem 0;
 }
 
@@ -75,6 +82,15 @@
   flex: 1;
 }
 
+.column-container.category,
+.column-container.itemQuantity {
+  text-align: left;
+}
+
+.column-container.itemActions {
+  text-align: right;
+}
+
 /*List and Item counter*/
 .counter-list {
   margin: 0.5rem 0;
@@ -90,6 +106,7 @@
 
 /*GroceriesList component - Item Category*/
 .item-category {
+  text-align: center;
   font-size: 0.8rem;
   font-weight: bold;
   border-radius: 5px;
@@ -236,11 +253,6 @@ ul .remove-item-info {
     padding: 2rem;
   }
 
-  /*MyLists component*/
-  .column-container.itemCount {
-    text-align: center;
-  }
-
   /*MyLists component Item Category*/
   .item-category {
     width: 60%;
@@ -268,6 +280,7 @@ ul .remove-item-info {
 
   .groceries-list-card {
     text-align: left;
+    margin-bottom: 3rem;
   }
 
   /*GroceriesList component - date/time*/
@@ -286,10 +299,6 @@ ul .remove-item-info {
 
   .column-container.itemQuantity {
     flex: 0.5;
-  }
-
-  .column-container.category {
-    align-items: center;
   }
 
   .item-count {
@@ -321,6 +330,13 @@ ul .remove-item-info {
   .input-container.add-list {
     margin-bottom: 6rem;
   }
+
+  .actions-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1.5rem;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -334,6 +350,10 @@ ul .remove-item-info {
   .column-container.listInfo,
   .column-container.creationDate {
     font-size: 1.4rem;
+  }
+
+  .column-container.creationDate {
+    flex: 2;
   }
 
   /*MyLists component Item Category*/
@@ -364,10 +384,6 @@ ul .remove-item-info {
   }
 
   .actions-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 1.5rem;
     font-size: 2rem;
   }
 }

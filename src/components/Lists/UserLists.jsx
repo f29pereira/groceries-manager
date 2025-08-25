@@ -115,13 +115,15 @@ function UserLists() {
             {/*Grocery Lists Table*/}
             <div className="table">
               <div className="row-container table-header">
+                {/*List Name Header Column*/}
                 <div className="column-container name">Name</div>
+
+                {/*List Creation Date Header Column*/}
                 <div className="column-container creationDate">
-                  <div className="centered-container">
-                    Date Added
+                  <div className="left-container gap">
+                    <span className="creation-date-text">Date Added</span>
                     {userLists.length > 1 ? (
                       <div
-                        className="column-container"
                         onClick={() => {
                           toggleColumnSort();
                         }}
@@ -131,7 +133,11 @@ function UserLists() {
                     ) : null}
                   </div>
                 </div>
+
+                {/*List Items Counter Header Column*/}
                 <div className="column-container itemCount">Items</div>
+
+                {/*List User Actions Header Column*/}
                 <div className="column-container listInfo">Actions</div>
               </div>
 
@@ -142,7 +148,10 @@ function UserLists() {
               ) : (
                 userLists.map((list, index) => (
                   <div key={index} className="row-container data">
+                    {/*List Name Data Column*/}
                     <div className="column-container name">{list.name}</div>
+
+                    {/*List Creation Date Data Column*/}
                     <div className="column-container creationDate gap">
                       <DateTime
                         isDisplayInline={false}
@@ -150,9 +159,13 @@ function UserLists() {
                         time={list.created_at_time}
                       />
                     </div>
+
+                    {/*List Items Counter Data Column*/}
                     <div className="column-container itemCount">
                       {list.items_count}
                     </div>
+
+                    {/*List User Actions Data Column*/}
                     <div className="column-container listInfo">
                       <div className="actions-container">
                         <Link

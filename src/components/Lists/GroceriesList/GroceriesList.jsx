@@ -138,7 +138,7 @@ function GroceriesList() {
               </header>
             </div>
 
-            <div className="date-time-container">
+            <div className="groceries-date-time">
               {/*Groceries Date/Time added*/}
               <DateTime
                 date={groceriesList.created_at_date}
@@ -182,10 +182,12 @@ function GroceriesList() {
               </div>
             </div>
 
+            {/*Groceries List Table*/}
             <div className="table">
               <div className="row-container table-header">
+                {/*Category Header Column*/}
                 <div className="column-container category">
-                  <div className="centered-container">
+                  <div className="left-container gap">
                     Category
                     {groceriesList?.items_count > 1 ? (
                       <div
@@ -199,8 +201,10 @@ function GroceriesList() {
                     ) : null}
                   </div>
                 </div>
+
+                {/*Item Name Header Column*/}
                 <div className="column-container itemName">
-                  <div className="centered-container">
+                  <div className="left-container gap">
                     Item
                     {groceriesList?.items_count > 1 ? (
                       <div
@@ -214,7 +218,11 @@ function GroceriesList() {
                     ) : null}
                   </div>
                 </div>
+
+                {/*Item Quantity Header Column*/}
                 <div className="column-container itemQuantity">Qty</div>
+
+                {/*Item User Actions Header Column*/}
                 <div className="column-container itemActions">Actions</div>
               </div>
 
@@ -230,6 +238,7 @@ function GroceriesList() {
                       item.isChecked ? "checked" : ""
                     }`}
                   >
+                    {/*Item Category Data Column*/}
                     <div className="column-container category">
                       <span
                         className="item-category"
@@ -242,16 +251,22 @@ function GroceriesList() {
                         {item.category_name}
                       </span>
                     </div>
+
+                    {/*Item Name Data Column*/}
                     <div className="column-container itemName">
                       <span className={`${item.isChecked ? "checked" : ""}`}>
                         {item.name}
                       </span>
                     </div>
+
+                    {/*Item Quantity Data Column*/}
                     <div className="column-container itemQuantity">
                       <span className={`${item.isChecked ? "checked" : ""}`}>
                         {item.quantity}
                       </span>
                     </div>
+
+                    {/*Item User Actions Data Column*/}
                     <div className="column-container itemActions">
                       <div className="actions-container">
                         <button

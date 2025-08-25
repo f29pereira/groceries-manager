@@ -99,7 +99,6 @@ button {
 .table {
   background-color: var(--soft-white);
   border-bottom: none;
-  text-align: center;
   margin-bottom: 1rem;
 }
 
@@ -129,7 +128,7 @@ button {
 }
 
 .table-header {
-  background-color: var(--card-header);
+  background-color: var(--nav-green);
   color: var(--white);
   font-weight: bold;
   border-radius: 5px 5px 0 0;
@@ -160,13 +159,14 @@ button {
   align-items: center;
 }
 
-/*Left Row flex container*/
+/*Start Left Row flex container*/
 .left-container {
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
+/*Start Right Row flex container*/
 .right-container {
   display: flex;
   justify-content: flex-end;
@@ -194,7 +194,7 @@ button {
 }
 
 .gap {
-  gap: 1rem;
+  gap: 0.5rem;
 }
 
 /*disabled button*/
@@ -233,6 +233,11 @@ button:disabled {
   }
 
   /*Table*/
+  .table-header,
+  .row-container {
+    padding: 1rem 1.5rem;
+  }
+
   .row-container {
     font-size: 1.2rem;
   }
