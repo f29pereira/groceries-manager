@@ -14,17 +14,17 @@ This project was built using **Vite** and **React 19**.
 
 <br>
 
-**Responsive Pages** - This project was built with responsive pages in mind.
+**Responsive Pages** - This project was built with responsive pages in mind. **_Some Page Examples on Small Screen:_**
 
-**_Home Page on Small Screen_**
+**_Home Page_**
 
 ![Home page Small Screen](src/assets/images/readme/small_screen/home.png)
 
-**_Menu on Small Screen_**
+**_Menu_**
 
 ![Home page Small Screen](src/assets/images/readme/small_screen/menu.png)
 
-**_Groceries List on Small Screen_**
+**_Groceries List_**
 
 ![Groceries List page Small Screen](src/assets/images/readme/small_screen/groceriesList.png)
 
@@ -52,7 +52,7 @@ This project was built using **Vite** and **React 19**.
 
 ![Grocery Lists page](src/assets/images/readme/list/groceryLists_empty.png)
 
-**Add Groceries list** - to create a new groceries list, user must fill out the "Name" field.
+**Add Groceries List** - to create a new groceries list, user must fill out the "Name" field.
 
 ![Add Groceries List page](src/assets/images/readme/list/groceryLists_add_list.png)
 
@@ -79,6 +79,12 @@ This project was built using **Vite** and **React 19**.
 **Groceries List with Item** - after successfully adding an item, the user will be redirected to the Groceries List page. A success notification will appear, and the user can manage the item through the "Actions" column in the table.
 
 ![Groceries list with item page](src/assets/images/readme/groceries/groceriesList.png)
+
+**_Category and Item Name Sorting_**
+
+When multiple items are added, the list is automatically sorted in ascending order by the category and item columns. If needed, the user can click the sorting icon to change the sorting order.
+
+![Groceries list sorted in ascending order by category and item](src/assets/images/readme/groceries/groceriesList_sort_cateogry_name_asc.png)
 
 **_Item Actions_**
 

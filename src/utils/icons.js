@@ -17,8 +17,6 @@ import {
   IoArrowBackCircle,
   IoText,
   IoClipboardOutline,
-  IoArrowUpCircle,
-  IoArrowDownCircle,
 } from "react-icons/io5";
 import { RiWeightLine } from "react-icons/ri";
 import {
@@ -32,6 +30,7 @@ import {
 } from "react-icons/fa";
 import { PiChatText, PiFileMagnifyingGlass } from "react-icons/pi";
 import { GoSignOut } from "react-icons/go";
+import { TiArrowSortedDown, TiArrowSortedUp } from "react-icons/ti";
 
 export {
   FaUserPlus, //add user
@@ -64,8 +63,8 @@ export {
   IoClose, //close
   IoClipboardOutline, //clipboard
   PiFileMagnifyingGlass, //page finding
-  IoArrowUpCircle, //circle with arrow up
-  IoArrowDownCircle, //circle with arrow down
+  TiArrowSortedDown, //arrow down
+  TiArrowSortedUp, //arrow up
   FaRegCalendar, //calendar
   FaClock, //clock
   FaCheckSquare, //check square

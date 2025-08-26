@@ -1,4 +1,4 @@
-import { IoArrowUpCircle, IoArrowDownCircle } from "../../utils/icons";
+import { TiArrowSortedDown, TiArrowSortedUp } from "../../utils/icons";
 
 /**
  * Renders current sort order icon
@@ -7,7 +7,7 @@ import { IoArrowUpCircle, IoArrowDownCircle } from "../../utils/icons";
 function SortIcon({ order }) {
   return (
     <div className="arrow">
-      {order === "asc" ? <IoArrowDownCircle /> : <IoArrowUpCircle />}
+      {order === "asc" ? <TiArrowSortedDown /> : <TiArrowSortedUp />}
     </div>
   );
 }

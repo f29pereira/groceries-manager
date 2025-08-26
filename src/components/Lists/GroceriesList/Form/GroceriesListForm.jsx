@@ -52,7 +52,7 @@ function GroceriesListForm({
 
         <div className="input-icon-container">
           <div className="centered-column-container full-width">
-            <div className="centered-container input-icon textarea-icon full-width">
+            <div className="input-icon textarea-icon">
               <PiChatText />
             </div>
 

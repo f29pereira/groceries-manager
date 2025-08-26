@@ -36,7 +36,7 @@ function PasswordRules({ password }) {
   ]);
 
   //useEffect Hook
-  // Updates password rules isValid when password changes value
+  // Updates isValid for each password rule when password changes value
   useEffect(() => {
     setPasswordRules((prev) =>
       prev.map((ruleObj) => ({
