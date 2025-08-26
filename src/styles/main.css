@@ -66,6 +66,7 @@ h1 {
 
 p {
   font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 header {
@@ -98,17 +99,16 @@ button {
 /*Table*/
 .table {
   background-color: var(--soft-white);
-  border-bottom: none;
+  border: 2px solid var(--card-header);
+  border-radius: 10px;
   margin-bottom: 1rem;
+  overflow: hidden;
 }
 
 .row-container {
   display: flex;
   align-items: center;
-  gap: 5px;
-  border-left: 1px solid var(--card-header);
-  border-right: 1px solid var(--card-header);
-  border-bottom: 1px solid var(--card-header);
+  gap: 0.3rem;
   padding: 1rem 0.5rem;
   position: relative;
 }
@@ -119,6 +119,8 @@ button {
 
 .row-container.data:hover {
   background-color: var(--ligth-gray);
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .data-container {
@@ -128,10 +130,9 @@ button {
 }
 
 .table-header {
-  background-color: var(--nav-green);
-  color: var(--white);
+  background-color: var(--gray);
+  color: var(--card-header);
   font-weight: bold;
-  border-radius: 5px 5px 0 0;
   padding: 1rem 0.5rem;
 }
 
@@ -255,6 +256,7 @@ button:disabled {
 @media (min-width: 1200px) {
   p {
     font-size: 1.4rem;
+    line-height: 1.4rem;
   }
 
   h1 {

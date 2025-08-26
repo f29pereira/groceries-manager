@@ -3,7 +3,7 @@ import { PiFileMagnifyingGlass } from "../../../utils/icons";
 
 function NotFound() {
   return (
-    <div className="centered-column-container error-container">
+    <div className="centered-column-container full-height error-container">
       <div className="error-card not-found">
         <h1>
           404 - <span className="text">Page not found</span>

@@ -1,3 +1,8 @@
+/*Home component*/
+.header-groceries-img-container {
+  margin-bottom: 1rem;
+}
+
 .home-title {
   font-size: 3rem;
   text-align: center;
@@ -8,29 +13,34 @@
   display: block;
 }
 
-#img-container {
+.img-container {
   display: flex;
   justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
 }
 
-#groceries-bag {
+.groceries-img {
   width: 12rem;
   height: 12rem;
   border-radius: 50%;
   object-fit: cover;
-  text-align: center;
 }
 
 .home-text {
   text-align: center;
-  line-height: 2rem;
   margin: 2rem 0;
 }
 
 .home-text p {
   margin-bottom: 1rem;
+}
+
+/*Signup*/
+.home-signup-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
 }
 
 .sign-up-home {
@@ -40,9 +50,9 @@
 /*Features Section*/
 .features-section {
   background-color: var(--card-header);
-  padding: 1rem;
+  padding: 3rem;
   margin-top: 1rem;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 }
 
 .features-title {
@@ -81,7 +91,6 @@
 
 .info-text {
   color: var(--black);
-  line-height: 2rem;
   margin: 1rem 0;
 }
 
@@ -95,8 +104,35 @@
   }
 
   .home-title {
-    font-size: 4rem;
+    font-size: 4.5rem;
     text-align: left;
+    margin: 0;
+  }
+
+  .header-groceries-img-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .header-groceries-img-container header {
+    margin: 0;
+  }
+
+  .header-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .img-container {
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .groceries-img {
+    width: 16rem;
+    height: 16rem;
   }
 
   .home-text {
@@ -109,16 +145,11 @@
     margin-bottom: 2rem;
   }
 
-  #groceries-bag {
-    width: 60%;
-    height: 60%;
-  }
-
-  .groceries-container {
+  /*Signup*/
+  .home-signup-container {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    margin-top: 2rem;
   }
 
   /*Features Section*/
@@ -126,13 +157,17 @@
     display: grid;
     justify-items: center;
     align-items: center;
-    gap: 2rem 0;
+    gap: 2rem;
     grid-template-rows: repeat(2, 1fr);
     grid-template-columns: repeat(2, 1fr);
   }
+}
 
-  .info-text {
-    line-height: unset;
+@media (min-width: 1000px) {
+  .header-groceries-img-container {
+    gap: 4rem;
+    justify-content: flex-start;
+    margin-bottom: 4rem;
   }
 }
 
@@ -145,9 +180,27 @@
     font-size: 6rem;
   }
 
+  .groceries-img {
+    width: 18rem;
+    height: 18rem;
+  }
+
+  /*Signup*/
+  .home-signup-container {
+    margin-top: 3rem;
+  }
+
   /*Features Section*/
+  .features-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+  }
+
   .features-container {
-    width: 60%;
-    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
   }
 }

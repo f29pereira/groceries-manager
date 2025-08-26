@@ -130,7 +130,6 @@
 
 .groceries-info p {
   margin: 1rem 0;
-  line-height: 1.5rem;
 }
 
 .groceries-toast {
@@ -188,9 +187,6 @@ span.checked {
 }
 
 /*GroceriesListForm component*/
-.input-container.add-list {
-  margin-bottom: 4rem;
-}
 
 /*Remove grid Info*/
 .remove-grid {
@@ -327,9 +323,6 @@ ul .remove-item-info {
   }
 
   /*GroceriesListForm component*/
-  .input-container.add-list {
-    margin-bottom: 6rem;
-  }
 
   .actions-container {
     display: flex;

@@ -195,7 +195,7 @@
 
 .toast-message {
   font-weight: bold;
-  line-height: 1.8rem;
+  line-height: 1.5rem;
   width: 100%;
 }
 
@@ -233,10 +233,6 @@
 .arrow {
   font-size: 1.2rem;
   cursor: pointer;
-}
-
-.arrow:hover {
-  color: var(--ligth-green);
 }
 
 /*DateTime component*/
@@ -481,6 +477,11 @@ footer {
 
   .date-time-icon.clock-icon {
     margin-left: 2rem;
+  }
+
+  /*Toast Component*/
+  .toast-message {
+    line-height: 1.4rem;
   }
 
   /*FallBack component*/

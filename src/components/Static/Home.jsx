@@ -7,6 +7,7 @@ import {
   FaRegListAlt,
   IoClipboardOutline,
 } from "../../utils/icons";
+import LinkButton from "../Elements/LinkButton";
 import Footer from "./Footer";
 
 function Home() {
@@ -15,18 +16,24 @@ function Home() {
   return (
     <main>
       <div className="content">
-        <header className="header home">
-          <h1 className="home-title">
-            Manage your <span className="green-text">Groceries</span>
-          </h1>
-          <div id="img-container">
+        <div className="header-groceries-img-container">
+          <div className="header-container">
+            <header>
+              <h1 className="home-title">
+                Manage your <span className="green-text">Groceries</span>
+              </h1>
+            </header>
+          </div>
+
+          <div className="img-container">
             <img
               id="groceries-bag"
-              src="/src/assets/images/groceries_bag.svg"
+              className="groceries-img"
+              src="/src/assets/images/static/unsplash_groceries.jpg"
               alt="Groceries bag filled with vegetables"
             />
           </div>
-        </header>
+        </div>
 
         <section className="home-text">
           <p>
@@ -40,12 +47,14 @@ function Home() {
           </p>
 
           {!isSignedIn ? (
-            <p>
-              Interested ?
-              <Link to="/signUp" className="click-link sign-up-home">
-                Sign up here
-              </Link>
-            </p>
+            <div className="home-signup-container">
+              <LinkButton
+                path="signup"
+                classNames="green"
+                name="Sign up, for free"
+                title="Sign up button"
+              />
+            </div>
           ) : null}
         </section>
       </div>

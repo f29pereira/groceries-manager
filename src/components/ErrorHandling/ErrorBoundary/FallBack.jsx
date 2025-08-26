@@ -20,7 +20,7 @@ function FallBack() {
   };
 
   return (
-    <div className="centered-column-container error-container">
+    <div className="centered-column-container full-height error-container">
       <div className="error-card">
         <div className="centered-column-container">
           <h1 className="fallback-msg">
