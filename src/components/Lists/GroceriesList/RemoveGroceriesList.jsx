@@ -1,30 +1,37 @@
 import { useEffect, useState } from "react";
 import { useContext } from "react";
 import { useLocation, useNavigate } from "react-router";
-import { ListContext } from "../List";
 import { AuthContext } from "../../../App";
+import { ToastContext } from "../../Elements/Toast/ToastProvider";
+import { ListContext } from "../List";
 import {
   getGroceriesListById,
   deleteGroceryListById,
 } from "../js/groceries_firebase";
-import { MdDelete } from "../../../utils/icons";
+import { MdDelete, BsThreeDots } from "../../../utils/icons";
 import Card from "../../Elements/Card";
 import Footer from "../../Static/Footer";
 
 function RemoveGroceriesList() {
-  const { userLists, setUserLists, setIsListEmpty } = useContext(ListContext);
+  //useContext Hooks
   const { setIsNavHidden } = useContext(AuthContext);
+  const { setToast } = useContext(ToastContext);
+  const { userLists, setUserLists, setIsListEmpty } = useContext(ListContext);
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
+  //useState Hooks
   const [listData, setListData] = useState({
     name: "",
     description: "",
     items_count: "",
   });
   const [error, setError] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
+  //React router Hooks
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  //useEffect Hook
   useEffect(() => {
     const getGroceryListData = () => {
       try {
@@ -43,6 +50,8 @@ function RemoveGroceriesList() {
   }, []);
 
   const removeGroceryList = () => {
+    setIsDeleting(true);
+
     deleteGroceryListById(location.state?.id, userLists)
       .then((updatedUserLists) => {
         setUserLists(updatedUserLists);
@@ -51,11 +60,22 @@ function RemoveGroceriesList() {
           setIsListEmpty(true);
         }
 
-        navigate("/myLists");
+        setToast({
+          type: "success",
+          message: "Groceries list removed successfully",
+        });
+        navigate(-1);
       })
       .catch((error) => {
+        setToast({
+          type: "error",
+          message: "Failed to remove groceries list. Please try again.",
+        });
         setIsNavHidden(true);
         setError(error);
+      })
+      .finally(() => {
+        setIsDeleting(false);
       });
   };
 
@@ -96,10 +116,25 @@ function RemoveGroceriesList() {
                 </div>
 
                 <div className="centered-container submit-cancel-btns">
-                  <button className="btn green" onClick={removeGroceryList}>
-                    Confirm
+                  <button
+                    className="btn green"
+                    onClick={removeGroceryList}
+                    disabled={isDeleting}
+                  >
+                    {isDeleting ? (
+                      <div className="centered-container">
+                        Deleting List
+                        <BsThreeDots className="submitting-icon" />
+                      </div>
+                    ) : (
+                      "Confirm"
+                    )}
                   </button>
-                  <button className="btn red" onClick={handleGoBack}>
+                  <button
+                    className="btn red"
+                    onClick={handleGoBack}
+                    disabled={isDeleting}
+                  >
                     Cancel
                   </button>
                 </div>

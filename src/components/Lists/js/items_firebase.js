@@ -13,6 +13,8 @@ import {
   getDocumentRefSnapShot,
   validateArray,
   validateString,
+  sortColumns,
+  validateObject,
 } from "../../../utils/utils";
 import {
   validateGroceriesListSnapShot,
@@ -202,10 +204,20 @@ export const updateItemById = async (itemId, formData, itemsList) => {
  * Checks item document by given id
  * @param {string} itemId   - item to be updated
  * @param {array} itemsList - list of items
+ * @param {{ order: "asc" | "desc", column: string }} sortCategoriesObj - categories sorting column object
+ * @param {{ order: "asc" | "desc", column: string }} sortItemsNameObj - item name sorting column object
  * @returns {object}        - list of items to update state
  */
-export const checkItemById = async (itemId, itemsList) => {
+export const checkItemById = async (
+  itemId,
+  itemsList,
+  categorySort,
+  itemNameSort
+) => {
   validateString(itemId);
+  validateArray(itemsList);
+  validateObject(categorySort);
+  validateObject(itemNameSort);
 
   //item document
   const itemDoc = await getDocumentRefSnapShot("items", itemId);
@@ -220,7 +232,7 @@ export const checkItemById = async (itemId, itemsList) => {
     isChecked: !isCheckedValue,
   });
 
-  //list of items to update state
+  //list of items
   const updatedItemsList = itemsList.map((item) => {
     if (item.id === itemId) {
       return {
@@ -232,7 +244,7 @@ export const checkItemById = async (itemId, itemsList) => {
     return item;
   });
 
-  return updatedItemsList;
+  return getSortedAndCheckedItems(updatedItemsList, categorySort, itemNameSort);
 };
 
 /**
@@ -270,4 +282,48 @@ const validateItemFormData = (formData) => {
   validateString(formData.category_id, "category Id");
 
   return;
+};
+
+/**
+ * Returns items list with sorted items at the top and checked items at the bottom
+ * @param {array} itemsList - items list
+ * @param {{ column_name: string, order: "asc" | "desc" }} sortCategoriesObj - categories sorting column object
+ * @param {{ column_name: string, order: "asc" | "desc" }} sortItemsNameObj - item name sorting column object
+ * @returns {array}
+ */
+export const getSortedAndCheckedItems = (
+  itemsList,
+  sortCategoriesObj,
+  sortItemsNameObj
+) => {
+  validateArray(itemsList);
+  validateObject(sortCategoriesObj);
+  validateObject(sortItemsNameObj);
+
+  //unchecked items list
+  const unCheckedItems = [];
+  //checked items list
+  const checkedItems = [];
+
+  for (const item of itemsList) {
+    if (!item.isChecked) {
+      unCheckedItems.push(item);
+    } else {
+      checkedItems.push(item);
+    }
+  }
+
+  //sort unchecked items list
+  const sortedItems = sortColumns(
+    unCheckedItems,
+    sortCategoriesObj,
+    sortItemsNameObj
+  );
+
+  if (!checkedItems.length) {
+    return sortedItems;
+  }
+
+  //returns the sorted items at the top of the list and checked (unsorted) items at the bottom
+  return [...sortedItems, ...checkedItems];
 };

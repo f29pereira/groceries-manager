@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import RequiredField from "../../../Elements/RequiredField";
-import { IoAdd, RiWeightLine, IoText, BiTag } from "../../../../utils/icons";
+import {
+  RiWeightLine,
+  IoText,
+  BiTag,
+  BsThreeDots,
+} from "../../../../utils/icons";
 import LoadingIcon from "../../../Elements/LoadingIcon";
 import { fetchGroceryCategories } from "../../js/items_firebase";
 
@@ -10,8 +15,15 @@ import { fetchGroceryCategories } from "../../js/items_firebase";
  * @param {function} handleChange       - sets name/quantity/category state values
  * @param {string} formData             - name/quantity/category state values
  * @param {function} handleCancel       - cancel btn function
+ * @param {boolean} isSubmitting        - form is submitting
  */
-function ItemForm({ handleOnSubmit, handleChange, formData, handleCancel }) {
+function ItemForm({
+  handleOnSubmit,
+  handleChange,
+  formData,
+  handleCancel,
+  isSubmitting,
+}) {
   const [categories, setCategories] = useState([]);
   const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const [error, setError] = useState(null);
@@ -127,10 +139,21 @@ function ItemForm({ handleOnSubmit, handleChange, formData, handleCancel }) {
       </div>
 
       <div className="centered-container submit-cancel-btns">
-        <button type="submit" className="btn green">
-          Submit
+        <button type="submit" className="btn green" disabled={isSubmitting}>
+          {isSubmitting ? (
+            <div className="centered-container">
+              Submitting
+              <BsThreeDots className="submitting-icon" />
+            </div>
+          ) : (
+            "Submit"
+          )}
         </button>
-        <button className="btn red" onClick={handleCancel}>
+        <button
+          className="btn red"
+          onClick={handleCancel}
+          disabled={isSubmitting}
+        >
           Cancel
         </button>
       </div>

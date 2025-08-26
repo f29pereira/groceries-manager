@@ -1,17 +1,22 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import { AuthContext } from "../../../App";
+import { ToastContext } from "../../Elements/Toast/ToastProvider";
 import { Outlet, useLocation } from "react-router";
-import { fetchGroceryListById } from "../js/groceries_firebase";
+import { fetchGroceriesListById } from "../js/groceries_firebase";
 
 export const GroceriesContext = createContext();
 /**
  * Fetches groceries list and provides context with GroceriesContext
  */
 function Groceries() {
+  //useContext Hooks
   const { setIsNavHidden } = useContext(AuthContext);
+  const { setToast } = useContext(ToastContext);
 
+  //useLocation Hook
   const location = useLocation();
 
+  //useState Hooks
   const [groceriesList, setGroceriesList] = useState({
     id: "",
     name: "",
@@ -25,9 +30,10 @@ function Groceries() {
   const [isGroceriesListEmpty, setIsGroceryListEmpty] = useState(false);
   const [error, setError] = useState(null);
 
+  //useEffect Hook
   useEffect(() => {
     const getGroceryList = () => {
-      fetchGroceryListById(location.state?.id)
+      fetchGroceriesListById(location.state?.id)
         .then((data) => {
           setIsLoadingData(false);
           if (data.items_list.length === 0) {
@@ -42,6 +48,10 @@ function Groceries() {
           setGroceriesList(groceriesListData);
         })
         .catch((error) => {
+          setToast({
+            type: "error",
+            message: "Failed to get your groceries list. Please try again.",
+          });
           setIsNavHidden(true);
           setError(error);
         });

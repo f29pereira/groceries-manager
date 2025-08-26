@@ -1,0 +1,120 @@
+.error-container {
+  background-color: var(--ligth-green);
+  padding: 1rem;
+}
+
+.error-card {
+  background-color: var(--soft-white);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+}
+
+.error-card h1 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.error-card p {
+  text-align: center;
+}
+
+/*NotFound component*/
+.error-card.not-found {
+  position: relative;
+  overflow: hidden;
+}
+
+.error-card .text {
+  color: var(--card-header);
+}
+
+/*NotFound component - icon*/
+.page-not-found-icon {
+  display: none;
+}
+
+/*NotFound and FallBack components - btn containers*/
+.not-found-home-btn,
+.error-btn-container {
+  margin: 1rem 0;
+}
+
+/*FallBack component*/
+.error-card .fallback-msg {
+  font-size: 1.5rem;
+}
+
+@media (min-width: 800px) {
+  .error-container {
+    padding: 1.5rem;
+  }
+
+  .error-card h1,
+  .error-card p {
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+
+  .error-card h1 {
+    font-size: 2.5rem;
+  }
+
+  .error-card p {
+    font-size: 1.5rem;
+  }
+
+  .return-home-container span {
+    font-size: 1.5rem;
+  }
+
+  .page-not-found-icon {
+    left: 75%;
+  }
+
+  /*NotFound component - icon*/
+  .page-not-found-icon {
+    display: unset;
+    position: absolute;
+    top: 45%;
+    left: 85%;
+    transform: translate(-50%, -50%);
+    font-size: 12rem;
+    opacity: 0.05;
+  }
+
+  /*NotFound and FallBack components - btn containers*/
+  .not-found-home-btn,
+  .error-btn-container {
+    margin-top: 2rem;
+  }
+
+  /*FallBack component*/
+  .error-card .fallback-msg {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .error-card h1 {
+    font-size: 3.5rem;
+  }
+
+  /*NotFound component - icon*/
+  .page-not-found-icon {
+    top: 50%;
+    left: 85%;
+    font-size: 14rem;
+  }
+
+  /*NotFound and FallBack components - btn containers*/
+  .not-found-home-btn,
+  .error-btn-container {
+    margin-top: 4rem;
+  }
+
+  /*FallBack component*/
+  .error-card .fallback-msg {
+    font-size: 3rem;
+  }
+}

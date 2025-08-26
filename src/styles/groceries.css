@@ -3,10 +3,6 @@
 }
 
 /*MyLists component*/
-.add-container {
-  margin: 2rem 0;
-}
-
 /*MyLists component info button*/
 .btn.info-list-btn {
   font-size: 1.5rem;
@@ -23,18 +19,59 @@
   flex: 2;
 }
 
-.column-container.creationDate,
 .column-container.itemCount,
+.column-container.creationDate,
 .column-container.listInfo {
   flex: 1;
 }
 
-.column-container.creationDate,
 .column-container.itemCount {
-  font-size: 1rem;
+  text-align: right;
+}
+
+.column-container.listInfo {
+  text-align: right;
+}
+
+.creation-date-text {
+  text-align: center;
+}
+
+/*MyLists and GroceriesList components - toast notifications and header*/
+.toast-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 2rem 0;
+}
+
+/*MyLists and GroceriesList components - list counter and add button*/
+.counter-add-list {
+  align-items: flex-end;
+  margin-bottom: 1rem;
 }
 
 /*GroceriesList component*/
+.groceries-list-card {
+  text-align: center;
+  border: 1px solid var(--card-header);
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem 0 2rem 0;
+}
+
+.groceries-list-card .toast-header {
+  margin: 0;
+}
+
+/*GroceriesList component - date/time*/
+.groceries-list-card .date-time-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .column-container.category,
 .column-container.itemName {
   flex: 2;
@@ -43,6 +80,15 @@
 .column-container.itemQuantity,
 .column-container.itemActions {
   flex: 1;
+}
+
+.column-container.category,
+.column-container.itemQuantity {
+  text-align: left;
+}
+
+.column-container.itemActions {
+  text-align: right;
 }
 
 /*List and Item counter*/
@@ -60,6 +106,7 @@
 
 /*GroceriesList component - Item Category*/
 .item-category {
+  text-align: center;
   font-size: 0.8rem;
   font-weight: bold;
   border-radius: 5px;
@@ -71,22 +118,26 @@
 }
 
 .header.groceries,
-.groceries-description {
+.groceries-desc-date {
   text-align: center;
 }
 
-.groceries-description {
+/*GroceriesList component - Info Section*/
+.groceries-info {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.groceries-info p {
   margin: 1rem 0;
-  line-height: 1.5rem;
+}
+
+.groceries-toast {
+  align-self: flex-start; /* Move this item to the top */
 }
 
 .edit-delete-container {
   gap: 1rem;
-}
-
-.btn.edit-delete-btn {
-  font-size: 1rem;
-  padding: 0.5rem;
 }
 
 /*GroceriesList component - user actions*/
@@ -136,9 +187,6 @@ span.checked {
 }
 
 /*GroceriesListForm component*/
-.input-container.add-list {
-  margin-bottom: 4rem;
-}
 
 /*Remove grid Info*/
 .remove-grid {
@@ -192,18 +240,13 @@ ul .remove-item-info {
   grid-template-columns: repeat(2, 1fr);
 }
 
-.groceries-description.remove-list {
+.groceries-info.remove-list {
   margin: 0;
 }
 
 @media (min-width: 800px) {
   .content.list {
     padding: 2rem;
-  }
-
-  /*MyLists component*/
-  .column-container.itemCount {
-    text-align: center;
   }
 
   /*MyLists component Item Category*/
@@ -214,6 +257,33 @@ ul .remove-item-info {
   /*MyLists component info button*/
   .btn.info-list-btn {
     font-size: 2rem;
+  }
+
+  /*MyLists and GroceriesList components - toast notifications and header*/
+  .toast-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .title {
+    order: 1;
+  }
+
+  .toast {
+    order: 2;
+  }
+
+  .groceries-list-card {
+    text-align: left;
+    margin-bottom: 3rem;
+  }
+
+  /*GroceriesList component - date/time*/
+  .groceries-list-card .date-time-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   /*GroceriesList component*/
@@ -227,16 +297,6 @@ ul .remove-item-info {
     flex: 0.5;
   }
 
-  .column-container.category {
-    align-items: center;
-  }
-
-  .header.groceries {
-    display: block;
-    text-align: center;
-    margin-bottom: 0;
-  }
-
   .item-count {
     font-size: 1.2rem;
   }
@@ -245,8 +305,10 @@ ul .remove-item-info {
     font-size: 0.9rem;
   }
 
-  .btn.edit-delete-btn {
-    font-size: 1.4rem;
+  /*GroceriesList component - Info Section*/
+  .groceries-info {
+    text-align: left;
+    margin-top: 3rem;
   }
 
   /*GroceriesList component - checked item*/
@@ -261,8 +323,12 @@ ul .remove-item-info {
   }
 
   /*GroceriesListForm component*/
-  .input-container.add-list {
-    margin-bottom: 6rem;
+
+  .actions-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 1.5rem;
   }
 }
 
@@ -279,14 +345,14 @@ ul .remove-item-info {
     font-size: 1.4rem;
   }
 
+  .column-container.creationDate {
+    flex: 2;
+  }
+
   /*MyLists component Item Category*/
   .item-category {
     padding: 0.5rem;
     width: 40%;
-  }
-
-  .btn.edit-delete-btn {
-    font-size: 1.8rem;
   }
 
   /*RemoveItem and RemoveGroceriesList component*/
@@ -296,11 +362,21 @@ ul .remove-item-info {
   }
 
   /*GroceriesList component*/
+  .header.groceries {
+    text-align: left;
+  }
+
+  /*GroceriesList component - Info Section*/
+  .groceries-info {
+    text-align: left;
+    margin: 2rem 0;
+  }
+
+  .groceries-info p {
+    margin: 2rem 0;
+  }
+
   .actions-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 1.5rem;
     font-size: 2rem;
   }
 }

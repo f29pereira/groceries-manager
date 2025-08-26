@@ -1,0 +1,124 @@
+/*Hamburguer and MedBigScreen components*/
+/*MedBigScreen component*/
+#nav-container {
+  display: flex;
+  align-items: center;
+  padding: 1rem 3rem;
+}
+
+.nav-items {
+  font-size: 1.5rem;
+}
+
+#nav-groceries {
+  margin-right: 3rem;
+}
+
+.nav-logo {
+  margin-right: auto;
+  font-weight: bold;
+}
+
+.logo-icon {
+  font-size: 2rem;
+  margin-right: 0.5rem;
+}
+
+/*Hamburguer and Menu components*/
+/*Hamburguer*/
+.hamburguer-list {
+  align-items: center;
+  padding: 0.5rem 1rem;
+}
+
+.icon-items {
+  font-size: 1.6rem;
+}
+
+.icon-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.icon-items#list {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.icon-items#list :hover {
+  border-bottom: 2px solid var(--white);
+}
+
+.icon-items .auth-option {
+  font-size: 1rem;
+}
+
+/*Menu*/
+#menu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#close {
+  font-size: 2.2rem;
+  text-align: center;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+#menu-items .item {
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+}
+
+.item {
+  margin-bottom: 1rem;
+}
+
+.item .icon {
+  font-size: 1.8rem;
+  margin-right: 1rem;
+}
+
+.item .description {
+  font-size: 1.5rem;
+}
+
+.item .description:hover {
+  border-bottom: 2px solid var(--white);
+}
+
+/*SignInNav component*/
+.auth-nav {
+  padding: 0.2rem;
+}
+
+.auth-nav-text {
+  display: none;
+}
+
+@media (min-width: 800px) {
+  #nav-container {
+    padding: 0.625rem 3rem;
+  }
+
+  /*SignInNav component*/
+  .auth-nav {
+    border: 2px solid var(--soft-white);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+  }
+
+  .auth-nav:hover {
+    background-color: var(--nav-green-hover);
+  }
+
+  .auth-nav-text {
+    display: inline-block;
+    font-size: 1rem;
+    margin-left: 0.4rem;
+  }
+}

@@ -1,18 +1,3 @@
-/*Authentication used in small and medium/big navbars*/
-.auth-option {
-  color: var(--nav-green);
-  background-color: var(--ligth-green);
-  font-weight: bold;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  display: block;
-}
-
-.auth-option:hover {
-  color: var(--white);
-  background-color: var(--nav-green);
-}
-
 /*Forms*/
 .form-wrapper {
   padding: 1rem;
@@ -25,9 +10,10 @@
 }
 
 .form-description {
+  font-weight: bold;
+  font-size: 1.4rem;
   text-align: center;
-  line-height: 1.5rem;
-  margin: 0.5rem 0;
+  margin: 1rem 0;
 }
 
 .input-container {
@@ -35,7 +21,6 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  margin-bottom: 1rem;
 }
 
 .form-label {
@@ -49,27 +34,29 @@
 }
 
 .input-icon-container {
-  display: flex;
-  height: 2.125rem;
+  position: relative;
   width: 100%;
+  margin-bottom: 1rem;
+}
+
+.input-icon-container.password {
+  margin-bottom: 0;
+  position: relative;
 }
 
 .input-icon {
-  background-color: var(--card-header);
-  color: var(--white);
-  font-size: 1.4rem;
-  padding: 1rem;
-}
-
-.textarea-icon {
-  font-size: 1.8rem;
-  padding: 0.5rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--nav-green);
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
 }
 
 .form-input {
   border: 1px solid var(--gray);
-  padding: 0.5rem;
-  margin-bottom: 1rem;
+  border-radius: 5px;
+  padding: 0.5rem 0rem 0.5rem 2rem;
   width: 100%;
   height: 100%;
 }
@@ -81,35 +68,52 @@
 
 .select-input {
   border: 1px solid var(--gray);
-  padding: 0.2rem 1rem;
+  padding: 0.2rem 2rem;
 }
 
-#create-account {
+.signup-link-text {
   font-size: 1rem;
   margin: 1rem 0;
 }
 
-/*Textarea*/
-.form-input.text-description {
-  text-align: center;
-  resize: none;
-  line-height: 1.5rem;
-  min-height: 4rem;
-  max-height: 6rem;
-  transition: height 0.5s ease;
-  padding: 0.8rem 0.5rem;
+.signin-link-text {
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-/*Password rules*/
+/*Textarea*/
+.textarea-container {
+  background-color: var(--nav-green);
+  width: 100%;
+}
+
+.textarea-icon {
+  left: 0;
+  color: var(--nav-green);
+}
+
+.form-input.text-description {
+  resize: none;
+  line-height: 1.5rem;
+  min-height: 5rem;
+  padding: 0.8rem 1rem 0.8rem 2.5rem;
+}
+
+/*SignIn, SignUp and SignOut components background*/
+.auth-background {
+  background: radial-gradient(
+    circle,
+    rgba(0, 100, 0, 0.76) 0%,
+    var(--card-header) 100%
+  );
+}
+
+/*PasswordRules component*/
 .password-rules {
   opacity: 0;
   visibility: hidden;
-  background-color: var(--password-rules);
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border: 1px solid var(--card-header);
-  padding: 0.5rem 1rem;
-  width: 100%;
+  padding: 0.5rem 0;
   transition: opacity 0.5s, visibility 0s 0.5s;
 }
 
@@ -121,14 +125,25 @@
 
 .rules-list {
   text-align: left;
-  list-style-type: disc;
-  list-style-position: inside;
 }
 
 .rules-item {
   color: var(--black);
-  font-size: 0.9rem;
   margin-bottom: 0.5rem;
+}
+
+.rules-item span {
+  font-size: 0.8rem;
+}
+
+.rules-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+}
+
+.sign-out-text {
+  text-align: center;
+  margin: 1rem 0;
 }
 
 /*Form Buttons*/
@@ -149,8 +164,8 @@
 }
 
 .generic-error-container {
-  background-color: var(--cancel);
-  color: var(--white);
+  background-color: var(--ligth-red);
+  color: var(--btn-danger-hover);
   display: flex;
   align-items: center;
   border-radius: 5px;
@@ -177,16 +192,15 @@
     width: 60%;
   }
 
-  /*Textarea*/
-  .form-input.text-description {
-    text-align: left;
-    min-height: 5rem;
+  /*UserForm component - inputs*/
+  .input-container.user-form {
+    width: 90%;
   }
 }
 
 @media (min-width: 1200px) {
   .input-container {
-    width: 30%;
+    width: 40%;
   }
 
   .form-input {
@@ -195,7 +209,11 @@
 
   /*Textarea*/
   .form-input.text-description {
-    text-align: left;
-    min-height: 6rem;
+    line-height: 1.4rem;
+  }
+
+  /*PasswordRules component*/
+  .rules-item span {
+    font-size: 1rem;
   }
 }

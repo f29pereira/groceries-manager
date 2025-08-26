@@ -81,7 +81,7 @@
 
 /*LinkButton Component*/
 .btn {
-  font-size: 1.2rem;
+  font-size: 1rem;
   border-radius: 5px;
   padding: 0.5rem 1rem;
   color: var(--white);
@@ -97,6 +97,16 @@
 
 .btn.green:hover {
   background-color: var(--btn-success-hover);
+}
+
+/*Sign In button*/
+.btn.green.signin {
+  margin: 2rem 0;
+}
+
+/*Sign Up button*/
+.btn.green.signup {
+  margin-bottom: 1rem;
 }
 
 .red {
@@ -159,6 +169,131 @@
   transition: opacity 0.5s;
 }
 
+/*Toast Component*/
+.toast-container {
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+
+.toast-info {
+  padding: 0.8rem;
+}
+
+.toast-icon {
+  margin-right: 1rem;
+}
+
+.toast-icon.success {
+  font-size: 2.5rem;
+  color: var(--white);
+}
+
+.toast-icon.error {
+  font-size: 3rem;
+  color: var(--btn-danger-hover);
+}
+
+.toast-message {
+  font-weight: bold;
+  line-height: 1.5rem;
+  width: 100%;
+}
+
+.close-container {
+  padding-top: 0.2rem;
+  padding-right: 0.4rem;
+  align-self: flex-start;
+  margin-left: 1rem;
+}
+
+.toast-close {
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.toast-close.sucess {
+  color: var(--white);
+}
+
+.toast-close.error {
+  display: none;
+}
+
+.toast-container.success {
+  background-color: var(--btn-success);
+  color: var(--card-header);
+}
+
+.toast-container.error {
+  background-color: var(--ligth-red);
+  color: var(--btn-danger);
+}
+
+/*SortIcon component*/
+.arrow {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+/*DateTime component*/
+.date-time-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date-time-text.date-text {
+  margin-bottom: 1rem;
+}
+
+.date-time-icon {
+  font-size: 1.2rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--card-header);
+}
+
+.date-time-text {
+  font-size: 0.8rem;
+}
+
+.date-column {
+  margin-bottom: 1rem;
+}
+
+/*ImageWithContent component*/
+.img-content {
+  padding: 1.5rem;
+}
+
+.img-content-container {
+  display: flex;
+  gap: 0.5rem;
+  border: 5px solid var(--soft-white);
+  border-radius: 10px;
+  background-color: var(--soft-white);
+}
+
+.img-content-container img {
+  display: none;
+  object-fit: fill;
+  height: auto;
+  width: 40%;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.img-content-container .content-show {
+  padding: 1rem;
+  width: 100%;
+}
+
+/*GMLogo*/
+.logo {
+  color: var(--nav-green);
+  font-size: 2rem;
+}
+
 /*FallBack component*/
 .fallback {
   border-radius: 5px;
@@ -166,16 +301,15 @@
   padding: 1rem;
 }
 
-.fallback-msg {
-  font-size: 1.4rem;
+h1.fallback-msg {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 /*Footer Component*/
 footer {
   background-color: var(--nav-green);
-  padding: 1rem;
+  padding: 0.5rem;
   color: var(--white);
 }
 
@@ -186,6 +320,13 @@ footer {
 .footer-text {
   font-size: 1rem;
   font-weight: bold;
+}
+
+@media (min-width: 700px) {
+  /*ImageWithContent component*/
+  .img-content-container img {
+    display: block;
+  }
 }
 
 @media (min-width: 800px) {
@@ -213,9 +354,74 @@ footer {
     font-size: 1.8rem;
   }
 
-  /*LinkButton component*/
-  .btn.add-item {
-    font-size: 1.5rem;
+  /*LinkButton Component*/
+  .btn {
+    font-size: 1.2rem;
+  }
+
+  /*Toast Component*/
+  .toast-icon.error {
+    font-size: 3.5rem;
+  }
+
+  /*SortIcon Component*/
+  .arrow {
+    font-size: 1.8rem;
+  }
+
+  /*DateTime component*/
+  .groceries-date-time .date-time-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .groceries-date-time .date-time-container .date-text {
+    margin-bottom: 0;
+    margin-right: 1rem;
+  }
+
+  .date-time-text {
+    font-size: 1rem;
+  }
+
+  .date-time-icon {
+    margin-bottom: unset;
+  }
+
+  /*ImageWithContent component*/
+  .img-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .img-content-container .content-show {
+    width: 60%;
+  }
+
+  /*SignIn, SignUp and SignOut page*/
+  .img-content-container.signin,
+  .img-content-container.signup,
+  .img-content-container.signout {
+    width: 45rem;
+    height: 45rem;
+  }
+
+  .img-content-container.signin img,
+  .img-content-container.signin .content-show,
+  .img-content-container.signup img,
+  .img-content-container.signup .content-show,
+  .img-content-container.signout img,
+  .img-content-container.signout .content-show {
+    width: 50%;
+  }
+
+  .img-content-container.signout .content-show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   /*FallBack component*/
@@ -224,6 +430,10 @@ footer {
   }
 
   /*Footer component*/
+  footer {
+    padding: 1rem;
+  }
+
   .footer-text {
     font-size: 1.2rem;
     font-weight: bold;
@@ -241,6 +451,37 @@ footer {
   .card-container {
     width: 60%;
     margin: auto;
+  }
+
+  /*SortIcon Component*/
+  .arrow {
+    font-size: 2rem;
+    margin-left: 1rem;
+  }
+
+  /*GMLogo*/
+  .logo {
+    font-size: 2.5rem;
+  }
+
+  /*DateTime component*/
+  .date-time-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .date-time-text.date-text {
+    margin-bottom: 0;
+  }
+
+  .date-time-icon.clock-icon {
+    margin-left: 2rem;
+  }
+
+  /*Toast Component*/
+  .toast-message {
+    line-height: 1.4rem;
   }
 
   /*FallBack component*/

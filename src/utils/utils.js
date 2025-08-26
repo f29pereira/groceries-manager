@@ -21,18 +21,30 @@ export const getDocumentRefSnapShot = async (collectionName, documentId) => {
 /**
  * Formats date YYY/MM/DD
  * @param {string} date - date timestamp
+ * @returns {string} formated date
  */
 export const formatDate = (date) => {
-  let newDate = "";
+  validateString(date);
 
-  if (date !== null && typeof date === "string") {
-    const year = date.slice(0, 4);
-    const month = date.slice(5, 7);
-    const day = date.slice(8, 10);
-    newDate = `${year}/${month}/${day}`;
-  }
+  const year = date.slice(0, 4);
+  const month = date.slice(5, 7);
+  const day = date.slice(8, 10);
 
-  return newDate;
+  return `${year}/${month}/${day}`;
+};
+
+/**
+ * Formats time HH:MM
+ * @param {string} date - date timestamp
+ * @returns {string} formated time
+ */
+export const formatTime = (date) => {
+  validateString(date);
+
+  let extractTime = date.split("T")[1];
+  let formatedTime = extractTime.slice(0, 5);
+
+  return formatedTime;
 };
 
 /**
@@ -102,8 +114,7 @@ const getErrorDescription = (errorCode) => {
     error.description = "Invalid email";
   } else if (errorCode === "auth/password-does-not-meet-requirements") {
     error.type = "password";
-    error.description =
-      "Password must contain: at least 8 characters, a lower case character, an upper case character and a non-alphanumeric character";
+    error.description = "Your password doesn't meet the requirements.";
   } else if (errorCode === "auth/invalid-credential") {
     error.type = "generic";
     error.description = "Invalid credentials";
@@ -119,6 +130,20 @@ const getErrorDescription = (errorCode) => {
   }
 
   return error;
+};
+
+/**
+ * Checks if password meets requirements
+ * @param {string} password
+ */
+export const validatePassword = (password) => {
+  validateString(password);
+
+  const regex = new RegExp(
+    "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\^\\$\\*\\.\\[\\]\\{\\}\\(\\)\\?\\\"!@#%&/\\\\,><':;\\|_~]).{8,}$"
+  );
+
+  return regex.test(password);
 };
 
 /**
@@ -163,4 +188,66 @@ export const validateObject = (object, objectName) => {
       `Invalid data type: ${objectName} must be an object. Current value: ${object}`
     );
   }
+};
+
+/**
+ * Compares two strings and returns number
+ * @param {string} firstString - first string value
+ * @param {string} secondString - second string value
+ * @returns {number} returns -1 (firstString < secondString), 1 (firstString > secondString), 0 (firstString = secondString)
+ */
+export const compareStrings = (firstString, secondString) => {
+  validateString(firstString);
+  validateString(secondString);
+
+  return firstString.toLowerCase().localeCompare(secondString.toLowerCase());
+};
+
+/**
+ * Sorts list by given columns
+ * @param {array} listToSort - list to be sorted
+ * @param {{ column_name: string, order: "asc" | "desc" }} firstColumnObj - first column sorting object
+ * @param {{ column_name: string, order: "asc" | "desc" }} secondColumnObj - second column sorting object
+ * @returns {array} sorted list
+ */
+export const sortColumns = (
+  listToSort,
+  firstColumnObj,
+  secondColumnObj = {}
+) => {
+  validateArray(listToSort);
+  validateObject(firstColumnObj);
+  validateObject(secondColumnObj);
+
+  const listSorted = [...listToSort];
+
+  listSorted.sort((a, b) => {
+    const firstColumnComparison =
+      firstColumnObj.order === "asc"
+        ? compareStrings(
+            a[firstColumnObj.column_name],
+            b[firstColumnObj.column_name]
+          )
+        : compareStrings(
+            b[firstColumnObj.column_name],
+            a[firstColumnObj.column_name]
+          );
+
+    if (firstColumnComparison !== 0) {
+      // If first column values are different, skip second column comparison
+      return firstColumnComparison;
+    }
+
+    return secondColumnObj.order === "asc"
+      ? compareStrings(
+          a[secondColumnObj.column_name],
+          b[secondColumnObj.column_name]
+        )
+      : compareStrings(
+          b[secondColumnObj.column_name],
+          a[secondColumnObj.column_name]
+        );
+  });
+
+  return listSorted;
 };

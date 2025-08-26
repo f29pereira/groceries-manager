@@ -12,11 +12,14 @@ import {
 } from "firebase/firestore";
 import {
   formatDate,
+  formatTime,
   getDocumentRefSnapShot,
   validateString,
   validateArray,
   validateObject,
+  sortColumns,
 } from "../../../utils/utils";
+import { getSortedAndCheckedItems } from "./items_firebase";
 
 /**
  * Creates a new document on the groceries_list collection
@@ -49,9 +52,10 @@ export const addEmptyGroceryList = async (userId, formData, userLists) => {
     id: groceryId,
     name: formData.name,
     description: formData.description,
-    items_list: [],
     items_count: 0,
-    created_at: formatDate(date),
+    created_at: date,
+    created_at_date: formatDate(date),
+    created_at_time: formatTime(date),
   };
 
   let updatedUserLists = userLists;
@@ -81,19 +85,26 @@ export const fetchAllUserLists = async (userId) => {
     for (const list of userLists) {
       const items = list.data.items_list;
       const itemsLength = items ? items.length : 0;
-      const date = formatDate(list.data.created_at);
 
       userListsCopy.push({
         id: list.id,
         name: list.data.name,
-        created_at: date,
+        created_at: list.data.created_at,
         description: list.data.description,
         items_count: itemsLength,
+        created_at_date: formatDate(list.data.created_at),
+        created_at_time: formatTime(list.data.created_at),
       });
     }
   }
 
-  return userListsCopy.reverse();
+  //Object to sort columns
+  const sortDateObj = {
+    order: "desc",
+    column_name: "created_at",
+  };
+
+  return sortColumns(userListsCopy, sortDateObj);
 };
 
 /**
@@ -145,7 +156,7 @@ export const getGroceriesListById = (listId, userLists) => {
  * @param {string} listId - groceries_list document id
  * @returns {object} object with groceries list data
  */
-export const fetchGroceryListById = async (listId) => {
+export const fetchGroceriesListById = async (listId) => {
   validateString(listId, "list ID");
 
   const groceryListToCopy = {
@@ -154,7 +165,8 @@ export const fetchGroceryListById = async (listId) => {
     description: "",
     items_list: [],
     items_count: 0,
-    created_at: "",
+    created_at_date: "",
+    created_at_time: "",
   };
 
   //groceries_list document
@@ -170,10 +182,11 @@ export const fetchGroceryListById = async (listId) => {
   groceryListToCopy.id = listId;
   groceryListToCopy.name = groceriesData.name;
   groceryListToCopy.description = groceriesData.description;
-  groceryListToCopy.created_at = formatDate(groceriesData.created_at);
+  groceryListToCopy.created_at_date = formatDate(groceriesData.created_at);
+  groceryListToCopy.created_at_time = formatTime(groceriesData.created_at);
 
   //items document references
-  const itemsList = groceriesData.items_list.reverse();
+  const itemsList = groceriesData.items_list;
 
   groceryListToCopy.items_count = itemsList.length;
 
@@ -210,6 +223,7 @@ export const fetchGroceryListById = async (listId) => {
       categoryName = categorySnapshotData.name;
       categoryColor = categorySnapshotData.color;
 
+      //groceries list item
       groceryListToCopy.items_list.push({
         id: itemId,
         name: itemName,
@@ -222,7 +236,24 @@ export const fetchGroceryListById = async (listId) => {
     }
   }
 
-  return groceryListToCopy;
+  //Objects to sort columns "Category" and "Item"
+  const sortCategoriesObj = {
+    order: "asc",
+    column_name: "category_name",
+  };
+  const sortItemsNameObj = {
+    order: "asc",
+    column_name: "name",
+  };
+
+  return {
+    ...groceryListToCopy,
+    items_list: getSortedAndCheckedItems(
+      groceryListToCopy.items_list,
+      sortCategoriesObj,
+      sortItemsNameObj
+    ),
+  };
 };
 
 /**

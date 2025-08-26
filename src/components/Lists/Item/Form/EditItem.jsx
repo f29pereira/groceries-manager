@@ -3,30 +3,36 @@ import { useNavigate, useLocation } from "react-router";
 import { handleInputChange, showError } from "../../../../utils/utils";
 import { getItemById, updateItemById } from "../../js/items_firebase";
 import { MdEdit } from "../../../../utils/icons";
-import { GroceriesContext } from "../../GroceriesList/Groceries";
 import { AuthContext } from "../../../../App";
+import { GroceriesContext } from "../../GroceriesList/Groceries";
+import { ToastContext } from "../../../Elements/Toast/ToastProvider";
 import Card from "../../../Elements/Card";
 import ItemForm from "./ItemForm";
 import Footer from "../../../Static/Footer";
 
+/**
+ * Updates item from a groceries list
+ */
 function EditItem() {
-  const { groceriesList, setGroceriesList } = useContext(GroceriesContext);
+  //useContext Hooks
   const { setIsNavHidden } = useContext(AuthContext);
-  const location = useLocation();
-  const navigate = useNavigate();
+  const { setToast } = useContext(ToastContext);
+  const { groceriesList, setGroceriesList } = useContext(GroceriesContext);
 
+  //useState Hooks
   const [editItemFormData, setEditItemFormData] = useState({
     name: "",
     quantity: "",
     category_id: "",
   });
-
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (event) => {
-    handleInputChange(event, setEditItemFormData);
-  };
+  //React Router Hooks
+  const location = useLocation();
+  const navigate = useNavigate();
 
+  //useEffect Hook
   useEffect(() => {
     const setItemData = () => {
       try {
@@ -45,8 +51,13 @@ function EditItem() {
     setItemData();
   }, []);
 
+  const handleChange = (event) => {
+    handleInputChange(event, setEditItemFormData);
+  };
+
   const editItem = (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
     updateItemById(
       location.state?.itemId,
@@ -59,11 +70,23 @@ function EditItem() {
           items_list: updatedItemsList,
         }));
 
+        setToast({
+          type: "success",
+          message: "Item updated successfully",
+        });
         navigate(-1);
       })
       .catch((error) => {
+        setToast({
+          type: "error",
+          message:
+            "Failed to edit item from your grocery list. Please try again.",
+        });
         setIsNavHidden(true);
         setError(error);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
   };
 
@@ -83,13 +106,14 @@ function EditItem() {
           <Card
             showGoBack={true}
             titleIcon={<MdEdit />}
-            titleText="Edit Item"
+            titleText="Item"
             body={
               <ItemForm
                 handleOnSubmit={editItem}
                 handleChange={handleChange}
                 formData={editItemFormData}
                 handleCancel={goBack}
+                isSubmitting={isSubmitting}
               />
             }
           />

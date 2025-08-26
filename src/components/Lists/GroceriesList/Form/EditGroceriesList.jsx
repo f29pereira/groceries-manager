@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from "react";
-import { GroceriesContext } from "../Groceries";
-import { ListContext } from "../../List";
 import { AuthContext } from "../../../../App";
+import { ToastContext } from "../../../Elements/Toast/ToastProvider";
+import { ListContext } from "../../List";
+import { GroceriesContext } from "../Groceries";
 import { useNavigate } from "react-router";
 import { handleInputChange } from "../../../../utils/utils";
 import {
@@ -11,25 +12,31 @@ import {
 import { MdEdit } from "../../../../utils/icons";
 import Card from "../../../Elements/Card";
 import GroceriesListForm from "./GroceriesListForm";
+import Toast from "../../../Elements/Toast/Toast";
 import Footer from "../../../Static/Footer";
 
 /**
  * Renders the form to update the groceries list name/description fields
  */
 function EditGroceriesList() {
-  const { groceriesList, setGroceriesList } = useContext(GroceriesContext);
-  const { userLists, setUserLists } = useContext(ListContext);
+  //useContext Hooks
   const { setIsNavHidden } = useContext(AuthContext);
+  const { setToast } = useContext(ToastContext);
+  const { userLists, setUserLists } = useContext(ListContext);
+  const { groceriesList, setGroceriesList } = useContext(GroceriesContext);
 
-  const navigate = useNavigate();
-
+  //useState Hooks
   const [listFormData, setListFormData] = useState({
     name: "",
     description: "",
   });
-
   const [error, setError] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
+  //useNavigate Hook
+  const navigate = useNavigate();
+
+  //useEffect Hook
   useEffect(() => {
     const getGroceryListData = () => {
       const data = {
@@ -49,6 +56,7 @@ function EditGroceriesList() {
 
   const editGroceryList = (event) => {
     event.preventDefault();
+    setIsSubmitting(true);
 
     updateGroceryList(groceriesList, listFormData)
       .then((updatedGroceriesList) => {
@@ -57,11 +65,22 @@ function EditGroceriesList() {
       })
       .then((listToUpdate) => {
         setUserLists(listToUpdate);
+        setToast({
+          type: "success",
+          message: "Groceries list updated successfully",
+        });
         navigate(-1);
       })
       .catch((error) => {
+        setToast({
+          type: "error",
+          message: "Failed to edit groceries list. Please try again.",
+        });
         setIsNavHidden(true);
         setError(error);
+      })
+      .finally(() => {
+        setIsSubmitting(false);
       });
   };
 
@@ -88,6 +107,7 @@ function EditGroceriesList() {
                 handleChange={handleChange}
                 formData={listFormData}
                 handleCancel={goBack}
+                isSubmitting={isSubmitting}
               />
             }
           ></Card>

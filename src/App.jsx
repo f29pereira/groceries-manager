@@ -1,9 +1,11 @@
 import { useState, createContext } from "react";
 import { BrowserRouter, Routes, Route } from "react-router";
+import ToastProvider from "./components/Elements/Toast/ToastProvider";
 import Nav from "./components/Nav/Nav";
 import Home from "./components/Static/Home";
 import SignUp from "./components/Authentication/Form/SignUp";
 import SignIn from "./components/Authentication/Form/SignIn";
+import SignOut from "./components/Authentication/SignOut";
 import AuthRequired from "./components/Authentication/AuthRequired";
 import ErrorBoundary from "./components/ErrorHandling/ErrorBoundary/ErrorBoundary";
 import List from "./components/Lists/List";
@@ -38,38 +40,42 @@ function App() {
           setIsNavHidden,
         }}
       >
-        <Routes>
-          <Route path="/" element={<Nav />}>
-            <Route index element={<Home />} />
+        <ToastProvider>
+          <Routes>
             <Route path="signUp" element={<SignUp />} />
             <Route path="signIn" element={<SignIn />} />
+            <Route path="signout" element={<SignOut />} />
 
-            <Route element={<AuthRequired />}>
-              <Route
-                path="myLists"
-                element={
-                  <ErrorBoundary>
-                    <List />
-                  </ErrorBoundary>
-                }
-              >
-                <Route index element={<UserLists />} />
-                <Route path="addList" element={<AddGroceriesList />} />
+            <Route path="/" element={<Nav />}>
+              <Route index element={<Home />} />
 
-                <Route path="groceryList/:id" element={<Groceries />}>
-                  <Route index element={<GroceriesList />} />
-                  <Route path="edit" element={<EditGroceriesList />} />
-                  <Route path="remove" element={<RemoveGroceriesList />} />
-                  <Route path="addItem" element={<AddItem />} />
-                  <Route path="editItem/:id" element={<EditItem />} />
-                  <Route path="removeItem/:id" element={<RemoveItem />} />
+              <Route element={<AuthRequired />}>
+                <Route
+                  path="myLists"
+                  element={
+                    <ErrorBoundary>
+                      <List />
+                    </ErrorBoundary>
+                  }
+                >
+                  <Route index element={<UserLists />} />
+                  <Route path="addList" element={<AddGroceriesList />} />
+
+                  <Route path="groceryList/:id" element={<Groceries />}>
+                    <Route index element={<GroceriesList />} />
+                    <Route path="edit" element={<EditGroceriesList />} />
+                    <Route path="remove" element={<RemoveGroceriesList />} />
+                    <Route path="addItem" element={<AddItem />} />
+                    <Route path="editItem/:id" element={<EditItem />} />
+                    <Route path="removeItem/:id" element={<RemoveItem />} />
+                  </Route>
                 </Route>
+                <Route path="profile" element={<Profile />} />
               </Route>
-              <Route path="profile" element={<Profile />} />
             </Route>
-          </Route>
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </ToastProvider>
       </AuthContext>
     </BrowserRouter>
   );

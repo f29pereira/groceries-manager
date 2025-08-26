@@ -1,11 +1,12 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import SmallScreenNav from "./SmallScreenNav/SmallScreenNav";
 import MedBigScreenNav from "./MedBigScreenNav/MedBigScreenNav";
 
 function Nav() {
+  //useState Hook
   const [windowWith, setWindowWith] = useState(window.innerWidth);
 
+  //useEffect Hook
   useEffect(() => {
     const handleResize = () => {
       setWindowWith(window.innerWidth);
